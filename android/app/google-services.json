@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "394426473636",
-    "firebase_url": "https://finance-app-addc7.firebaseio.com",
-    "project_id": "finance-app-addc7",
-    "storage_bucket": "finance-app-addc7.appspot.com"
+    "project_number": "535582518325",
+    "firebase_url": "https://longview-financeapp.firebaseio.com",
+    "project_id": "longview-financeapp",
+    "storage_bucket": "longview-financeapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:394426473636:android:1907b341a90a3b4c0e1a31",
+        "mobilesdk_app_id": "1:535582518325:android:ed6bc3a00633671d94157c",
         "android_client_info": {
           "package_name": "com.example.finance_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "394426473636-djnjbe5umnldrdi1jtcjfbgbv68vingg.apps.googleusercontent.com",
+          "client_id": "535582518325-p0q0bhhegimk6ndc3va7tcnbqosburb9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD3QrOakrp9XOI3r3Z9hN_19sFAnpP9UDA"
+          "current_key": "AIzaSyD_RJWKlxGcJFFo91EqhqH25CKekDnVNEs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "394426473636-djnjbe5umnldrdi1jtcjfbgbv68vingg.apps.googleusercontent.com",
+              "client_id": "535582518325-p0q0bhhegimk6ndc3va7tcnbqosburb9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
