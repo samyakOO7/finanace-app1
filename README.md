@@ -1,3 +1,3 @@
-# finance_app
+# Finanace App
 
-A new Flutter application.
+An Android Application that facilitates the management of business processes that deal with money. 
