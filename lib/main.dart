@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();  // load the SplashScreen
   runApp(MyApp());
 }
 
@@ -47,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-       
+
         title: Text(widget.title),
       ),
       body: Center(
