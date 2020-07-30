@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:finance_app/signin.dart';
-// TESTING COMMENT 
+// TESTING COMMENT
+
+//TESTING COMMENT 2
 void main() {
   WidgetsFlutterBinding.ensureInitialized();  // load the SplashScreen
   runApp(MyApp());
