@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//button for signin and sign up
 class RoundedButton extends StatelessWidget {
   RoundedButton({this.color, @required this.title, @required this.onPress, this.radius = 15.0});
 
