@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:finance_app/signin.dart';
+import 'profilePage.dart';
+import 'UserProfile.dart';
+import 'package:flutter/services.dart';
 // TESTING COMMENT
 
 //TESTING COMMENT 2
@@ -10,6 +13,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       title: 'splttr',
       theme: ThemeData(

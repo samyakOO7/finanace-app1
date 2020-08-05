@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_app/HomePage.dart';
 import 'package:finance_app/components/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -11,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/dividerWithText.dart';
 import 'components/text_field_decoration.dart';
+import 'components/dual_button_tiles.dart';
 
 
 class SigninScreen extends StatefulWidget {
@@ -183,6 +183,8 @@ class _SigninScreenState extends State<SigninScreen> {
                     ),
                   ),
                   HorizontalOrLine(height: 10, label: "OR"),
+                  ProfileButtons(title: 'akj',onPress: (){},width: MediaQuery.of(context).size.width,icon: Icons.android,),
+                  ProfileButtons(title: 'akj',onPress: (){},width: MediaQuery.of(context).size.width,icon: Icons.android,),
                   SignInButton(
 
                     Buttons.Google,
