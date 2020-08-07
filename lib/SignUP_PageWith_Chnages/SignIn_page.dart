@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
 
 import 'SignUp_page.dart';
@@ -10,6 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final _formKey2 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -40,15 +43,39 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    TextFormField(
-                      decoration: textfield("Email"),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: textfield("Password"),
+                    Form(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: textfield("Email"),
+                            validator: (value1) {
+                              if (value1.isEmpty) {
+                                return 'Please enter an email address';
+                              }
+                              if (st_validator.isEmail(value1)) {
+                                return 'Enter a valid email address';
+                              }
+                              if (value1.split('@').length != 2) {
+                                return 'Enter a valid email address';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            obscureText: true,
+                            decoration: textfield("Password"),
+                            validator: (value1){
+                              if (value1.isEmpty) {
+                                return 'Please enter a password';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,
@@ -64,7 +91,11 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (_formKey2.currentState.validate());
+                        });
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(

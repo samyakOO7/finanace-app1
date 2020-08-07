@@ -1,8 +1,10 @@
+import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
 import 'package:flutter/material.dart';
-import 'package:finance_app/signin.dart';
+
 import 'profilePage.dart';
 import 'UserProfile.dart';
 import 'package:flutter/services.dart';
+import 'SignUP_PageWith_Chnages/SignUp_page.dart';
 // TESTING COMMENT
 
 //TESTING COMMENT 2
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      title: 'splttr',
+      title: 'finance app',
       theme: ThemeData(
         primaryColor: Color(0xFF40E0D0),
         scaffoldBackgroundColor: Colors.white, // Color(0xFF393073)
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => SigninScreen(),
+        '/': (context) => LoginPage(),
       },
     );
   }
