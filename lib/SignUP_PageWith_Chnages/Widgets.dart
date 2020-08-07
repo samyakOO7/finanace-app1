@@ -16,7 +16,7 @@ InputDecoration textfield(String hintText) {
     ),
     filled: true,
     hintText: hintText,
-    hintStyle: TextStyle(color: Color(0xff616161)),
+    hintStyle: TextStyle(color: Color(0xff373D3F)),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: BorderSide(

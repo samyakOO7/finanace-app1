@@ -29,7 +29,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 title: Text(
                   'Enter the promo code',
-                  style: TextStyle(color: Color(0xff616161)),
+                  style: TextStyle(
+                    color: Color(0xff373D3F),
+                  ),
                 ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -37,14 +39,14 @@ class _SignUpState extends State<SignUp> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    color: Color(0xff18FFFF),
+                    color: Color(0xff63E2E0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text(
                       'Confirm',
                       style: TextStyle(
-                        color: Color(0xff616161),
+                        color: Color(0xff373D3F),
                       ),
                     ),
                     onPressed: () {},
@@ -81,11 +83,13 @@ class _SignUpState extends State<SignUp> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(60),
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 40, bottom: 20),
                       child: Container(
                         child: Text(
                           'SIGN UP',
-                          style: TextStyle(fontSize: width * 0.09),
+                          style: TextStyle(
+                              color: Color(0xff373D3F), fontSize: width * 0.09),
                         ),
                       ),
                     ),
@@ -109,11 +113,11 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                           SizedBox(
-                            height: 8,
+                            height: 15,
                           ),
                           TextFormField(
                             keyboardType: TextInputType.number,
-                            decoration: textfield("Phone Number (Compulsory)"),
+                            decoration: textfield("Phone Number"),
                             validator: (String value) {
                               if (value.isEmpty) {
                                 return 'Please enter a PhoneNumber';
@@ -122,7 +126,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                           SizedBox(
-                            height: 8,
+                            height: 15,
                           ),
                           TextFormField(
                             decoration: textfield("Email (Optional)"),
@@ -140,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                           SizedBox(
-                            height: 8,
+                            height: 15,
                           ),
                           TextFormField(
                             obscureText: true,
@@ -157,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                           SizedBox(
-                            height: 8,
+                            height: 15,
                           ),
                           TextFormField(
                             obscureText: true,
@@ -185,16 +189,17 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'SIGN UP',
-                          style: TextStyle(fontSize: width * 0.05),
+                          style: TextStyle(
+                              color: Color(0xff373D3F), fontSize: width * 0.05),
                         ),
                       ),
-                      color: Color(0xff64FFDA),
+                      color: Color(0xff63E2E0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -202,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                         Text(
                           'Already have an account? ',
                           style: TextStyle(
-                              color: Color(0xff616161), fontSize: width * 0.04),
+                              color: Color(0xff373D3F), fontSize: width * 0.04),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -215,14 +220,15 @@ class _SignUpState extends State<SignUp> {
                           child: Text(
                             'Sign In',
                             style: TextStyle(
-                                color: Colors.lightBlue,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff63E2E0),
                                 fontSize: width * 0.04),
                           ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Row(
                       children: <Widget>[
@@ -236,7 +242,7 @@ class _SignUpState extends State<SignUp> {
                           child: Text(
                             "OR",
                             style: TextStyle(
-                              color: Color(0xff616161),
+                              color: Color(0xff373D3F),
                               fontSize: width * 0.04,
                             ),
                           ),
@@ -249,7 +255,7 @@ class _SignUpState extends State<SignUp> {
                       ],
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Container(
                       width: width * 0.7,
@@ -261,13 +267,10 @@ class _SignUpState extends State<SignUp> {
                           children: <Widget>[
                             Image.asset('assets/images/google.jpg',
                                 height: 50, width: 40),
-                            SizedBox(
-                              width: 10,
-                            ),
                             Text(
                               'Login with Google',
                               style: TextStyle(
-                                color: Color(0xff616161),
+                                color: Color(0xff373D3F),
                                 fontSize: width * 0.04,
                               ),
                             ),
@@ -276,7 +279,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Container(
                       child: Row(
@@ -285,9 +288,7 @@ class _SignUpState extends State<SignUp> {
                           Text(
                             'Got any promo/referral code? ',
                             style: TextStyle(
-                              color: Color(
-                                0xff616161,
-                              ),
+                              color: Color(0xff373D3F),
                             ),
                           ),
                           Checkbox(
