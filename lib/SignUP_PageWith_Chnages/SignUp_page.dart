@@ -12,7 +12,7 @@ class _SignUpState extends State<SignUp> {
   var val;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
 
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   bool checked = false;
   void toggle(bool check) {
@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          if (_formKey.currentState.validate()) ;
+                          if (_formKey.currentState.validate());
                         });
                       },
                       child: Padding(
