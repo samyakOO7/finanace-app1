@@ -113,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           TextFormField(
                             keyboardType: TextInputType.number,
-                            decoration: textfield("Phone Number"),
+                            decoration: textfield("Phone Number (Compulsory)"),
                             validator: (String value) {
                               if (value.isEmpty) {
                                 return 'Please enter a PhoneNumber';
@@ -125,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                             height: 8,
                           ),
                           TextFormField(
-                            decoration: textfield("Email"),
+                            decoration: textfield("Email (Optional)"),
                             validator: (String value) {
                               if (value.isEmpty) {
                                 return 'Please enter an email address';
@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          if (_formKey.currentState.validate());
+                          if (_formKey.currentState.validate()) ;
                         });
                       },
                       child: Padding(
