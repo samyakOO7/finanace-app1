@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "535582518325-tgbm7340nadtjornqmh61o883lvskglv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finance_app",
+            "certificate_hash": "ff217ed02f154d510146c5d5ca78324a0fd34002"
+          }
+        },
+        {
+          "client_id": "535582518325-1554f97lvi0pfsvnmb3c669aef3olf86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finance_app",
+            "certificate_hash": "cf65c926071238fd09c0496ead754d381685713b"
+          }
+        },
+        {
+          "client_id": "535582518325-i0lov1vd309930qq9e4lqdl8085betjq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finance_app",
+            "certificate_hash": "e38f9bae82b74a3da1a23700045f449bc66eeea5"
+          }
+        },
+        {
           "client_id": "535582518325-p0q0bhhegimk6ndc3va7tcnbqosburb9.apps.googleusercontent.com",
           "client_type": 3
         }

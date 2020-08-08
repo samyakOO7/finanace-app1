@@ -12,28 +12,30 @@ class ProfileButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 0.0),
-      child: Material(
-        color: color,
-        borderRadius: BorderRadius.circular(0),
-        elevation: 5.0,
-        child: MaterialButton(
-          onPressed: onPress,
-          minWidth: width,
-          height: 50.0,
-          child: Row(
-            children: <Widget>[
-              Icon(icon),
-              SizedBox(width: 8.0,),
-              Text(
-                title,
-                style: TextStyle(color: Colors.black),
-              ),
-              Expanded(child: Align(alignment: Alignment.bottomRight,child: Icon(Icons.keyboard_arrow_right,color: Colors.black26,)))
-            ],
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(0),
+      elevation: 0.0,
+      child: Column(
+        children: <Widget>[
+          MaterialButton(
+            onPressed: onPress,
+            minWidth: width,
+            height: 60.0,
+            color: Colors.white,
+            child: Row(
+              children: <Widget>[
+                Icon(icon,color: Colors.black54,),
+                SizedBox(width: 8.0,),
+                Text(
+                  title,
+                  style: TextStyle(color: Color(0xFF373D3F),fontWeight: FontWeight.normal),
+                ),
+                Expanded(child: Align(alignment: Alignment.bottomRight,child: Icon(Icons.keyboard_arrow_right,color: Colors.black26,)))
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

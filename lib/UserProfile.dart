@@ -11,8 +11,7 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     double tileHeight = MediaQuery.of(context).size.height;
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -180,8 +179,8 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
           ),
-        )),
-      ),
+        ),
+        ),
     );
   }
 }
