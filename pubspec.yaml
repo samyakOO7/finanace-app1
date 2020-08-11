@@ -37,6 +37,7 @@ dependencies:
   firebase_messaging: 6.0.13
   flutter_local_notifications: 1.4.0
   photo_view: ^0.5.0
+  pie_chart: ^3.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

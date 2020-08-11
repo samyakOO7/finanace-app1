@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'components/dual_button_tiles.dart';
 
-class ProfilePage extends StatefulWidget {
+class menuPage extends StatefulWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _menuPageState createState() => _menuPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _menuPageState extends State<menuPage> {
   String userName = 'Akhilesh';
   @override
   Widget build(BuildContext context) {
