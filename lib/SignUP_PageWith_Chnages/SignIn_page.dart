@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
@@ -11,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final _formKey2 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Container(
                         child: Text(
                           'LOGIN',
-                          style: TextStyle(fontSize: width * 0.1),
+                          style: TextStyle(
+                              fontSize: width * 0.1, color: Color(0xff373D3F)),
                         ),
                       ),
                     ),
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration: textfield("Email"),
+                            decoration: textfield("Phone Number/ Email"),
                             validator: (value1) {
                               if (value1.isEmpty) {
                                 return 'Please enter an email address';
@@ -67,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             obscureText: true,
                             decoration: textfield("Password"),
-                            validator: (value1){
+                            validator: (value1) {
                               if (value1.isEmpty) {
                                 return 'Please enter a password';
                               }
@@ -78,32 +79,39 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        FlatButton(
-                          onPressed: () {},
+                        GestureDetector(
+                          onTap: () {},
                           child: Text('Forgot Password?',
-                              style: TextStyle(fontSize: width * 0.04)),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: width * 0.04,
+                                  color: Color(0xff373D3F))),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          if (_formKey2.currentState.validate());
+                          if (_formKey2.currentState.validate()) ;
                         });
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'LOGIN',
-                          style: TextStyle(fontSize: width * 0.05),
+                          style: TextStyle(
+                              fontSize: width * 0.05, color: Color(0xff373D3F)),
                         ),
                       ),
-                      color: Color(0xff64FFDA),
+                      color: Color(0xff63E2E0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -117,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           'New User? ',
                           style: TextStyle(
-                              color: Color(0xff616161), fontSize: width * 0.04),
+                              color: Color(0xff373D3F), fontSize: width * 0.04),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -130,7 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             'Sign Up',
                             style: TextStyle(
-                                color: Colors.lightBlue,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff63E2E0),
                                 fontSize: width * 0.04),
                           ),
                         ),
@@ -151,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             "OR",
                             style: TextStyle(
-                              color: Color(0xff616161),
+                              color: Color(0xff373D3F),
                               fontSize: width * 0.04,
                             ),
                           ),
@@ -176,13 +185,10 @@ class _LoginPageState extends State<LoginPage> {
                           children: <Widget>[
                             Image.asset('assets/images/google.jpg',
                                 height: 50, width: 40),
-                            SizedBox(
-                              width: 10,
-                            ),
                             Text(
                               'Login with Google',
                               style: TextStyle(
-                                color: Color(0xff616161),
+                                color: Color(0xff373D3F),
                                 fontSize: width * 0.04,
                               ),
                             ),
