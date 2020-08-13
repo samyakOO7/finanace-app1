@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:pie_chart/pie_chart.dart';
+
+import 'components/ButtonsWidget.dart';
 
 class Rewards extends StatefulWidget {
   @override
@@ -10,64 +11,80 @@ class Rewards extends StatefulWidget {
 
 class _RewardsState extends State<Rewards> {
   String rCode = 'ASd3f2';
-  List<List> redeems = [["p45ik9",15],["p45ik9",15],["p45ik9",15],["p45ik9",15],["p45ik9",15],["p45ik9",15],["p45ik9",15],];
-  List<List> rewards = [['rewards1','rewards detailpoiuytrewqasdfghj kll,mnbvcxzasdfghjkl;poiuytrewqasdfghjkll,mnbvcxzsdfghjklpoiuytrewqasdfghjkl,mnbvcxzasdfghjklpoiuy'],['rewards1','rewards detail'],['rewards1','rewards detail'],['rewards1','rewards detail']];
+  List<List> redeems = [
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+    ["p45ik9", 15],
+  ];
+  List<List> rewards = [
+    [
+      'rewards1',
+      'rewards detailpoiuytrewqasdfghj kll,mnbvcxzasdfghjkl;poiuytrewqasdfghjkll,mnbvcxzsdfghjklpoiuytrewqasdfghjkl,mnbvcxzasdfghjklpoiuy'
+    ],
+    ['rewards1', 'rewards detail'],
+    ['rewards1', 'rewards detail'],
+    ['rewards1', 'rewards detail']
+  ];
   Map<String, double> dataMap = new Map();
-  void popUp(){
+  void popUp() {
     setState(() {
       showDialog(
           context: context,
           barrierDismissible: false,
           builder: (context) {
             return AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              title: Text(
-                'HOW TO EARN',
-                style: TextStyle(
-                  color: Color(0xff373D3F),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ),
-              content:Container(
-                height: 300,
-                child: ListView(
+                title: Text(
+                  'HOW TO EARN',
+                  style: TextStyle(
+                    color: Color(0xff373D3F),
+                  ),
+                ),
+                content: Container(
+                  height: 300,
+                  child: ListView(
                     children: List.generate(rewards.length, (int index) {
                       return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(rewards[index][0],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xff373D3F),
-                                ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              rewards[index][0],
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xff373D3F),
                               ),
-                              Text(rewards[index][1],
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Color(0xff373D3F),
-                                ),
+                            ),
+                            Text(
+                              rewards[index][1],
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xff373D3F),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
                       );
-                    }
-              ),
-                    ),
-              )
-            );
+                    }),
+                  ),
+                ));
           });
     });
   }
+
   @override
   void initState() {
     super.initState();
     dataMap.putIfAbsent("Redemtions", () => redeems.length.toDouble());
-    dataMap.putIfAbsent("Redemtionsleft", () => 30-redeems.length.toDouble());
+    dataMap.putIfAbsent("Redemtionsleft", () => 30 - redeems.length.toDouble());
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +117,10 @@ class _RewardsState extends State<Rewards> {
                         showChartValues: false,
                         showChartValuesOutside: false,
                         chartValueBackgroundColor: Colors.grey[200],
-                        colorList: [Color(0xff63e2e0),Colors.black12,],
+                        colorList: [
+                          Color(0xff63e2e0),
+                          Colors.black12,
+                        ],
                         showLegends: false,
                         legendPosition: LegendPosition.right,
                         decimalPlaces: 0,
@@ -145,7 +165,8 @@ class _RewardsState extends State<Rewards> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 15),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Text('Copy Code',
@@ -163,14 +184,40 @@ class _RewardsState extends State<Rewards> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SignInButton(Buttons.Facebook, mini: true, onPressed: () {}),
-                    SignInButton(Buttons.Twitter, mini: true, onPressed: () {}),
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        socialmedia('assets/images/facebook.png'),
+                        space(),
+                        socialtext('Facebook'),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        socialmedia('assets/images/instagram.jpg'),
+                        space(),
+                        socialtext('Instagram'),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        socialmedia('assets/images/wh.png'),
+                        space(),
+                        socialtext('Whatsapp'),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        socialmedia('assets/images/share.png'),
+                        space(),
+                        socialtext('Share with'),
+                      ],
+                    ),
                   ],
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 20.0),
                   child: Container(
                     height: tileHeight * 0.3,
                     width: tileWidth,
@@ -199,13 +246,14 @@ class _RewardsState extends State<Rewards> {
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
                               child: ListView(
-                                children: List.generate(rewards.length, buildTitleTile),
+                                children: List.generate(
+                                    rewards.length, buildTitleTile),
                               ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 15,bottom: 15),
+                          padding: const EdgeInsets.only(right: 15, bottom: 15),
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
@@ -226,23 +274,27 @@ class _RewardsState extends State<Rewards> {
                   height: tileHeight * 0.08,
                   width: tileWidth,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 20),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                     child: Row(
                       children: [
-                        Expanded(child: TextFormField(
-                          decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      hintText: 'Have a code?',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          style: BorderStyle.solid,
-                        ),
-                      ),
-                    ),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              alignLabelWithHint: true,
+                              hintText: 'Have a code?',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 8,),
+                        SizedBox(
+                          width: 8,
+                        ),
                         RaisedButton(
                           color: Color(0xff63E2E0),
                           shape: RoundedRectangleBorder(
@@ -260,13 +312,15 @@ class _RewardsState extends State<Rewards> {
                     ),
                   ),
                 ),
-                BottomSheet(onClosing: (){}, builder: (context){
-                  return Container(
-                    height: tileHeight * 0.08,
-                    width: tileWidth,
-                    color: Colors.black12,
-                  );
-                },
+                BottomSheet(
+                  onClosing: () {},
+                  builder: (context) {
+                    return Container(
+                      height: tileHeight * 0.08,
+                      width: tileWidth,
+                      color: Colors.black12,
+                    );
+                  },
                 )
               ],
             ),
@@ -275,6 +329,7 @@ class _RewardsState extends State<Rewards> {
       ),
     );
   }
+
   Padding buildTitleTile(int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -282,8 +337,11 @@ class _RewardsState extends State<Rewards> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(Icons.add),
-          SizedBox(width: 10.0,),
-          Text(rewards[index][0],
+          SizedBox(
+            width: 10.0,
+          ),
+          Text(
+            rewards[index][0],
             style: TextStyle(
               fontSize: 20,
               color: Color(0xff373D3F),

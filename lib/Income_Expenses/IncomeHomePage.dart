@@ -1,6 +1,6 @@
 import 'dart:math';
+import 'package:finance_app/Income_Expenses/widgetcode.dart';
 import 'package:flutter/material.dart';
-import 'widgetcode.dart';
 
 class IncomePage extends StatefulWidget {
   @override
@@ -14,13 +14,33 @@ class _IncomePageState extends State<IncomePage> {
       savings = 0,
       c1 = 0,
       c2 = 0,
-      potentialValue = 0;
+      potentialValue = 0,
+      rate,
+      time;
   double potential = 0;
   String incometype, expensetype, typei, typee;
   TextEditingController income = new TextEditingController();
   TextEditingController expense = new TextEditingController();
   TextEditingController x = new TextEditingController();
   TextEditingController y = new TextEditingController();
+
+  void calculatePotential(String value, int r, int t) {
+    setState(() {
+      if (y.text.isEmpty) {
+        t = 10;
+      }
+      if (x.text.isEmpty) {
+        r = 15;
+      }
+      if (dropdown == "YEARLY") {
+        potential = savings * pow((1 + (r / (12 * 100))), (t * 12));
+      } else {
+        potential = savings * pow((1 + (r / 100)), (t));
+      }
+      potentialValue = potential.toInt();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -72,6 +92,7 @@ class _IncomePageState extends State<IncomePage> {
                                 onChanged: (String newValue) {
                                   setState(() {
                                     dropdown = newValue;
+                                    calculatePotential(dropdown, rate, time);
                                   });
                                 },
                                 items: <String>[
@@ -518,6 +539,13 @@ class _IncomePageState extends State<IncomePage> {
                                       height: 20,
                                       width: 30,
                                       child: TextField(
+                                        onChanged: (t) {
+                                          setState(() {
+                                            time = int.parse(t);
+                                            calculatePotential(
+                                                dropdown, rate, time);
+                                          });
+                                        },
                                         keyboardType: TextInputType.number,
                                         textAlign: TextAlign.center,
                                         controller: y,
@@ -538,6 +566,13 @@ class _IncomePageState extends State<IncomePage> {
                                       height: 20,
                                       width: 30,
                                       child: TextField(
+                                        onChanged: (r) {
+                                          setState(() {
+                                            rate = int.parse(r);
+                                            calculatePotential(
+                                                dropdown, rate, time);
+                                          });
+                                        },
                                         keyboardType: TextInputType.number,
                                         textAlign: TextAlign.center,
                                         controller: x,
@@ -554,38 +589,6 @@ class _IncomePageState extends State<IncomePage> {
                                           color: Color(0xff373D3F),
                                           fontSize: 14),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          if (y.text.isEmpty) {
-                                            y.text = "10";
-                                          }
-                                          if (x.text.isEmpty) {
-                                            x.text = "15";
-                                          }
-                                          if (dropdown == "YEARLY") {
-                                            potential = savings *
-                                                pow(
-                                                    (1 +
-                                                        (int.parse(x.text) /
-                                                            (12 * 100))),
-                                                    (int.parse(y.text) * 12));
-                                          } else {
-                                            potential = savings *
-                                                pow(
-                                                    (1 +
-                                                        (int.parse(x.text) /
-                                                            100)),
-                                                    (int.parse(y.text)));
-                                          }
-                                          potentialValue = potential.toInt();
-                                        });
-                                      },
-                                      child: Icon(
-                                        Icons.arrow_forward,
-                                        size: 25,
-                                      ),
-                                    )
                                   ],
                                 ),
                               ],
