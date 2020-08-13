@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import 'RewardHistory.dart';
 import 'components/ButtonsWidget.dart';
 
 class Rewards extends StatefulWidget {
@@ -86,11 +89,13 @@ class _RewardsState extends State<Rewards> {
     dataMap.putIfAbsent("Redemtionsleft", () => 30 - redeems.length.toDouble());
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     double tileHeight = MediaQuery.of(context).size.height;
     double tileWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('REWARDS & REFERRALS'),
       ),
@@ -307,20 +312,112 @@ class _RewardsState extends State<Rewards> {
                             ),
                           ),
                           onPressed: () {},
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
-                BottomSheet(
-                  onClosing: () {},
-                  builder: (context) {
-                    return Container(
-                      height: tileHeight * 0.08,
-                      width: tileWidth,
-                      color: Colors.black12,
-                    );
-                  },
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Flexible(
+                      child: GestureDetector(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Color(0xff63E2E0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            padding: EdgeInsets.all(10),
+                            child: Text('Swipe up to see your Reward History')),
+                        onVerticalDragStart: (DragStartDetails details) {
+                          _scaffoldKey.currentState
+                              .showBottomSheet<Null>((BuildContext context) {
+                            var h = MediaQuery.of(context).size.height;
+                            var w = MediaQuery.of(context).size.width;
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                color: Color(0xff63E2E0),
+                              ),
+                              height: h * 0.5,
+                              width: w,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      'Your Reward History',
+                                      style: TextStyle(
+                                        color: Color(0xff373D3F),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      height: h * 0.4,
+                                      child: ListView.builder(
+                                        itemCount: codesUsed.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Column(
+                                            children: <Widget>[
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  color: Colors.white,
+                                                ),
+                                                height: 80,
+                                                width: w * 0.8,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: <Widget>[
+                                                      Text(codesUsed[index]
+                                                          .codeName),
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Text('Points Earned'),
+                                                          Text(codesUsed[index]
+                                                              .points)
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                        },
+                      ),
+                    )
+                  ],
                 )
               ],
             ),
