@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
 import 'SignIn_page.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -13,6 +15,75 @@ class _SignUpState extends State<SignUp> {
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
 
   final _formKey = GlobalKey<FormState>();
+  bool confirmMobile = false;
+  void checkMobileOTP(String otp){
+    setState(() {
+      confirmMobile = true;
+    });
+  }
+
+  void toggleMobile() {
+    if (confirmMobile == false) {
+      setState(() {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                title: Center(
+                  child: Text(
+                    'Enter the OTP',
+                    style: TextStyle(
+                      color: Color(0xff373D3F),
+                    ),
+                  ),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[OTPTextField(
+                    length: 6,
+                    width: MediaQuery.of(context).size.width,
+                    fieldWidth: 16,
+                    style: TextStyle(
+                        fontSize: 14
+                    ),
+                    textFieldAlignment: MainAxisAlignment.spaceAround,
+                    fieldStyle: FieldStyle.underline,
+                    onCompleted: (pin) {
+                      print("Completed: " + pin);
+                    },
+                  ),],
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
+                      'Verify',
+                      style: TextStyle(
+                        color: Color(0xff373D3F),
+                      ),
+                    ),
+                    onPressed: () {
+                      checkMobileOTP('otp');
+                    },
+                  )
+                ],
+              );
+            });
+      });
+    } else {
+      setState(() {
+        checked = false;
+      });
+    }
+  }
+
 
   bool checked = false;
   void toggle(bool check) {
@@ -182,6 +253,7 @@ class _SignUpState extends State<SignUp> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
+                          toggleMobile();
                           if (_formKey.currentState.validate()) ;
                         });
                       },
