@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'menu_page.dart';
 import 'SignUP_PageWith_Chnages/SignUp_page.dart';
 import 'forget_password.dart';
+import 'NotificationPage.dart';
 // TESTING COMMENT
 
 //TESTING COMMENT 2
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => NotificationPage(),
       },
     );
   }
