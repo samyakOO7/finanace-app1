@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'components/dual_button_tiles.dart';
+import 'package:finance_app/UserProfile.dart';
+import 'package:finance_app/Refer.dart';
+import 'Income_Expenses/IncomeHomePage.dart';
+import 'package:finance_app/MyGoals/GoalsHomePage.dart';
 
 class menuPage extends StatefulWidget {
   @override
@@ -38,7 +42,13 @@ class _menuPageState extends State<menuPage> {
             ),
             ProfileButtons(
                 title: 'Profile',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              UserProfile()));
+                },
                 width: tileWidth,
                 icon: Icons.person_outline),
             ProfileButtons(
@@ -68,19 +78,42 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.trending_up),
             ProfileButtons(
                 title: 'Income and Expense',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              IncomePage()));
+                },
                 width: tileWidth,
                 icon: Icons.compare_arrows),
             ProfileButtons(
                 title: "Goals",
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              GoalsHomePage()));
+                },
                 width: tileWidth,
                 icon: Icons.notification_important),
             ProfileButtons(
                 title: 'Rewards & Referrals',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Rewards()));
+                },
                 width: tileWidth,
                 icon: Icons.card_giftcard),
+            ProfileButtons(
+                title: 'Advisor',
+                onPress: () {},
+                width: tileWidth,
+                icon: Icons.assistant),
             ProfileButtons(
                 title: 'About Us',
                 onPress: () {},
