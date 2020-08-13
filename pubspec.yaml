@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  math_expressions: ^2.0.0
+  percent_indicator: ^2.1.5
   flutter_signin_button: ^1.0.0
   string_validator: ^0.1.4
   flutter:
