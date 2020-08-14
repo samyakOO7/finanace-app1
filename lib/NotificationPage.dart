@@ -94,28 +94,17 @@ class _NotificationPageState extends State<NotificationPage> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(width: 10.0,),
-              Text(notificationDetails[index],
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xff373D3F),
-                ),
+          SizedBox(width: 10.0,),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(notificationDetails[index],
+              style: TextStyle(
+                fontSize: 15,
+                color: Color(0xff373D3F),
               ),
-              SizedBox(width: 10.0,),
-              Expanded(
-                child: GestureDetector(
-                    child:Align(
-                        alignment: Alignment.bottomRight,
-                        child: Icon(Icons.keyboard_arrow_right,
-                          color: Colors.black26,),),
-                  onTap: (){},
-                ),
-              ),
-        ],
-      ),
+            ),
+          ),
+          SizedBox(width: 10.0,),
           Divider(),
       ],
     ),
