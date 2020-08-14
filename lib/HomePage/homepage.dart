@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../NotificationPage.dart';
 import '../menu_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,7 +54,13 @@ class _HomePageState extends State<HomePage> {
                         ),
                         IconButton(
                           iconSize: 40,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        NotificationPage()));
+                          },
                           icon: Icon(Icons.notifications_none),
                           color: Color(0xff373D3F),
                         )
