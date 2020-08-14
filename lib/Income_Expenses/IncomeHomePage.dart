@@ -138,9 +138,6 @@ class _IncomePageState extends State<IncomePage> {
                                         color: Color(0xff63E2E0),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
                                   Visibility(
                                     child: Container(
                                       height: height * 0.02,
@@ -166,98 +163,105 @@ class _IncomePageState extends State<IncomePage> {
                                     ),
                                     visible: (c1 != 0) ? true : false,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton(
-                                            hint: Text(
-                                              "Add Income",
-                                              style: TextStyle(
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                              hint: Text(
+                                                "Add Income",
+                                                style: TextStyle(
+                                                  color: Color(0xff373D3F),
+                                                ),
+                                              ),
+                                              value: incometype,
+                                              icon: Icon(
+                                                Icons.arrow_drop_down,
                                                 color: Color(0xff373D3F),
                                               ),
+                                              iconSize: 16,
+                                              onChanged: (String newValue) {
+                                                setState(() {
+                                                  incometype = newValue;
+                                                });
+                                              },
+                                              items: <String>[
+                                                'Salary',
+                                                'Investment',
+                                                'Business',
+                                                'Others'
+                                              ].map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
                                             ),
-                                            value: incometype,
-                                            icon: Icon(
-                                              Icons.arrow_drop_down,
-                                              color: Color(0xff373D3F),
-                                            ),
-                                            iconSize: 16,
-                                            onChanged: (String newValue) {
-                                              setState(() {
-                                                incometype = newValue;
-                                              });
-                                            },
-                                            items: <String>[
-                                              'Salary',
-                                              'Investment',
-                                              'Business',
-                                              'Others'
-                                            ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 10),
-                                        child: Visibility(
-                                          visible:
-                                              incometype != null ? true : false,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: <Widget>[
-                                              Container(
-                                                width: 150,
-                                                height: 50,
-                                                child: TextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  controller: income,
-                                                  decoration: InputDecoration(
-                                                    hintText: "Enter amount",
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color(
-                                                              0xff373D3F)),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0xff63E2E0),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10),
+                                          child: Visibility(
+                                            visible: incometype != null
+                                                ? true
+                                                : false,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 180,
+                                                  height: 50,
+                                                  child: TextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    controller: income,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Enter amount",
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Color(
+                                                                0xff373D3F)),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xff63E2E0),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    c1 = c1 + 1;
-                                                    typei = incometype;
-                                                    incometype = null;
-                                                    totalincome = totalincome +
-                                                        int.parse(income.text);
-                                                  });
-                                                },
-                                                icon: Icon(Icons.arrow_forward),
-                                                color: Color(0xff373D3F),
-                                              )
-                                            ],
+                                                IconButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      c1 = c1 + 1;
+                                                      typei = incometype;
+                                                      incometype = null;
+                                                      totalincome =
+                                                          totalincome +
+                                                              int.parse(
+                                                                  income.text);
+                                                    });
+                                                  },
+                                                  icon:
+                                                      Icon(Icons.arrow_forward),
+                                                  color: Color(0xff373D3F),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -339,108 +343,112 @@ class _IncomePageState extends State<IncomePage> {
                                     ),
                                     visible: (c2 != 0) ? true : false,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton(
-                                            hint: Text(
-                                              "Add Expense",
-                                              style: TextStyle(
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                              hint: Text(
+                                                "Add Expense",
+                                                style: TextStyle(
+                                                  color: Color(0xff373D3F),
+                                                ),
+                                              ),
+                                              value: expensetype,
+                                              icon: Icon(
+                                                Icons.arrow_drop_down,
                                                 color: Color(0xff373D3F),
                                               ),
+                                              iconSize: 16,
+                                              onChanged: (String newValue) {
+                                                setState(() {
+                                                  expensetype = newValue;
+                                                });
+                                              },
+                                              items: <String>[
+                                                'Rent',
+                                                'EMI(House)',
+                                                'EMI(Car)',
+                                                'Car costs',
+                                                'Education',
+                                                'Food',
+                                                'House costs',
+                                                'Shopping',
+                                                'Other'
+                                              ].map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
                                             ),
-                                            value: expensetype,
-                                            icon: Icon(
-                                              Icons.arrow_drop_down,
-                                              color: Color(0xff373D3F),
-                                            ),
-                                            iconSize: 16,
-                                            onChanged: (String newValue) {
-                                              setState(() {
-                                                expensetype = newValue;
-                                              });
-                                            },
-                                            items: <String>[
-                                              'House Rent',
-                                              'House EMI',
-                                              'Car EMI',
-                                              'Car Expense',
-                                              'Education',
-                                              'Food',
-                                              'House Expenses',
-                                              'Shopping',
-                                              'Other'
-                                            ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 10),
-                                        child: Visibility(
-                                          visible: expensetype != null
-                                              ? true
-                                              : false,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: <Widget>[
-                                              Container(
-                                                width: 120,
-                                                height: 50,
-                                                child: TextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  controller: expense,
-                                                  decoration: InputDecoration(
-                                                    hintText: "Enter amount",
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color(
-                                                              0xff373D3F)),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0xff63E2E0),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10),
+                                          child: Visibility(
+                                            visible: expensetype != null
+                                                ? true
+                                                : false,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 180,
+                                                  height: 50,
+                                                  child: TextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    controller: expense,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Enter amount",
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Color(
+                                                                0xff373D3F)),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xff63E2E0),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    c2 = c2 + 1;
-                                                    typee = expensetype;
-                                                    expensetype = null;
-                                                    totalexpense =
-                                                        totalexpense +
-                                                            int.parse(
-                                                                expense.text);
-                                                    savings = totalincome -
-                                                        totalexpense;
-                                                  });
-                                                },
-                                                icon: Icon(Icons.arrow_forward),
-                                                color: Color(0xff373D3F),
-                                              )
-                                            ],
+                                                IconButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      c2 = c2 + 1;
+                                                      typee = expensetype;
+                                                      expensetype = null;
+                                                      totalexpense =
+                                                          totalexpense +
+                                                              int.parse(
+                                                                  expense.text);
+                                                      savings = totalincome -
+                                                          totalexpense;
+                                                    });
+                                                  },
+                                                  icon:
+                                                      Icon(Icons.arrow_forward),
+                                                  color: Color(0xff373D3F),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -503,106 +511,110 @@ class _IncomePageState extends State<IncomePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
-                      child: Container(
-                        height: height * 0.15,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color(0xff373D3F),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Container(
+                          height: height * 0.15,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color(0xff373D3F),
+                            ),
+                            color: Color(0xff63E2E0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
                           ),
-                          color: Color(0xff63E2E0),
-                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                      "Potential Value of your Savings ",
-                                      style: TextStyle(
-                                          color: Color(0xff373D3F),
-                                          fontSize: 14)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 20,
-                                      width: 30,
-                                      child: TextField(
-                                        onChanged: (t) {
-                                          setState(() {
-                                            time = int.parse(t);
-                                            calculatePotential(
-                                                dropdown, rate, time);
-                                          });
-                                        },
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        controller: y,
-                                        decoration: InputDecoration(
-                                          hintText: "Y",
-                                          contentPadding:
-                                              EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                        "Potential Value of your Savings ",
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F),
+                                            fontSize: 14)),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        height: 20,
+                                        width: 30,
+                                        child: TextField(
+                                          onChanged: (t) {
+                                            setState(() {
+                                              time = int.parse(t);
+                                              calculatePotential(
+                                                  dropdown, rate, time);
+                                            });
+                                          },
+                                          keyboardType: TextInputType.number,
+                                          textAlign: TextAlign.center,
+                                          controller: y,
+                                          decoration: InputDecoration(
+                                            hintText: "Y",
+                                            contentPadding:
+                                                EdgeInsets.only(bottom: 10),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      " years from now at ",
-                                      style: TextStyle(
-                                          color: Color(0xff373D3F),
-                                          fontSize: 14),
-                                    ),
-                                    Container(
-                                      height: 20,
-                                      width: 30,
-                                      child: TextField(
-                                        onChanged: (r) {
-                                          setState(() {
-                                            rate = int.parse(r);
-                                            calculatePotential(
-                                                dropdown, rate, time);
-                                          });
-                                        },
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        controller: x,
-                                        decoration: InputDecoration(
-                                          hintText: "X",
-                                          contentPadding:
-                                              EdgeInsets.only(bottom: 10),
+                                      Text(
+                                        " years from now at ",
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F),
+                                            fontSize: 14),
+                                      ),
+                                      Container(
+                                        height: 20,
+                                        width: 30,
+                                        child: TextField(
+                                          onChanged: (r) {
+                                            setState(() {
+                                              rate = int.parse(r);
+                                              calculatePotential(
+                                                  dropdown, rate, time);
+                                            });
+                                          },
+                                          keyboardType: TextInputType.number,
+                                          textAlign: TextAlign.center,
+                                          controller: x,
+                                          decoration: InputDecoration(
+                                            hintText: "X",
+                                            contentPadding:
+                                                EdgeInsets.only(bottom: 10),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      " % CAGR will be  ",
-                                      style: TextStyle(
-                                          color: Color(0xff373D3F),
-                                          fontSize: 14),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 10),
-                              child: Center(
-                                child: Text("Rs. $potentialValue",
-                                    style: TextStyle(
-                                        color: Color(0xff373D3F),
-                                        fontSize: 24)),
+                                      Text(
+                                        " % CAGR will be  ",
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F),
+                                            fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: Center(
+                                  child: Text("Rs. $potentialValue",
+                                      style: TextStyle(
+                                          color: Color(0xff373D3F),
+                                          fontSize: 24)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

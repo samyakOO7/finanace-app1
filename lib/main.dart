@@ -1,4 +1,5 @@
 import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
+import 'package:finance_app/advisor.dart';
 import 'package:flutter/material.dart';
 import 'UserProfile.dart';
 import 'package:finance_app/Refer.dart';
@@ -7,6 +8,7 @@ import 'menu_page.dart';
 import 'SignUP_PageWith_Chnages/SignUp_page.dart';
 import 'forget_password.dart';
 import 'NotificationPage.dart';
+
 // TESTING COMMENT
 
 //TESTING COMMENT 2
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => NotificationPage(),
+        '/': (context) => Advisor(),
       },
     );
   }
