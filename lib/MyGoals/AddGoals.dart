@@ -60,60 +60,61 @@ class _AddGoalsState extends State<AddGoals> {
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
                         Container(
-                          height: height * 0.25,
+                          height: height * 0.2,
                           width: width,
                           child: ListView.builder(
                             itemCount: category.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      goalselected = index;
-                                    });
-                                  },
-                                  child: Container(
-                                    decoration: goalselected == index
-                                        ? BoxDecoration(
-                                            border: Border.all(
-                                              width: 4,
-                                              color: Color(0xff63E2E0),
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 10,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        goalselected = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: goalselected == index
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                width: 4,
+                                                color: Color(0xff63E2E0),
+                                              ),
+                                            )
+                                          : BoxDecoration(
+                                              border: Border.all(
+                                                width: 4,
+                                                color: Color(0xff373D3F),
+                                              ),
                                             ),
-                                          )
-                                        : BoxDecoration(
-                                            border: Border.all(
-                                              width: 4,
-                                              color: Color(0xff373D3F),
-                                            ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 20,
+                                      ),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            category[index].imageUrl,
+                                            height: height * 0.1,
+                                            width: width * 0.2,
                                           ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 20,
-                                    ),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Image.asset(
-                                          category[index].imageUrl,
-                                          height: 100,
-                                          width: 100,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          category[index].name,
-                                          style: TextStyle(
-                                              color: Color(0xff373D3F),
-                                              fontWeight: goalselected == index
-                                                  ? FontWeight.bold
-                                                  : FontWeight.w400),
-                                        ),
-                                      ],
+                                          Text(
+                                            category[index].name,
+                                            style: TextStyle(
+                                                color: Color(0xff373D3F),
+                                                fontWeight:
+                                                    goalselected == index
+                                                        ? FontWeight.bold
+                                                        : FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -200,7 +201,7 @@ class _AddGoalsState extends State<AddGoals> {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 40,
                         ),
                         Center(
                           child: RaisedButton(
