@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Advisor(),
+        '/': (context) => Rewards(),
       },
     );
   }
