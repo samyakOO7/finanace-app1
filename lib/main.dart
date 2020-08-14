@@ -1,5 +1,6 @@
 import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
 import 'package:finance_app/advisor.dart';
+import 'package:finance_app/contact_us.dart';
 import 'package:flutter/material.dart';
 import 'UserProfile.dart';
 import 'package:finance_app/Refer.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Advisor(),
+        '/': (context) => Contact_us(),
       },
     );
   }
