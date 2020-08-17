@@ -8,6 +8,7 @@ import 'menu_page.dart';
 import 'SignUP_PageWith_Chnages/SignUp_page.dart';
 import 'forget_password.dart';
 import 'NotificationPage.dart';
+import 'mPinPage.dart';
 
 // TESTING COMMENT
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => Rewards(),
+        '/': (context) => MPinPage(),
       },
     );
   }
