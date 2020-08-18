@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
+import 'Fingerprint.dart';
 
 
 class MPinPage extends StatefulWidget {
@@ -76,6 +75,8 @@ class _MPinPageState extends State<MPinPage> {
     //Function to check Pin
     setState(() {
       pinValidity = false;
+      output = '';
+
     });
   }
   @override
@@ -152,7 +153,6 @@ class _MPinPageState extends State<MPinPage> {
       }
       else if(output.length==4){
         checkPin();
-        output = '';
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -181,6 +181,9 @@ class _MPinPageState extends State<MPinPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Text('Enter mPin to unlock',
+                    style: TextStyle(fontSize: 25, color: Color(0xff373D3F),fontWeight: FontWeight.w500),),
+                  SizedBox(height: 35,),
                   spaceBuilder(),
                   SizedBox(height: 20,),
                   Padding(
@@ -188,7 +191,7 @@ class _MPinPageState extends State<MPinPage> {
                     child: warningBuilder(),
                   ),
 
-                  SizedBox(height: 50,),
+                  SizedBox(height: 20,),
                   Column(
                     children: <Widget>[
                       Padding(
@@ -257,6 +260,55 @@ class _MPinPageState extends State<MPinPage> {
                               fontSize: tileWidth * 0.06),
                         ),
                       ),
+                    ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff616161),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "OR",
+                          style: TextStyle(
+                            color: Color(0xff373D3F),
+                            fontSize: tileWidth * 0.04,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff616161),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  fingerPrint()));
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Use Fingerprint',
+                        style: TextStyle(
+                            fontSize: tileWidth * 0.05, color: Color(0xff373D3F)),
+                      ),
+                    ),
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ],
