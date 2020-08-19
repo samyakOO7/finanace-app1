@@ -48,6 +48,7 @@ dependencies:
   flutter_numpad_widget: ^0.1.1
   flutter_mobx: ^0.2.3
   reactify: ^1.1.1
+  fl_chart: ^0.10.1
 
 
   # The following adds the Cupertino Icons font to your application.
