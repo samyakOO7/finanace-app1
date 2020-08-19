@@ -19,7 +19,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-   var val;
+  var val;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
       confirmMobile = true;
     });
   }
-   bool _isHidden = true;
+  bool _isHidden = true;
 
   void _toggleVisibility(){
     setState(() {
@@ -101,11 +101,11 @@ class _SignUpState extends State<SignUp> {
     'password' : ''
 
   };
-     Future<void> _submit() async{
+  Future<void> _submit() async{
     if(!_formKey.currentState.validate())
-      {
-        return ;
-      }
+    {
+      return ;
+    }
     _formKey.currentState.save();
     try{
       await  Provider.of<Authentication>(context, listen: false).
@@ -119,7 +119,7 @@ class _SignUpState extends State<SignUp> {
       _showErrorDailog(errorMessage);
     }
 
-}
+  }
 
   Future<bool> loginUser(String phone, BuildContext context) async{
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -338,280 +338,280 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: viewportConstraints.maxHeight,
-            ),
-            child: Container(
-              height: height * 1.2,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 20, right: 20, top: 40, bottom: 20),
-                      child: Container(
-                        child: Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                              color: Color(0xff373D3F), fontSize: width * 0.09),
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: viewportConstraints.maxHeight,
+                ),
+                child: Container(
+                  height: height * 1.2,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 20, right: 20, top: 40, bottom: 20),
+                          child: Container(
+                            child: Text(
+                              'SIGN UP',
+                              style: TextStyle(
+                                  color: Color(0xff373D3F), fontSize: width * 0.09),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: textfield("Username"),
-                            validator: (String value) {
-                              if (value.isEmpty) {
-                                return 'Please enter a username';
-                              }
-                              if (!userNameRegExp.hasMatch(value)) {
-                                return 'Only Alphanumerics, underscore or period, allowed';
-                              }
-                              if (value[0] == value[0].toUpperCase()) {
-                                return 'First letter should not be uppercase in username';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration: textfield("Phone Number"),
-                            validator: (String value) {
-                              if (value.isEmpty) {
-                                return 'Please enter a PhoneNumber';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            decoration: textfield("Email (Optional)"),
-                            validator: (String value) {
-                              if (value.isEmpty) {
-                                return 'Please enter an email address';
-                              }
-                              if (st_validator.isEmail(value)) {
-                                return 'Enter a valid email address';
-                              }
-                              if (value.split('@').length != 2) {
-                                return 'Enter a valid email address';
-                              }
-                              return null;
-                            },
-                            onSaved: (value)
-                            {
-                              _authData['email']=value;
-                            },
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            obscureText: _isHidden,
-                            decoration:  InputDecoration(
-                              hintText: ' Password',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(0.5),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                decoration: textfield("Username"),
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return 'Please enter a username';
+                                  }
+                                  if (!userNameRegExp.hasMatch(value)) {
+                                    return 'Only Alphanumerics, underscore or period, allowed';
+                                  }
+                                  if (value[0] == value[0].toUpperCase()) {
+                                    return 'First letter should not be uppercase in username';
+                                  }
+                                  return null;
+                                },
                               ),
-                              suffixIcon: IconButton(
-                                onPressed: _toggleVisibility,
-                                icon: Icon(Icons.visibility_off),
-                              )
-                            
-                            validator: (String value) {
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                keyboardType: TextInputType.number,
+                                decoration: textfield("Phone Number"),
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return 'Please enter a PhoneNumber';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                decoration: textfield("Email (Optional)"),
+                                validator: (String value) {
+                                  if (value.isEmpty) {
+                                    return 'Please enter an email address';
+                                  }
+                                  if (st_validator.isEmail(value)) {
+                                    return 'Enter a valid email address';
+                                  }
+                                  if (value.split('@').length != 2) {
+                                    return 'Enter a valid email address';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value)
+                                {
+                                  _authData['email']=value;
+                                },
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                obscureText: _isHidden,
+                                decoration:  InputDecoration(
+                                    hintText: ' Password',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0.5),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      onPressed: _toggleVisibility,
+                                      icon: Icon(Icons.visibility_off),
+                                    )),
+
+                                    validator: (String value) {
                               val = value;
                               if (value.isEmpty) {
-                                return 'Please enter a password';
+                              return 'Please enter a password';
                               }
                               if (value.length < 8) {
-                                return 'Password must be greater than 8 alphabets';
+                              return 'Password must be greater than 8 alphabets';
                               }
                               return null;
-                            },
-                              onSaved: (value)
-                            {
-                              _authData['password']=value;
-                            },
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          TextFormField(
-                            obscureText: _isHidden2,
-                            decoration:  InputDecoration(
-                              hintText: 'Confirm Password',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(0.5),
+                              },
+                                onSaved: (value)
+                                {
+                                  _authData['password']=value;
+                                },
                               ),
-                              suffixIcon: IconButton(
-                                onPressed: _toggleVisibility2,
-                                icon: Icon(Icons.visibility_off),
-                              )
-                            validator: (String value) {
+                              SizedBox(
+                                height: 15,
+                              ),
+                              TextFormField(
+                                obscureText: _isHidden2,
+                                decoration:  InputDecoration(
+                                    hintText: 'Confirm Password',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(0.5),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      onPressed: _toggleVisibility2,
+                                      icon: Icon(Icons.visibility_off),
+                                    ),),
+                                    validator: (String value) {
                               if (val != value) {
-                                return 'Passwords do not match';
+                              return 'Passwords do not match';
                               }
                               return null;
-                            },
+                              },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                         final phone = _phoneController.text.trim();
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            final phone = _phoneController.text.trim();
 
-                        loginUser(phone, context);
+                            loginUser(phone, context);
 //                         setState(() {
 //                           toggleMobile();
 //                           if (_formKey.currentState.validate()) ;
 //                         });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                              color: Color(0xff373D3F), fontSize: width * 0.05),
-                        ),
-                      ),
-                      color: Color(0xff63E2E0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Already have an account? ',
-                          style: TextStyle(
-                              color: Color(0xff373D3F), fontSize: width * 0.04),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        LoginPage()));
                           },
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff63E2E0),
-                                fontSize: width * 0.04),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xff616161),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "OR",
-                            style: TextStyle(
-                              color: Color(0xff373D3F),
-                              fontSize: width * 0.04,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'SIGN UP',
+                              style: TextStyle(
+                                  color: Color(0xff373D3F), fontSize: width * 0.05),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: Color(0xff616161),
+                          color: Color(0xff63E2E0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      width: width * 0.7,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: controlSignIn,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Image.asset('assets/images/google.jpg',
-                                height: 50, width: 40),
                             Text(
-                              'Login with Google',
+                              'Already have an account? ',
                               style: TextStyle(
-                                color: Color(0xff373D3F),
-                                fontSize: width * 0.04,
+                                  color: Color(0xff373D3F), fontSize: width * 0.04),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            LoginPage()));
+                              },
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff63E2E0),
+                                    fontSize: width * 0.04),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Got any promo/referral code? ',
-                            style: TextStyle(
-                              color: Color(0xff373D3F),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Divider(
+                                color: Color(0xff616161),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "OR",
+                                style: TextStyle(
+                                  color: Color(0xff373D3F),
+                                  fontSize: width * 0.04,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                color: Color(0xff616161),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          child: RaisedButton(
+                            color: Colors.white,
+                            onPressed: controlSignIn,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Image.asset('assets/images/google.jpg',
+                                    height: 50, width: 40),
+                                Text(
+                                  'Login with Google',
+                                  style: TextStyle(
+                                    color: Color(0xff373D3F),
+                                    fontSize: width * 0.04,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Checkbox(
-                            value: checked,
-                            onChanged: (bool value) {
-                              toggle(value);
-                            },
-                            activeColor: Color(0xff616161),
-                            checkColor: Colors.white,
-                            tristate: false,
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Got any promo/referral code? ',
+                                style: TextStyle(
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                              Checkbox(
+                                value: checked,
+                                onChanged: (bool value) {
+                                  toggle(value);
+                                },
+                                activeColor: Color(0xff616161),
+                                checkColor: Colors.white,
+                                tristate: false,
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        );
-      }),
+            );
+          }),
     );
   }
-                    
-                     Future<Null> controlSignIn() async {
+
+  Future<Null> controlSignIn() async {
     preferences = await SharedPreferences.getInstance();
     this.setState(() {
       isLoading = true;

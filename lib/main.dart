@@ -1,3 +1,4 @@
+import 'package:finance_app/HomePage/homepage.dart';
 import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
 import 'package:finance_app/advisor.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => MPinPage(),
+        '/': (context) => HomePage(),
       },
     );
   }
