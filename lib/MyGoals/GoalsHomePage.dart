@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'YourGoals.dart';
 import 'GoalsType.dart';
 import 'AddGoals.dart';
+import 'Graph.dart';
 
 class GoalsHomePage extends StatefulWidget {
   @override
@@ -50,7 +51,8 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(15.0)),
                         ),
-                        height: height * 0.65,
+                        height: height * 0.4,
+                        child: LineCharts(),
                       ),
                     ),
                     Row(
@@ -83,7 +85,7 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
                       ],
                     ),
                     Container(
-                      height: height * 0.1,
+                      height: height * 0.12,
                       width: width,
                       color: Color(0xffECEFF1),
                       child: ListView.builder(
