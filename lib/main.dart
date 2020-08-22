@@ -1,6 +1,8 @@
 import 'package:finance_app/HomePage/homepage.dart';
+import 'package:finance_app/Insurance/InsuranceHomePage.dart';
 import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
 import 'package:finance_app/advisor.dart';
+import 'package:finance_app/contact_us.dart';
 import 'package:flutter/material.dart';
 import 'UserProfile.dart';
 import 'package:finance_app/Refer.dart';
@@ -10,6 +12,12 @@ import 'SignUP_PageWith_Chnages/SignUp_page.dart';
 import 'forget_password.dart';
 import 'NotificationPage.dart';
 import 'mPinPage.dart';
+import 'package:finance_app/Fingerprint.dart';
+import 'package:finance_app/Investments/InvestmentHomePage.dart';
+import 'package:finance_app/Investments/InvestmentPacks.dart';
+import 'package:finance_app/Investments/InvestmentPackDetails.dart';
+import 'package:finance_app/Investments/PacksInfo.dart';
+import 'MyGoals/GoalsHomePage.dart';
 
 // TESTING COMMENT
 
@@ -38,7 +46,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(),
+        '/': (context) => InsuranceHome(),
       },
     );
   }
