@@ -4,7 +4,7 @@ List<String> currentGoals = ['Dream Home', 'Son'];
 
 List<String> completedGoals = ['Study', 'Job', 'Education', 'Marriage'];
 
-final List<String> goalsType = ['Current Goals', 'Completed Goals'];
+final List<String> goalsType = ['Current', 'Completed'];
 
 class GoalInfo {
   final GoalCategory type;

@@ -60,7 +60,7 @@ class _AddGoalsState extends State<AddGoals> {
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
                         Container(
-                          height: (height < 640) ? height * 0.15 : height * 0.2,
+                          height: (height < 640) ? height * 0.18 : height * 0.2,
                           width: width,
                           child: ListView.builder(
                             itemCount: category.length,
@@ -134,25 +134,28 @@ class _AddGoalsState extends State<AddGoals> {
                           child: Text('Goal Name',
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: TextFormField(
-                            controller: name,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff373D3F)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff63E2E0),
+                        Container(
+                          height: height < 640 ? height * 0.06 : height * 0.08,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: TextFormField(
+                              controller: name,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xff373D3F)),
                                   ),
-                                ),
-                                hintText: "Enter name"),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xff63E2E0),
+                                    ),
+                                  ),
+                                  hintText: "Enter name"),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: (height < 640) ? 10 : 20,
+                          height: 10,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -160,26 +163,29 @@ class _AddGoalsState extends State<AddGoals> {
                           child: Text('Goal Amount',
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            controller: value,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff373D3F)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff63E2E0),
+                        Container(
+                          height: height < 640 ? height * 0.06 : height * 0.08,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: value,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xff373D3F)),
                                   ),
-                                ),
-                                hintText: "Enter Amount"),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xff63E2E0),
+                                    ),
+                                  ),
+                                  hintText: "Enter Amount"),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: (height < 640) ? 10 : 20,
+                          height: 10,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -187,26 +193,29 @@ class _AddGoalsState extends State<AddGoals> {
                           child: Text('Achieve Goal By',
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            controller: year,
-                            decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff373D3F)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff63E2E0),
+                        Container(
+                          height: height < 640 ? height * 0.06 : height * 0.08,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: year,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xff373D3F)),
                                   ),
-                                ),
-                                hintText: "Enter year"),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xff63E2E0),
+                                    ),
+                                  ),
+                                  hintText: "Enter year"),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: (height < 640) ? 20 : 40,
+                          height: 20,
                         ),
                         Center(
                           child: RaisedButton(
