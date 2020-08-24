@@ -52,7 +52,7 @@ Widget yourGoals(BuildContext context, List typeGoal, double height,
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(6.0),
                       child: LinearPercentIndicator(
                         lineHeight: 14.0,
                         percent: 0.5,
@@ -62,29 +62,64 @@ Widget yourGoals(BuildContext context, List typeGoal, double height,
                     ),
                     Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                "Achieve by: ",
-                                style: TextStyle(color: Color(0xff373D3F)),
-                              ),
-                              Text(goal_info[index].year,
-                                  style: TextStyle(color: Color(0xff373D3F))),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text("Target Value ",
-                                  style: TextStyle(color: Color(0xff373D3F))),
-                              Text(goal_info[index].value,
-                                  style: TextStyle(color: Color(0xff373D3F))),
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: (width > 350)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Achieve by: ",
+                                      style:
+                                          TextStyle(color: Color(0xff373D3F)),
+                                    ),
+                                    Text(goal_info[index].year,
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text("Target: ",
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                    Text(goal_info[index].value,
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "Achieve by: ",
+                                      style:
+                                          TextStyle(color: Color(0xff373D3F)),
+                                    ),
+                                    Text(goal_info[index].year,
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text("Target: ",
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                    Text(goal_info[index].value,
+                                        style: TextStyle(
+                                            color: Color(0xff373D3F))),
+                                  ],
+                                ),
+                              ],
+                            ),
                     )
                   ],
                 ),

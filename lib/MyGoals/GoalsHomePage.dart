@@ -16,6 +16,8 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    print(width);
+    print(height);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -85,7 +87,7 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
                       ],
                     ),
                     Container(
-                      height: height * 0.12,
+                      height: (height < 640) ? height * 0.2 : height * 0.12,
                       width: width,
                       color: Color(0xffECEFF1),
                       child: ListView.builder(

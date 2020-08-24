@@ -60,7 +60,7 @@ class _AddGoalsState extends State<AddGoals> {
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
                         Container(
-                          height: height * 0.2,
+                          height: (height < 640) ? height * 0.15 : height * 0.2,
                           width: width,
                           child: ListView.builder(
                             itemCount: category.length,
@@ -68,6 +68,7 @@ class _AddGoalsState extends State<AddGoals> {
                             itemBuilder: (BuildContext context, int index) {
                               return SingleChildScrollView(
                                 scrollDirection: Axis.vertical,
+                                physics: NeverScrollableScrollPhysics(),
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 20,
@@ -101,7 +102,9 @@ class _AddGoalsState extends State<AddGoals> {
                                         children: <Widget>[
                                           Image.asset(
                                             category[index].imageUrl,
-                                            height: height * 0.1,
+                                            height: (height < 640)
+                                                ? height * 0.05
+                                                : height * 0.1,
                                             width: width * 0.2,
                                           ),
                                           Text(
@@ -149,7 +152,7 @@ class _AddGoalsState extends State<AddGoals> {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: (height < 640) ? 10 : 20,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -160,6 +163,7 @@ class _AddGoalsState extends State<AddGoals> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: value,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -175,7 +179,7 @@ class _AddGoalsState extends State<AddGoals> {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: (height < 640) ? 10 : 20,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
@@ -186,6 +190,7 @@ class _AddGoalsState extends State<AddGoals> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: year,
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -201,7 +206,7 @@ class _AddGoalsState extends State<AddGoals> {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: (height < 640) ? 20 : 40,
                         ),
                         Center(
                           child: RaisedButton(

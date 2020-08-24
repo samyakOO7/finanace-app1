@@ -9,7 +9,7 @@ class LineCharts extends StatelessWidget {
         fontSize: 10, color: Colors.black, fontWeight: FontWeight.bold);
 
     return SizedBox(
-      width: 400,
+      width: MediaQuery.of(context).size.width,
       height: 180,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -77,11 +77,14 @@ class LineCharts extends StatelessWidget {
               ),
             ),
             axisTitleData: FlAxisTitleData(
-                leftTitle:
-                    AxisTitle(showTitle: true, titleText: 'Value', margin: 10),
+                leftTitle: AxisTitle(
+                    showTitle: true,
+                    titleText: 'Value',
+                    margin: 30,
+                    textStyle: yearTextStyle),
                 bottomTitle: AxisTitle(
                     showTitle: true,
-                    margin: 10,
+                    margin: 20,
                     titleText: 'Year',
                     textStyle: yearTextStyle,
                     textAlign: TextAlign.right)),
