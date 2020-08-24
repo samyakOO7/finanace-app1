@@ -78,16 +78,17 @@ class LineCharts extends StatelessWidget {
             ),
             axisTitleData: FlAxisTitleData(
                 leftTitle: AxisTitle(
-                    showTitle: true,
-                    titleText: 'Value',
-                    margin: 30,
-                    textStyle: yearTextStyle),
+                  showTitle: true,
+                  titleText: 'Value',
+                  margin: 20,
+                  textStyle: yearTextStyle,
+                ),
                 bottomTitle: AxisTitle(
                     showTitle: true,
-                    margin: 20,
+                    margin: 10,
                     titleText: 'Year',
                     textStyle: yearTextStyle,
-                    textAlign: TextAlign.right)),
+                    textAlign: TextAlign.center)),
             gridData: FlGridData(
               show: true,
               checkToShowHorizontalLine: (double value) {
