@@ -79,14 +79,14 @@ class LineCharts extends StatelessWidget {
             axisTitleData: FlAxisTitleData(
                 leftTitle: AxisTitle(
                   showTitle: true,
-                  titleText: 'Value',
-                  margin: 20,
+                  titleText: '',
+                  margin: 10,
                   textStyle: yearTextStyle,
                 ),
                 bottomTitle: AxisTitle(
                     showTitle: true,
                     margin: 10,
-                    titleText: 'Year',
+                    titleText: '',
                     textStyle: yearTextStyle,
                     textAlign: TextAlign.center)),
             gridData: FlGridData(

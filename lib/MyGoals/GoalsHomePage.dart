@@ -86,44 +86,48 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
                         ),
                       ],
                     ),
-                    Container(
-                      height: (height < 640) ? height * 0.15 : height * 0.12,
-                      width: width,
-                      color: Color(0xffECEFF1),
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: goalsType.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            width: width * 0.5,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedIndex = index;
-                                });
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 30,
-                                ),
-                                child: Text(
-                                  goalsType[index],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: index == selectedIndex
-                                          ? Color(0xff63E2E0)
-                                          : Color(0xff373D3F),
-                                      fontSize: 20,
-                                      fontWeight: index == selectedIndex
-                                          ? FontWeight.bold
-                                          : FontWeight.w500,
-                                      letterSpacing: 1),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
+                        height: (height < 640) ? height * 0.15 : height * 0.12,
+                        width: width,
+                        color: Color(0xffECEFF1),
+                        child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: goalsType.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              width: width * 0.45,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedIndex = index;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 30,
+                                  ),
+                                  child: Text(
+                                    goalsType[index],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: index == selectedIndex
+                                            ? Color(0xff63E2E0)
+                                            : Color(0xff373D3F),
+                                        fontSize: 20,
+                                        fontWeight: index == selectedIndex
+                                            ? FontWeight.bold
+                                            : FontWeight.w500,
+                                        letterSpacing: 1),
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                     Column(
