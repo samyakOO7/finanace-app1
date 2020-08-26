@@ -6,7 +6,44 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  String dropdownValue = 'Male';
+  String dropdownValue;
+  String userName;
+  String userPan;
+  String userStatus;
+  String userMobile;
+  String userDob;
+  String userCode;
+  bool isEditing = false;
+
+  void getUserData(){
+    //function to get user data
+    dropdownValue = 'Male';
+    userName = 'Ganesh';
+    userPan = 'po87uin';
+    userCode = '3218526547';
+    userDob = '';
+    userStatus = 'Single';
+    userMobile = '9564832178';
+
+  }
+  void switchState(){
+    if(isEditing){
+      isEditing = false;
+    }
+    else{
+      isEditing = true;
+    }
+  }
+  void updateUserData(){
+    //function to update the data of user to sync database
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +52,15 @@ class _UserProfileState extends State<UserProfile> {
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if(isEditing){
+            updateUserData();
+          }
+          setState(() {
+            switchState();
+          });
           // Add your onPressed code here!
         },
-        child: Icon(Icons.edit),
+        child: isEditing?Icon(Icons.save):Icon(Icons.edit),
         backgroundColor: Colors.green,
       ),
       body: SafeArea(
@@ -38,14 +81,14 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                Text(
-                  'Ganesh',
+                isEditing?TextFormField():Text(
+                  '$userName',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(
@@ -61,14 +104,14 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                Text(
-                  '',
+                isEditing?TextFormField():Text(
+                  '$userDob',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(
@@ -84,14 +127,14 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                Text(
-                  '9876543210',
+                isEditing?TextFormField():Text(
+                  '$userMobile',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(
@@ -107,14 +150,14 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                Text(
-                  'poiuytr',
+                isEditing?TextFormField():Text(
+                  '$userPan',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(
@@ -130,14 +173,14 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                Text(
-                  '',
+                isEditing?TextFormField():Text(
+                  '$userStatus',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(
@@ -153,7 +196,7 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(
                   height: tileHeight / 80,
                 ),
-                DropdownButton<String>(
+                isEditing?DropdownButton<String>(
                   value: dropdownValue,
                   icon: Icon(Icons.arrow_drop_down),
                   iconSize: tileHeight/40,
@@ -176,6 +219,15 @@ class _UserProfileState extends State<UserProfile> {
                       child: Text(value),
                     );
                   }).toList(),
+                ):Text(
+                  '$dropdownValue',
+                  style: TextStyle(
+                    fontSize: tileHeight / 55,
+                    color: Colors.black45,
+                  ),
+                ),
+                isEditing?SizedBox():Divider(
+                  color: Colors.black45,
                 ),
                 SizedBox(
                   height: tileHeight / 40,
@@ -191,13 +243,13 @@ class _UserProfileState extends State<UserProfile> {
                   height: tileHeight / 80,
                 ),
                 Text(
-                  '9876541230',
+                  '$userCode',
                   style: TextStyle(
                     fontSize: tileHeight / 55,
                     color: Colors.black45,
                   ),
                 ),
-                Divider(
+                isEditing?SizedBox():Divider(
                   color: Colors.black45,
                 ),
                 SizedBox(

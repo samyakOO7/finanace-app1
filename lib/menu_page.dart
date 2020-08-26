@@ -4,6 +4,10 @@ import 'package:finance_app/UserProfile.dart';
 import 'package:finance_app/Refer.dart';
 import 'Income_Expenses/IncomeHomePage.dart';
 import 'package:finance_app/MyGoals/GoalsHomePage.dart';
+import 'advisor.dart';
+import 'contact_us.dart';
+import 'package:finance_app/Investments/InvestmentHomePage.dart';
+import 'Insurance/InsuranceHomePage.dart';
 
 class menuPage extends StatefulWidget {
   @override
@@ -58,12 +62,24 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.business_center),
             ProfileButtons(
                 title: 'Investment',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              InvestmentHomePage()));
+                },
                 width: tileWidth,
                 icon: Icons.attach_money),
             ProfileButtons(
                 title: 'Insurance',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              InsuranceHome()));
+                },
                 width: tileWidth,
                 icon: Icons.home),
             ProfileButtons(
@@ -111,7 +127,13 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.card_giftcard),
             ProfileButtons(
                 title: 'Advisor',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Advisor()));
+                },
                 width: tileWidth,
                 icon: Icons.assistant),
             ProfileButtons(
@@ -121,7 +143,13 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.business),
             ProfileButtons(
                 title: 'Help & Support',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Contact_us()));
+                },
                 width: tileWidth,
                 icon: Icons.call),
           ],
