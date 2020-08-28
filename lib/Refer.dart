@@ -37,46 +37,64 @@ class _RewardsState extends State<Rewards> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            return AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                title: Text(
-                  'HOW TO EARN',
-                  style: TextStyle(
-                    color: Color(0xff373D3F),
-                    fontSize: h*0.025
+            return SingleChildScrollView(
+              child: AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                content: Container(
-                  height: h*0.4,
-                  child: ListView(
-                    children: List.generate(rewards.length, (int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              rewards[index][0],
-                              style: TextStyle(
-                                fontSize: h*0.022,
-                                color: Color(0xff373D3F),
-                              ),
+                  title: Row(
+                    children: [
+                      GestureDetector(
+                        child: Icon(Icons.arrow_back,color: Color(0xff373D3F),size: h*.02,),
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                      ),
+
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'HOW TO EARN',
+                            style: TextStyle(
+                              color: Color(0xff373D3F),
+                              fontSize: h*0.025
                             ),
-                            Text(
-                              rewards[index][1],
-                              style: TextStyle(
-                                fontSize: h*0.015,
-                                color: Color(0xff373D3F),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      );
-                    }),
+                      ),
+                    ],
                   ),
-                ));
+                  content: Container(
+                    height: h*0.4,
+                    child: ListView(
+                      children: List.generate(rewards.length, (int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                rewards[index][0],
+                                style: TextStyle(
+                                  fontSize: h*0.022,
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                              Text(
+                                rewards[index][1],
+                                style: TextStyle(
+                                  fontSize: h*0.015,
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
+                  )),
+            );
           });
     });
   }
@@ -385,17 +403,15 @@ class _RewardsState extends State<Rewards> {
                   height: 5,
                 ),
                 GestureDetector(
-                  child: Expanded(
-                    child: Container(
-                      width: tileWidth,
-                        decoration: BoxDecoration(
-                            color: Color(0xff63E2E0),
-                            borderRadius:
-                                BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
-                        padding: EdgeInsets.all(16),
-                        child: Center(child: Text('Swipe up to see your Reward History',
-                        style: TextStyle(fontSize: tileHeight*0.02,fontWeight: FontWeight.w600,color: Color(0xff373D3F)),))),
-                  ),
+                  child: Container(
+                    width: tileWidth,
+                      decoration: BoxDecoration(
+                          color: Color(0xff63E2E0),
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
+                      padding: EdgeInsets.all(16),
+                      child: Center(child: Text('Swipe up to see your Reward History',
+                      style: TextStyle(fontSize: tileHeight*0.02,fontWeight: FontWeight.w600,color: Color(0xff373D3F)),))),
                   onVerticalDragStart: (DragStartDetails details) {
                     _scaffoldKey.currentState
                         .showBottomSheet<Null>((BuildContext context) {
