@@ -49,6 +49,9 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     double tileHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('User Profile'),
+      ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -67,195 +70,197 @@ class _UserProfileState extends State<UserProfile> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Name(as on PAN Card)',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Name(as on PAN Card)',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?TextFormField():Text(
-                  '$userName',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?TextFormField():Text(
+                    '$userName',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'Date of Birth',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?TextFormField():Text(
-                  '$userDob',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  Text(
+                    'Date of Birth',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?TextFormField():Text(
+                    '$userDob',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'Mobile Number',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?TextFormField():Text(
-                  '$userMobile',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  Text(
+                    'Mobile Number',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?TextFormField():Text(
+                    '$userMobile',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'PAN Number',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?TextFormField():Text(
-                  '$userPan',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  Text(
+                    'PAN Number',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?TextFormField():Text(
+                    '$userPan',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'Marital Status',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?TextFormField():Text(
-                  '$userStatus',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  Text(
+                    'Marital Status',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?TextFormField():Text(
+                    '$userStatus',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'Gender',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                isEditing?DropdownButton<String>(
-                  value: dropdownValue,
-                  icon: Icon(Icons.arrow_drop_down),
-                  iconSize: tileHeight/40,
-                  elevation: 16,
-                  style: TextStyle(
-                      color: Colors.black45, fontSize: tileHeight / 55),
-                  underline: Container(
-                    height: 2,
+                  Text(
+                    'Gender',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing?DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: Icon(Icons.arrow_drop_down),
+                    iconSize: tileHeight/40,
+                    elevation: 16,
+                    style: TextStyle(
+                        color: Colors.black45, fontSize: tileHeight / 55),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.black45,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
+                    items: <String>['Male', 'Female']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ):Text(
+                    '$dropdownValue',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                  onChanged: (String newValue) {
-                    setState(() {
-                      dropdownValue = newValue;
-                    });
-                  },
-                  items: <String>['Male', 'Female']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ):Text(
-                  '$dropdownValue',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
+                  SizedBox(
+                    height: tileHeight / 40,
+                  ),
+                  Text(
+                    'Unique Client Code',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  Text(
+                    '$userCode',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing?SizedBox():Divider(
                     color: Colors.black45,
                   ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-                Text(
-                  'Unique Client Code',
-                  style: TextStyle(
-                    fontSize: tileHeight / 40,
-                    color: Colors.black87,
+                  SizedBox(
+                    height: tileHeight / 40,
                   ),
-                ),
-                SizedBox(
-                  height: tileHeight / 80,
-                ),
-                Text(
-                  '$userCode',
-                  style: TextStyle(
-                    fontSize: tileHeight / 55,
-                    color: Colors.black45,
-                  ),
-                ),
-                isEditing?SizedBox():Divider(
-                  color: Colors.black45,
-                ),
-                SizedBox(
-                  height: tileHeight / 40,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
