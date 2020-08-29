@@ -8,7 +8,7 @@ import 'UserProfile.dart';
 import 'package:finance_app/Refer.dart';
 import 'package:flutter/services.dart';
 import 'menu_page.dart';
-import 'SignUP_PageWith_Chnages/SignUp_page.dart';
+import 'SignUP_PageWith_Chnages/signup2.dart';
 import 'forget_password.dart';
 import 'NotificationPage.dart';
 import 'mPinPage.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(),
+        '/': (context) => SignUp(),
       },
     );
   }
