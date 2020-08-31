@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
     }
     elseif(strlen($password)<6)
     {
-        $msg = "<div class='alert alert-danger'>Password length should be greater than 6</div>";
+        $msg = "Password length should be greater than 6";
 
     }
     else {
@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
         mysqli_query($conn,$query);
         $query="delete from set password_reset where email='$email'";
         mysqli_query($conn,$query);
-        $msg = "<div class='alert alert-success'>Password updated.</div>";
+        $msg = "Password updated.";
     }
 
 }
@@ -77,11 +77,11 @@ if(isset($_POST['submit']))
      $headers= "Content-type:text/html;charset=UTF-8" . "\r\n";
      $headers = 'From:<demo@demo.com>' . "\r\n";
       mail($to,$subject,$message,$headers);
-      $msg = "<div class='alert alert-success'>Password reset link has been sent to the email address.</div>";
+      $msg = "Password reset link has been sent to the email address";
     }
 }
     else {
-      $msg = "<div class='alert alert-danger'>User not found.</div>";
+      $msg = "User not found";
 
     }
   }
@@ -125,11 +125,11 @@ if(isset($_POST['submit'])){
     $hashed = password_hash($password,PASSWORD_BCRYPT,$options);
     if($password!=$confirmpassword)
     {
-        $msg = "<div class='alert alert-danger'>Passwords does not match</div>";
+        $msg = "Passwords does not match";
     }
     elseif(strlen($password)<6)
     {
-        $msg = "<div class='alert alert-danger'>Password length should be greater than 6</div>";
+        $msg = "Password length should be greater than 6";
 
     }
     else {
@@ -137,7 +137,7 @@ if(isset($_POST['submit'])){
         mysqli_query($conn,$query);
         $query="delete from set password_reset where email='$email'";
         mysqli_query($conn,$query);
-        $msg = "<div class='alert alert-success'>Password updated.</div>";
+        $msg = "Password updated";
     }
 
 }
