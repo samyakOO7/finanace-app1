@@ -1,341 +1,375 @@
 import 'package:flutter/material.dart';
 
-class InsuranceHome extends StatefulWidget {
+class InsuranceHomePage extends StatefulWidget {
   @override
-  _InsuranceHomeState createState() => _InsuranceHomeState();
+  _InsuranceHomePageState createState() => _InsuranceHomePageState();
 }
 
-class _InsuranceHomeState extends State<InsuranceHome> {
+class _InsuranceHomePageState extends State<InsuranceHomePage> {
   @override
   Widget build(BuildContext context) {
-    var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+          color: Color(0xff373D3F),
         ),
-        centerTitle: true,
         backgroundColor: Color(0xff63E2E0),
+        centerTitle: true,
         title: Text(
           'INSURANCE',
-          style: TextStyle(
-            color: Color(0xff373D3F),
-            fontSize: 23,
-          ),
+          style: TextStyle(color: Color(0xff373D3F)),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Column(
-                  children: [
-                    Container(
-                      height: h * 0.45,
-                      //color: Colors.brown,
-                      child: Column(
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: viewportConstraints.maxHeight,
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                right: 15.0,
+                top: 10,
+                bottom: 15,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Image.asset('assets/images/health.png'),
-                              Text(
-                                'Health Insurance',
-                                style: TextStyle(
-                                  color: Color(0xff373D3F),
-                                  fontSize: 19,
-                                ),
-                              ),
-                              RaisedButton(
-                                elevation: 0,
-                                onPressed: () {},
-                                child: Text('Get a quote'),
-                              ),
-                            ],
+                          Image.asset(
+                            "assets/images/health.png",
+                            height: 60,
+                            width: 80,
                           ),
-                          Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                height: h * 0.30,
-                                width: w * 1,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: h * 0.02,
-                                        width: w * 0.8,
-                                        child: Card(
-                                          color: Color(0xff00BBFF),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  """Access to best healthcare for
- you and you family""",
-                                                  style: TextStyle(fontSize: 19),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: h * 0.1,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  onPressed: () {},
-                                                  child: Text('Know more'),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: h * 0.18,
-                                        width: w * 0.8,
-                                        child: Card(
-                                          color: Color(0xff32CFCB),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  """Access to best healthcare for
- you and you family""",
-                                                  style: TextStyle(fontSize: 19),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: h * 0.1,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  onPressed: () {},
-                                                  child: Text('Know more'),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-
-
+                          Text(
+                            "Health Insurance",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff373D3F),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                height: 1,
-                thickness: 2,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 2),
-                child: Column(
-                  children: [
-                    Container(
-                      height: h * 0.45,
-                      //color: Colors.brown,
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Image.asset('assets/images/family.png'),
-                              Text(
-                                'Term Life Insurance',
-                                style: TextStyle(
-                                  color: Color(0xff373D3F),
-                                  fontSize: 19,
-                                ),
-                              ),
-                              RaisedButton(
-                                elevation: 0,
-                                onPressed: () {},
-                                child: Text('Get a quote'),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                height: h * 0.30,
-                                width: w * 1,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: h * 0.02,
-                                        width: w * 0.8,
-                                        child: Card(
-                                          color: Color(0xff00BBFF),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  """Access to best healthcare for
- you and you family""",
-                                                  style: TextStyle(fontSize: 19),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: h * 0.1,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  onPressed: () {},
-                                                  child: Text('Know more'),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: h * 0.18,
-                                        width: w * 0.8,
-                                        child: Card(
-                                          color: Color(0xff32CFCB),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  """Access to best healthcare for
- you and you family""",
-                                                  style: TextStyle(fontSize: 19),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: h * 0.1,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: RaisedButton(
-                                                  onPressed: () {},
-                                                  child: Text('Know more'),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-
-
-                        ],
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-              Text('MOTOR',
-              style: TextStyle(
-                fontSize: 25,
-              ),),
-              SizedBox(
-                height: 19,
-              ),
-              Divider(
-                height: 1,
-                thickness: 2,
-              ),
-              Container(
-                height: h * 0.25,
-                //color: Colors.yellow,
-                child: Column(
-                  children:<Widget> [
-                    Row(
-                      children:<Widget> [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset('assets/images/car1.png'),
-                        ),
-                        Text('Car Insurance',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),),
-
-                        SizedBox(
-                          width: w * 0.2,
-                        ),
-                        RaisedButton(
-                          onPressed: (){},
-                          child: Text('Get a quote'),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      height: 1,
-                      thickness: 2,
-                    ),
-
-                    Row(
-                      children:<Widget> [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset('assets/images/bike.png'),
-                        ),
-                        Text('Car Insurance',
+                      FlatButton(
+                        onPressed: () {},
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xff63E2E0))),
+                        child: Text(
+                          "Get a quote",
                           style: TextStyle(
-                            fontSize: 20,
-                          ),),
-
-                        SizedBox(
-                          width: w * 0.08,
+                            color: Color(0xff63E2E0),
+                          ),
                         ),
-                        RaisedButton(
-                          onPressed: (){},
-                          child: Text('Get a quote'),
-                        ),
-                      ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Container(
+                      height: height * 0.2,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            width: width * 0.7,
+                            decoration: BoxDecoration(
+                              color: Color(0xff00BBFF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Access to best healthcare for you and you family",
+                                    style: TextStyle(fontSize: 19),
+                                  ),
+                                  FlatButton(
+                                    color: Color(0xff00BBFF),
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(color: Colors.black)),
+                                    onPressed: () {},
+                                    child: Text('Know more'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: width * 0.7,
+                            decoration: BoxDecoration(
+                              color: Color(0xff32CFCB),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Access to best healthcare for you and you family",
+                                    style: TextStyle(fontSize: 19),
+                                  ),
+                                  RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(color: Colors.black)),
+                                    onPressed: () {},
+                                    child: Text('Know more'),
+                                    color: Color(0xff32CFCB),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-
-                ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Divider(
+                      height: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/images/family.png",
+                            height: 60,
+                            width: 80,
+                          ),
+                          Text(
+                            "Term Life Insurance",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff373D3F),
+                            ),
+                          ),
+                        ],
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xff63E2E0))),
+                        child: Text(
+                          "Get a quote",
+                          style: TextStyle(
+                            color: Color(0xff63E2E0),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Container(
+                      height: height * 0.2,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            width: width * 0.7,
+                            decoration: BoxDecoration(
+                              color: Color(0xffEDFF96),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Access to best healthcare for you and you family",
+                                    style: TextStyle(fontSize: 19),
+                                  ),
+                                  FlatButton(
+                                    color: Color(0xffEDFF96),
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(color: Colors.black)),
+                                    onPressed: () {},
+                                    child: Text('Know more'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: width * 0.7,
+                            decoration: BoxDecoration(
+                              color: Color(0xffD49CFF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "Access to best healthcare for you and you family",
+                                    style: TextStyle(fontSize: 19),
+                                  ),
+                                  RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(color: Colors.black)),
+                                    onPressed: () {},
+                                    child: Text('Know more'),
+                                    color: Color(0xffD49CFF),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "Motor",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Divider(
+                      height: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/images/car1.png",
+                            height: 60,
+                            width: 80,
+                          ),
+                          Text(
+                            "Car Insurance",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff373D3F),
+                            ),
+                          ),
+                        ],
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xff63E2E0))),
+                        child: Text(
+                          "Get a quote",
+                          style: TextStyle(
+                            color: Color(0xff63E2E0),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Divider(
+                      height: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Image.asset(
+                              "assets/images/bike1.png",
+                              height: 60,
+                              width: 70,
+                            ),
+                          ),
+                          Text(
+                            "Bike Insurance",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff373D3F),
+                            ),
+                          ),
+                        ],
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xff63E2E0))),
+                        child: Text(
+                          "Get a quote",
+                          style: TextStyle(
+                            color: Color(0xff63E2E0),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Divider(
+                      height: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
-
-
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
