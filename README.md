@@ -46,55 +46,6 @@ if(isset($_POST['submit'])){
 }
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Reset</title>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<link rel="stylesheet" href="/css/main.css">
-</head>
-
-
-<body>
-<div class="container">
-<div class="row">
-<div class="col-md-6-col-md-offset-3">
-<h1>Set Pin</h1><hr>
-<form action="" method="post">
-<div class="form-group">
-<label for="">Email</label>
-<input type="text" readonly class="form-control" name=""value="<?php echo $email; ?>">
-</div>
-<div class="form-group">
-<label for="">Enter Pin</label>
-<input type="password" class="form-control" name="password">
-</div>
-<div class="form-group">
-<label for"">Confirm Pin</label>
-<input type="password" class="form-control" name="confirmpassword">
-</div>
-<?php if(isset($ms)){echo $msg;} ?>
-<div class="form-group">
-<button name="submit" class="btn btn-primary btn-block">Submit</button>
-</div>
-
-<!-- <center>
-<a href="forget-password.php">Forgot</a>
-</center> -->
-</form>
-</div>
-</div>
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</body>
-</html>
 
 //forget-password.php
 
@@ -137,48 +88,7 @@ if(isset($_POST['submit']))
    
 
 ?>
-<!doctype html>
-<html lang="en">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Forgot Password</title>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/main.css">
-</head>
-
-
-<body >
-
-<div class="container">
-<div class="row">
-<div class="col-md-6-col-md-offset-3">
-<h1>Forgot Password</h1><hr>
-<form action="" method="post">
-<div class="form-group">
-<label for="">Enter Email</label>
-<input type="email"class="form-control" name="email"value="">
-</div>
-<?php if(isset($ms)){echo $msg;} ?>
-<div class="form-group">
-<button name="submit" class="btn btn-primary btn-block">Submit</button>
-</div>
-<!-- <center>
-<a href="forget-password.php">Forgot</a>
-</center> -->
-</form>
-</div>
-</div>
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-</body>
-</html>
 
 
 
@@ -233,52 +143,3 @@ if(isset($_POST['submit'])){
 }
 ?>
 
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Reset</title>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<link rel="stylesheet" href="/css/main.css">
-</head>
-
-
-<body>
-<div class="container">
-<div class="row">
-<div class="col-md-6-col-md-offset-3">
-<h1>Reset Password</h1><hr>
-<form action="" method="post">
-<div class="form-group">
-<label for="">Email</label>
-<input type="text" readonly class="form-control" name=""value="<?php echo $email; ?>">
-</div>
-<div class="form-group">
-<label for="">Password</label>
-<input type="password" class="form-control" name="password">
-</div>
-<div class="form-group">
-<label for"">Confirm Password</label>
-<input type="password" class="form-control" name="confirmpassword">
-</div>
-<?php if(isset($ms)){echo $msg;} ?>
-<div class="form-group">
-<button name="submit" class="btn btn-primary btn-block">Submit</button>
-</div>
-
-<!-- <center>
-<a href="forget-password.php">Forgot</a>
-</center> -->
-</form>
-</div>
-</div>
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</body>
-</html>
