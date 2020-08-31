@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
     $hashed = password_hash($password,PASSWORD_BCRYPT,$options);
     if($password!=$confirmpassword)
     {
-        $msg = "<div class='alert alert-danger'>Passwords does not match</div>";
+        $msg = Passwords does not match";
     }
     elseif(strlen($password)<6)
     {
