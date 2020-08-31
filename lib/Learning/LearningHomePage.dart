@@ -34,7 +34,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: ScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: viewportConstraints.maxHeight,
@@ -55,7 +55,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
                       height: 30,
                     ),
                     Container(
-                      height: height * 0.25,
+                      height: height < 640 ? height * 0.3 : height * 0.25,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15)),

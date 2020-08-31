@@ -15,7 +15,7 @@ class _UserProfileState extends State<UserProfile> {
   String userCode;
   bool isEditing = false;
 
-  void getUserData(){
+  void getUserData() {
     //function to get user data
     dropdownValue = 'Male';
     userName = 'Ganesh';
@@ -24,17 +24,17 @@ class _UserProfileState extends State<UserProfile> {
     userDob = '';
     userStatus = 'Single';
     userMobile = '9564832178';
-
   }
-  void switchState(){
-    if(isEditing){
+
+  void switchState() {
+    if (isEditing) {
       isEditing = false;
-    }
-    else{
+    } else {
       isEditing = true;
     }
   }
-  void updateUserData(){
+
+  void updateUserData() {
     //function to update the data of user to sync database
   }
   @override
@@ -44,18 +44,18 @@ class _UserProfileState extends State<UserProfile> {
     getUserData();
   }
 
-
   @override
   Widget build(BuildContext context) {
     double tileHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('User Profile'),
+        backgroundColor: Color(0xff63E2E0),
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if(isEditing){
+          if (isEditing) {
             updateUserData();
           }
           setState(() {
@@ -63,7 +63,7 @@ class _UserProfileState extends State<UserProfile> {
           });
           // Add your onPressed code here!
         },
-        child: isEditing?Icon(Icons.save):Icon(Icons.edit),
+        child: isEditing ? Icon(Icons.save) : Icon(Icons.edit),
         backgroundColor: Colors.green,
       ),
       body: SafeArea(
@@ -85,16 +85,20 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?TextFormField():Text(
-                    '$userName',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? TextFormField()
+                      : Text(
+                          '$userName',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -108,16 +112,20 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?TextFormField():Text(
-                    '$userDob',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? TextFormField()
+                      : Text(
+                          '$userDob',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -131,16 +139,20 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?TextFormField():Text(
-                    '$userMobile',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? TextFormField()
+                      : Text(
+                          '$userMobile',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -154,16 +166,20 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?TextFormField():Text(
-                    '$userPan',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? TextFormField()
+                      : Text(
+                          '$userPan',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -177,16 +193,20 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?TextFormField():Text(
-                    '$userStatus',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? TextFormField()
+                      : Text(
+                          '$userStatus',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -200,39 +220,43 @@ class _UserProfileState extends State<UserProfile> {
                   SizedBox(
                     height: tileHeight / 80,
                   ),
-                  isEditing?DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: Icon(Icons.arrow_drop_down),
-                    iconSize: tileHeight/40,
-                    elevation: 16,
-                    style: TextStyle(
-                        color: Colors.black45, fontSize: tileHeight / 55),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.black45,
-                    ),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['Male', 'Female']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ):Text(
-                    '$dropdownValue',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.arrow_drop_down),
+                          iconSize: tileHeight / 40,
+                          elevation: 16,
+                          style: TextStyle(
+                              color: Colors.black45, fontSize: tileHeight / 55),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.black45,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: <String>['Male', 'Female']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        )
+                      : Text(
+                          '$dropdownValue',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -253,9 +277,11 @@ class _UserProfileState extends State<UserProfile> {
                       color: Colors.black45,
                     ),
                   ),
-                  isEditing?SizedBox():Divider(
-                    color: Colors.black45,
-                  ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),

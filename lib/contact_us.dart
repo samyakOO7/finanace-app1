@@ -23,7 +23,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget appBarTitle = Text(
     'SUPPORT',
     style: TextStyle(
-      fontSize: 28.0,
       color: Color(0xff373D3F),
     ),
   );

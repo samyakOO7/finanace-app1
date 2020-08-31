@@ -29,7 +29,6 @@ class Advisor extends StatelessWidget {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
-            //physics: NeverScrollableScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: viewportConstraints.maxHeight,
@@ -95,7 +94,7 @@ class Advisor extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Container(
-                        height: height < 640 ? height * 0.24 : height * 0.18,
+                        height: height < 640 ? height * 0.3 : height * 0.18,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -217,7 +216,7 @@ class Advisor extends StatelessWidget {
                     ),
                     Center(
                       child: Container(
-                        height: height < 640 ? height * 0.26 : height * 0.23,
+                        height: height < 640 ? height * 0.3 : height * 0.23,
                         width: width * 0.9,
                         color: Colors.white,
                         child: Card(
