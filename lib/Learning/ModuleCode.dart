@@ -36,7 +36,7 @@ Widget modules(double width, double height, Color back, Color front, int x) {
             padding: EdgeInsets.only(top: 15),
             child: Text(
               "Stock Market Basics",
-              textAlign: TextAlign.end,
+              textAlign: TextAlign.center,
             ),
           ),
         )
