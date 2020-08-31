@@ -1,10 +1,6 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-
 
 class Contact_us extends StatelessWidget {
   @override
@@ -36,6 +32,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+          color: Color(0xff373D3F),
+        ),
         actions: <Widget>[
           IconButton(
             icon: searchIcon,
@@ -69,11 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         backgroundColor: Color(0xff63E2E0),
         automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {},
-        ),
         centerTitle: true,
         title: appBarTitle,
       ),

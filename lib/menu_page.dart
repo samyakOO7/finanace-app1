@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
 import 'package:finance_app/UserProfile.dart';
 import 'package:finance_app/Refer.dart';
@@ -28,17 +29,13 @@ class _menuPageState extends State<menuPage> {
             SizedBox(
               width: MediaQuery.of(context).size.width / 1.5,
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 16
-                ),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                 child: Text(
                   '$userName',
-                  style:
-                      Theme.of(context).textTheme.subtitle1.copyWith(
-                            fontSize: 20.0,
-                        color: Color(0xFF373D3F)
-                          ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(fontSize: 20.0, color: Color(0xFF373D3F)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -50,8 +47,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              UserProfile()));
+                          builder: (BuildContext context) => UserProfile()));
                 },
                 width: tileWidth,
                 icon: Icons.person_outline),
@@ -78,7 +74,7 @@ class _menuPageState extends State<menuPage> {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              InsuranceHome()));
+                              InsuranceHomePage()));
                 },
                 width: tileWidth,
                 icon: Icons.home),
@@ -89,7 +85,13 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.receipt),
             ProfileButtons(
                 title: 'Learning',
-                onPress: () {},
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              LearningHomePage()));
+                },
                 width: tileWidth,
                 icon: Icons.trending_up),
             ProfileButtons(
@@ -98,8 +100,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              IncomePage()));
+                          builder: (BuildContext context) => IncomePage()));
                 },
                 width: tileWidth,
                 icon: Icons.compare_arrows),
@@ -109,8 +110,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              GoalsHomePage()));
+                          builder: (BuildContext context) => GoalsHomePage()));
                 },
                 width: tileWidth,
                 icon: Icons.notification_important),
@@ -120,8 +120,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              Rewards()));
+                          builder: (BuildContext context) => Rewards()));
                 },
                 width: tileWidth,
                 icon: Icons.card_giftcard),
@@ -131,8 +130,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              Advisor()));
+                          builder: (BuildContext context) => Advisor()));
                 },
                 width: tileWidth,
                 icon: Icons.assistant),
@@ -147,8 +145,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              Contact_us()));
+                          builder: (BuildContext context) => Contact_us()));
                 },
                 width: tileWidth,
                 icon: Icons.call),

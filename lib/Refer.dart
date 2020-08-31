@@ -31,7 +31,7 @@ class _RewardsState extends State<Rewards> {
   ];
   Map<String, double> dataMap = new Map();
   Map<String, double> dataMap2 = new Map();
-  void popUp(double h,double w) {
+  void popUp(double h, double w) {
     setState(() {
       showDialog(
           context: context,
@@ -45,27 +45,28 @@ class _RewardsState extends State<Rewards> {
                   title: Row(
                     children: [
                       GestureDetector(
-                        child: Icon(Icons.arrow_back,color: Color(0xff373D3F),size: h*.02,),
-                        onTap: (){
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Color(0xff373D3F),
+                          size: h * .02,
+                        ),
+                        onTap: () {
                           Navigator.pop(context);
                         },
                       ),
-
                       Expanded(
                         child: Center(
                           child: Text(
                             'HOW TO EARN',
                             style: TextStyle(
-                              color: Color(0xff373D3F),
-                              fontSize: h*0.025
-                            ),
+                                color: Color(0xff373D3F), fontSize: h * 0.025),
                           ),
                         ),
                       ),
                     ],
                   ),
                   content: Container(
-                    height: h*0.4,
+                    height: h * 0.4,
                     child: ListView(
                       children: List.generate(rewards.length, (int index) {
                         return Padding(
@@ -77,14 +78,14 @@ class _RewardsState extends State<Rewards> {
                               Text(
                                 rewards[index][0],
                                 style: TextStyle(
-                                  fontSize: h*0.022,
+                                  fontSize: h * 0.022,
                                   color: Color(0xff373D3F),
                                 ),
                               ),
                               Text(
                                 rewards[index][1],
                                 style: TextStyle(
-                                  fontSize: h*0.015,
+                                  fontSize: h * 0.015,
                                   color: Color(0xff373D3F),
                                 ),
                               ),
@@ -103,10 +104,11 @@ class _RewardsState extends State<Rewards> {
   void initState() {
     super.initState();
     dataMap.putIfAbsent("Redemtions", () => codesUsed.length.toDouble());
-    dataMap.putIfAbsent("Redemtionsleft", () => 30 - codesUsed.length.toDouble());
+    dataMap.putIfAbsent(
+        "Redemtionsleft", () => 30 - codesUsed.length.toDouble());
     dataMap2.putIfAbsent("Investments", () => codesUsed.length.toDouble());
-    dataMap2.putIfAbsent("Investmentleft", () => 30 - codesUsed.length.toDouble());
-
+    dataMap2.putIfAbsent(
+        "Investmentleft", () => 30 - codesUsed.length.toDouble());
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -117,6 +119,15 @@ class _RewardsState extends State<Rewards> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+          color: Color(0xff373D3F),
+        ),
+        backgroundColor: Color(0xff63E2E0),
+        centerTitle: true,
         title: Text('REWARDS & REFERRALS'),
       ),
       backgroundColor: Colors.white,
@@ -233,7 +244,9 @@ class _RewardsState extends State<Rewards> {
                     ),
                   ),
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -267,7 +280,9 @@ class _RewardsState extends State<Rewards> {
                     ),
                   ],
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 4.0, horizontal: 16.0),
@@ -299,32 +314,36 @@ class _RewardsState extends State<Rewards> {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 9,horizontal: 15),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 9, horizontal: 15),
                             child: Container(
                               child: ListView(
-                                children: List.generate(
-                                    rewards.length, (int index){return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.add),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Flexible(
-                                        child: Text(
-                                          rewards[index][0],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: tileHeight*0.022,
-                                            color: Color(0xff373D3F),
-                                          ),
+                                children:
+                                    List.generate(rewards.length, (int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.add),
+                                        SizedBox(
+                                          width: 10.0,
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                );}),
+                                        Flexible(
+                                          child: Text(
+                                            rewards[index][0],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: tileHeight * 0.022,
+                                              color: Color(0xff373D3F),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
                               ),
                             ),
                           ),
@@ -334,12 +353,15 @@ class _RewardsState extends State<Rewards> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
-                              onTap: (){popUp(tileHeight,tileWidth);},
+                              onTap: () {
+                                popUp(tileHeight, tileWidth);
+                              },
                               child: Text('View More Details',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: tileHeight * 0.02,
-                                    color: Color(0xff373D3F),)),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: tileHeight * 0.02,
+                                    color: Color(0xff373D3F),
+                                  )),
                             ),
                           ),
                         ),
@@ -374,8 +396,7 @@ class _RewardsState extends State<Rewards> {
                             textAlignVertical: TextAlignVertical.bottom,
                             style: TextStyle(
                                 color: Color(0xff373D3F),
-                                fontSize: tileHeight*0.02
-                            ),
+                                fontSize: tileHeight * 0.02),
                           ),
                         ),
                         SizedBox(
@@ -389,9 +410,8 @@ class _RewardsState extends State<Rewards> {
                           child: Text(
                             'Confirm',
                             style: TextStyle(
-                              color: Color(0xff373D3F),
-                              fontSize: tileHeight*0.02
-                            ),
+                                color: Color(0xff373D3F),
+                                fontSize: tileHeight * 0.02),
                           ),
                           onPressed: () {},
                         ),
@@ -404,24 +424,32 @@ class _RewardsState extends State<Rewards> {
                 ),
                 GestureDetector(
                   child: Container(
-                    width: tileWidth,
+                      width: tileWidth,
                       decoration: BoxDecoration(
                           color: Color(0xff63E2E0),
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
                       padding: EdgeInsets.all(16),
-                      child: Center(child: Text('Swipe up to see your Reward History',
-                      style: TextStyle(fontSize: tileHeight*0.02,fontWeight: FontWeight.w600,color: Color(0xff373D3F)),))),
+                      child: Center(
+                          child: Text(
+                        'Swipe up to see your Reward History',
+                        style: TextStyle(
+                            fontSize: tileHeight * 0.02,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff373D3F)),
+                      ))),
                   onVerticalDragStart: (DragStartDetails details) {
                     _scaffoldKey.currentState
                         .showBottomSheet<Null>((BuildContext context) {
                       return Container(
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(15)),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           color: Color(0xff63E2E0),
                         ),
-                        height: tileHeight * 0.5,
+                        height: tileHeight < 640
+                            ? tileHeight * 0.7
+                            : tileHeight * 0.5,
                         width: tileWidth,
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
@@ -430,10 +458,9 @@ class _RewardsState extends State<Rewards> {
                               Text(
                                 'Your Reward History',
                                 style: TextStyle(
-                              color: Color(0xff373D3F),
-                            fontSize: tileHeight*0.02,
-                                  fontWeight: FontWeight.w600
-                        ),
+                                    color: Color(0xff373D3F),
+                                    fontSize: tileHeight * 0.02,
+                                    fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
                                 height: 20,
@@ -449,16 +476,14 @@ class _RewardsState extends State<Rewards> {
                                       children: <Widget>[
                                         Container(
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.all(
-                                                    Radius.circular(15)),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15)),
                                             color: Colors.white,
                                           ),
                                           height: 80,
                                           width: tileWidth * 0.8,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(
-                                                10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -467,30 +492,45 @@ class _RewardsState extends State<Rewards> {
                                                 Expanded(
                                                   flex: 3,
                                                   child: Center(
-                                                    child: Text(codesUsed[index]
-                                                        .codeName,style: TextStyle(
-                                                        color: Color(0xff373D3F),
-                                                        fontSize: tileHeight*0.03,
-                                                    ),),
+                                                    child: Text(
+                                                      codesUsed[index].codeName,
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xff373D3F),
+                                                        fontSize:
+                                                            tileHeight * 0.03,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex:3,
+                                                  flex: 3,
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
                                                     children: <Widget>[
-                                                      Text('Points Earned',style: TextStyle(
-                                                          color: Color(0xff373D3F),
-                                                          fontSize: tileHeight*0.02,
-                                                          fontWeight: FontWeight.w600
-                                                      ),),
-                                                      Text(codesUsed[index]
-                                                          .points,style: TextStyle(
-                                                          color: Color(0xff373D3F),
-                                                          fontSize: tileHeight*0.02,
-                                                      ),)
+                                                      Text(
+                                                        'Points Earned',
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xff373D3F),
+                                                            fontSize:
+                                                                tileHeight *
+                                                                    0.02,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                      Text(
+                                                        codesUsed[index].points,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xff373D3F),
+                                                          fontSize:
+                                                              tileHeight * 0.02,
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
