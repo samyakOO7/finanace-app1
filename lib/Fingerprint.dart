@@ -53,7 +53,7 @@ class fingerPrint extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  MPinPage()));
+                                  PassCodeScreen()));
 
                     },
                     child: Padding(
