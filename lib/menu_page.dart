@@ -120,7 +120,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Rewards()));
+                          builder: (BuildContext context) => RewardsPages()));
                 },
                 width: tileWidth,
                 icon: Icons.card_giftcard),
