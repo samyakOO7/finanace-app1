@@ -182,7 +182,7 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Container(
-                                        height: height * 0.35,
+                                        height: height * 0.38,
                                         child: ListView.builder(
                                             physics: ScrollPhysics(),
                                             scrollDirection: Axis.vertical,
@@ -192,7 +192,7 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                               return Column(
                                                 children: <Widget>[
                                                   Container(
-                                                    height: height * 0.2,
+                                                    height: height * 0.23,
                                                     child: Column(
                                                       children: <Widget>[
                                                         Padding(

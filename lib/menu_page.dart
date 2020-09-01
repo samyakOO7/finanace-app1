@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Income_Expenses/NewIncomePage.dart';
 import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
 import 'package:finance_app/UserProfile.dart';
@@ -100,7 +101,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => IncomePage()));
+                          builder: (BuildContext context) => IncomeHomePage()));
                 },
                 width: tileWidth,
                 icon: Icons.compare_arrows),
