@@ -37,110 +37,82 @@ class _InvestmentHomePageState extends State<InvestmentHomePage> {
               ),
               child: Material(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0, // soften the shadow
-                                spreadRadius: 0, //extend the shadow
-                              ),
-                            ]),
-                        height: height * 0.5,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            InvestmentPack()));
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Investment Bundles for you',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24,
-                                          color: Color(0xff373D3F)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                        'Find the right mutual funds for \n  you across these categories',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Color(0xff373D3F)),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: Colors.grey,
-                            ),
-                            IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  mutual("assets/images/equity.png", "Equity"),
-                                  VerticalDivider(
-                                    color: Colors.grey,
-                                  ),
-                                  mutual("assets/images/debt.png", "Debt"),
-                                  VerticalDivider(
-                                    color: Colors.grey,
-                                  ),
-                                  mutual("assets/images/gold.jpg", "Gold Fund"),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: Colors.grey,
-                            ),
-                            IntrinsicHeight(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  mutual("assets/images/hybrid.jpg", "Hybrid"),
-                                  VerticalDivider(
-                                    color: Colors.grey,
-                                  ),
-                                  mutual("assets/images/tax.png",
-                                      "Tax Saving Fund"),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      InvestmentPack()));
+                        },
+                        child: investmentbuttons(
+                            "assets/images/bundles.jpg",
+                            "Investment Bundles",
+                            "Find the right mutual funds for you across these categories",
+                            height),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[],
+                      Divider(
+                        color: Colors.grey,
                       ),
-                      SizedBox(
-                        height: 20,
+                      GestureDetector(
+                        onTap: () {},
+                        child: investmentbuttons(
+                            "assets/images/equity.png",
+                            "Equity",
+                            "Find the right mutual funds for you across these categories",
+                            height),
                       ),
+                      Divider(
+                        color: Colors.grey,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: investmentbuttons(
+                            "assets/images/debt.png",
+                            "Debt",
+                            "Find the right mutual funds for you across these categories",
+                            height),
+                      ),
+                      Divider(
+                        color: Colors.grey,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: investmentbuttons(
+                            "assets/images/gold.jpg",
+                            "Gold Fund",
+                            "Find the right mutual funds for you across these categories",
+                            height),
+                      ),
+                      Divider(
+                        color: Colors.grey,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: investmentbuttons(
+                            "assets/images/hybrid.jpg",
+                            "Hybrid",
+                            "Find the right mutual funds for you across these categories",
+                            height),
+                      ),
+                      Divider(
+                        color: Colors.grey,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: investmentbuttons(
+                            "assets/images/tax.png",
+                            "Tax Saving Fund",
+                            "Find the right mutual funds for you across these categories",
+                            height),
+                      ),
+                      Divider(
+                        color: Colors.grey,
+                      )
                     ],
                   ),
                 ),
