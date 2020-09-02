@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -14,16 +16,34 @@ class _UserProfileState extends State<UserProfile> {
   String userDob;
   String userCode;
   bool isEditing = false;
+   SharedPreferences preferences;
+  String id = "";
 
   void getUserData() {
+    
+     preferences = await SharedPreferences.getInstance();
+    id = preferences.getString("id");
+
+
+
+    Firestore.instance.collection('users').document(id)
+        .get().then((DocumentSnapshot) {
+      userName = (DocumentSnapshot.data['Name'].toString());
+      userDob = (DocumentSnapshot.data['Date of Birth'].toString());
+      userMobile = (DocumentSnapshot.data['Mobile Number'].toString());
+      userPan = (DocumentSnapshot.data['Pan Number'].toString());
+      userStatus = (DocumentSnapshot.data['Marital Status'].toString());
+      dropdownValue = (DocumentSnapshot.data['Gender'].toString());
+      userCode = (DocumentSnapshot.data['Unique Client Code'].toString());
+    });
     //function to get user data
-    dropdownValue = 'Male';
-    userName = 'Ganesh';
-    userPan = 'po87uin';
-    userCode = '3218526547';
-    userDob = '';
-    userStatus = 'Single';
-    userMobile = '9564832178';
+//     dropdownValue = 'Male';
+//     userName = 'Ganesh';
+//     userPan = 'po87uin';
+//     userCode = '3218526547';
+//     userDob = '';
+//     userStatus = 'Single';
+//     userMobile = '9564832178';
   }
 
   void switchState() {
@@ -33,9 +53,20 @@ class _UserProfileState extends State<UserProfile> {
       isEditing = true;
     }
   }
-
+String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = "", code = "";
   void updateUserData() {
     //function to update the data of user to sync database
+     Firestore.instance.collection('users').document(id).updateData(
+        {
+          'Name': name,
+          'Date of Birth': dob,
+          'Mobile Number': mobile,
+          'Pan Number': pan,
+          'Marital Status': maritalStatus,
+          'Gender': gender,
+          'Unique Client Code': code
+        }
+    );
   }
   @override
   void initState() {
