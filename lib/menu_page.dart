@@ -106,15 +106,16 @@ class _menuPageState extends State<menuPage> {
                 width: tileWidth,
                 icon: Icons.compare_arrows),
             ProfileButtons(
-                title: "Goals",
-                onPress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => GoalsHomePage()));
-                },
-                width: tileWidth,
-                icon: Icons.notification_important),
+              title: "Goals",
+              onPress: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => GoalsHomePage()));
+              },
+              width: tileWidth,
+              icon: Icons.outlined_flag,
+            ),
             ProfileButtons(
                 title: 'Rewards & Referrals',
                 onPress: () {

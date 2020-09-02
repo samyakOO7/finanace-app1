@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'BodyTabs.dart';
+import 'BottomBar.dart';
 
 class InvestmentPack extends StatefulWidget {
   @override
@@ -9,8 +10,8 @@ class InvestmentPack extends StatefulWidget {
 
 class _InvestmentPackState extends State<InvestmentPack> {
   int current = 0;
-  final List<Widget> bodyTabs = [Tabs(), Tabs(), Tabs(), Tabs(), Tabs()];
-  void tapped(int index) {
+  final List<Widget> bodyopt = [Recommend(), AllPacks()];
+  void changes(int index) {
     setState(() {
       current = index;
     });
@@ -18,36 +19,9 @@ class _InvestmentPackState extends State<InvestmentPack> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xff63E2E0),
-        type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.white,
-        currentIndex: current,
-        onTap: tapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_forward),
-            title: Text('1m'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_forward),
-            title: Text('3m'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_forward),
-            title: Text('1y'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_forward),
-            title: Text('5y'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_forward),
-            title: Text('max'),
-          ),
-        ],
-      ),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -59,11 +33,28 @@ class _InvestmentPackState extends State<InvestmentPack> {
         backgroundColor: Color(0xff63E2E0),
         centerTitle: true,
         title: Text(
-          'INVESTMENT PACKS',
+          'INVESTMENT PACK DETAILS',
           style: TextStyle(color: Color(0xff373D3F)),
         ),
       ),
-      body: bodyTabs[current],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xff63E2E0),
+        currentIndex: current,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.white,
+        onTap: changes,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            title: Text("Recommended for you"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            title: Text("All Investment Packs"),
+          )
+        ],
+      ),
+      body: bodyopt[current],
     );
   }
 }

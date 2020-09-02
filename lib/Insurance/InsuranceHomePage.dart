@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'InsuranceButtons.dart';
+
 class InsuranceHomePage extends StatefulWidget {
   @override
   _InsuranceHomePageState createState() => _InsuranceHomePageState();
@@ -33,338 +35,43 @@ class _InsuranceHomePageState extends State<InsuranceHomePage> {
             constraints: BoxConstraints(
               minHeight: viewportConstraints.maxHeight,
             ),
-            child: Padding(
-              padding: EdgeInsets.only(
-                right: 15.0,
-                top: 10,
-                bottom: 15,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/images/health.png",
-                            height: 60,
-                            width: 80,
-                          ),
-                          Text(
-                            "Health Insurance",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
-                        ],
-                      ),
-                      FlatButton(
-                        onPressed: () {},
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Color(0xff63E2E0))),
-                        child: Text(
-                          "Get a quote",
-                          style: TextStyle(
-                            color: Color(0xff63E2E0),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: Container(
-                      height: height * 0.2,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Container(
-                            width: width * 0.7,
-                            decoration: BoxDecoration(
-                              color: Color(0xff00BBFF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "Access to best healthcare for you and you family",
-                                    style: TextStyle(fontSize: 19),
-                                  ),
-                                  FlatButton(
-                                    color: Color(0xff00BBFF),
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(color: Colors.black)),
-                                    onPressed: () {},
-                                    child: Text('Know more'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Container(
-                            width: width * 0.7,
-                            decoration: BoxDecoration(
-                              color: Color(0xff32CFCB),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "Access to best healthcare for you and you family",
-                                    style: TextStyle(fontSize: 19),
-                                  ),
-                                  RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(color: Colors.black)),
-                                    onPressed: () {},
-                                    child: Text('Know more'),
-                                    color: Color(0xff32CFCB),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+            child: Material(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {},
+                      child: insurancebuttons("assets/images/health.png",
+                          "Health Insurance", "ABCD", height),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Divider(
-                      height: 10,
+                    Divider(
                       color: Colors.grey,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/images/family.png",
-                            height: 60,
-                            width: 80,
-                          ),
-                          Text(
-                            "Term Life Insurance",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
-                        ],
-                      ),
-                      FlatButton(
-                        onPressed: () {},
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Color(0xff63E2E0))),
-                        child: Text(
-                          "Get a quote",
-                          style: TextStyle(
-                            color: Color(0xff63E2E0),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: Container(
-                      height: height * 0.2,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Container(
-                            width: width * 0.7,
-                            decoration: BoxDecoration(
-                              color: Color(0xffEDFF96),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "Access to best healthcare for you and you family",
-                                    style: TextStyle(fontSize: 19),
-                                  ),
-                                  FlatButton(
-                                    color: Color(0xffEDFF96),
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(color: Colors.black)),
-                                    onPressed: () {},
-                                    child: Text('Know more'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Container(
-                            width: width * 0.7,
-                            decoration: BoxDecoration(
-                              color: Color(0xffD49CFF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "Access to best healthcare for you and you family",
-                                    style: TextStyle(fontSize: 19),
-                                  ),
-                                  RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(color: Colors.black)),
-                                    onPressed: () {},
-                                    child: Text('Know more'),
-                                    color: Color(0xffD49CFF),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: insurancebuttons("assets/images/family.jpg",
+                          "Term Life Insurance", "ABCD", height),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Motor",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Divider(
-                      height: 10,
+                    Divider(
                       color: Colors.grey,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/images/car1.png",
-                            height: 60,
-                            width: 80,
-                          ),
-                          Text(
-                            "Car Insurance",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
-                        ],
-                      ),
-                      FlatButton(
-                        onPressed: () {},
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Color(0xff63E2E0))),
-                        child: Text(
-                          "Get a quote",
-                          style: TextStyle(
-                            color: Color(0xff63E2E0),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Divider(
-                      height: 10,
+                    GestureDetector(
+                      onTap: () {},
+                      child: insurancebuttons("assets/images/car1.png",
+                          "Car Insurance", "ABCD", height),
+                    ),
+                    Divider(
                       color: Colors.grey,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Image.asset(
-                              "assets/images/bike1.png",
-                              height: 60,
-                              width: 70,
-                            ),
-                          ),
-                          Text(
-                            "Bike Insurance",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
-                        ],
-                      ),
-                      FlatButton(
-                        onPressed: () {},
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Color(0xff63E2E0))),
-                        child: Text(
-                          "Get a quote",
-                          style: TextStyle(
-                            color: Color(0xff63E2E0),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Divider(
-                      height: 10,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+                    GestureDetector(
+                      onTap: () {},
+                      child: insurancebuttons("assets/images/bike1.jpg",
+                          "Bike Insurance", "ABCD", height),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

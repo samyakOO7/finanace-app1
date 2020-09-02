@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget investmentbuttons(
+Widget insurancebuttons(
     String imgurl, String name, String info, double height) {
   return Container(
     height: height * 0.12,
