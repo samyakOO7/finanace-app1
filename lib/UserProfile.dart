@@ -19,31 +19,31 @@ class _UserProfileState extends State<UserProfile> {
    SharedPreferences preferences;
   String id = "";
 
-  void getUserData() {
+  void getUserData()  async{
     
-//      preferences = await SharedPreferences.getInstance();
-//     id = preferences.getString("id");
+     preferences = await SharedPreferences.getInstance();
+    id = preferences.getString("id");
 
+//     //function to get user data
+//     dropdownValue = 'Male';
+//     userName = 'Ganesh';
+//     userPan = 'po87uin';
+//     userCode = '3218526547';
+//     userDob = '';
+//     userStatus = 'Single';
+//     userMobile = '9564832178';
 
+    Firestore.instance.collection('users').document(id)
+        .get().then((DocumentSnapshot) {
+      userName = (DocumentSnapshot.data['Name'].toString());
+      userDob = (DocumentSnapshot.data['Date of Birth'].toString());
+      userMobile = (DocumentSnapshot.data['Mobile Number'].toString());
+      userPan = (DocumentSnapshot.data['Pan Number'].toString());
+      userStatus = (DocumentSnapshot.data['Marital Status'].toString());
+      dropdownValue = (DocumentSnapshot.data['Gender'].toString());
+      userCode = (DocumentSnapshot.data['Unique Client Code'].toString());
+    });
 
-//     Firestore.instance.collection('users').document(id)
-//         .get().then((DocumentSnapshot) {
-//       userName = (DocumentSnapshot.data['Name'].toString());
-//       userDob = (DocumentSnapshot.data['Date of Birth'].toString());
-//       userMobile = (DocumentSnapshot.data['Mobile Number'].toString());
-//       userPan = (DocumentSnapshot.data['Pan Number'].toString());
-//       userStatus = (DocumentSnapshot.data['Marital Status'].toString());
-//       dropdownValue = (DocumentSnapshot.data['Gender'].toString());
-//       userCode = (DocumentSnapshot.data['Unique Client Code'].toString());
-//     });
-    //function to get user data
-    dropdownValue = 'Male';
-    userName = 'Ganesh';
-    userPan = 'po87uin';
-    userCode = '3218526547';
-    userDob = '';
-    userStatus = 'Single';
-    userMobile = '9564832178';
   }
 
   void switchState() {
@@ -56,17 +56,17 @@ class _UserProfileState extends State<UserProfile> {
 String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = "", code = "";
   void updateUserData() {
     //function to update the data of user to sync database
-//      Firestore.instance.collection('users').document(id).updateData(
-//         {
-//           'Name': name,
-//           'Date of Birth': dob,
-//           'Mobile Number': mobile,
-//           'Pan Number': pan,
-//           'Marital Status': maritalStatus,
-//           'Gender': gender,
-//           'Unique Client Code': code
-//         }
-//     );
+     Firestore.instance.collection('users').document(id).updateData(
+        {
+          'Name': name,
+          'Date of Birth': dob,
+          'Mobile Number': mobile,
+          'Pan Number': pan,
+          'Marital Status': maritalStatus,
+          'Gender': gender,
+          'Unique Client Code': code
+        }
+    );
   }
   @override
   void initState() {
@@ -117,7 +117,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                     height: tileHeight / 80,
                   ),
                   isEditing
-                      ? TextFormField()
+                      ? TextFormField(
+                    onChanged: (value)
+                    {
+                      name = value;
+                    },
+                  )
                       : Text(
                           '$userName',
                           style: TextStyle(
@@ -144,7 +149,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                     height: tileHeight / 80,
                   ),
                   isEditing
-                      ? TextFormField()
+                      ? TextFormField(
+                    onChanged: (value)
+                    {
+                      dob = value;
+                    },
+                  )
                       : Text(
                           '$userDob',
                           style: TextStyle(
@@ -171,7 +181,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                     height: tileHeight / 80,
                   ),
                   isEditing
-                      ? TextFormField()
+                      ? TextFormField(
+                    onChanged: (value)
+                    {
+                      mobile = value;
+                    },
+                  )
                       : Text(
                           '$userMobile',
                           style: TextStyle(
@@ -198,7 +213,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                     height: tileHeight / 80,
                   ),
                   isEditing
-                      ? TextFormField()
+                      ? TextFormField(
+                    onChanged: (value)
+                    {
+                      pan = value;
+                    },
+                  )
                       : Text(
                           '$userPan',
                           style: TextStyle(
@@ -225,7 +245,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                     height: tileHeight / 80,
                   ),
                   isEditing
-                      ? TextFormField()
+                      ? TextFormField(
+                    onChanged: (value)
+                    {
+                      maritalStatus = value;
+                    },
+                  )
                       : Text(
                           '$userStatus',
                           style: TextStyle(
@@ -264,8 +289,10 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                             color: Colors.black45,
                           ),
                           onChanged: (String newValue) {
+                            gender = newValue;
                             setState(() {
                               dropdownValue = newValue;
+
                             });
                           },
                           items: <String>['Male', 'Female']
