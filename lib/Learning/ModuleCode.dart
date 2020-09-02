@@ -31,7 +31,7 @@ Widget modules(double width, double height, Color back, Color front, int x) {
           ),
         ),
         Container(
-          height: height * 0.05,
+          height: height * 0.06,
           child: Padding(
             padding: EdgeInsets.only(top: 15),
             child: Text(
