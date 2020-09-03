@@ -25,10 +25,10 @@ class _AddGoalsState extends State<AddGoals> {
           icon: Icon(Icons.arrow_back_ios),
           color: Color(0xff373D3F),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff63E2E0),
         centerTitle: true,
         title: Text(
-          'Add Goal',
+          'ADD GOAL',
           style: TextStyle(color: Color(0xff373D3F)),
         ),
       ),
