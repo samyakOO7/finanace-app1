@@ -1,6 +1,10 @@
+import 'dart:collection';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_app/Income_Expenses/widgetcode.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IncomePage extends StatefulWidget {
   @override
@@ -9,6 +13,11 @@ class IncomePage extends StatefulWidget {
 
 class _IncomePageState extends State<IncomePage> {
   String dropdown = "YEARLY";
+  int saveSavings;
+  int incomeVal;
+  int expenseVal;
+  String saveExpenseType;
+  String saveIncomeType;
   int totalincome = 0,
       totalexpense = 0,
       savings = 0,
@@ -23,6 +32,9 @@ class _IncomePageState extends State<IncomePage> {
   TextEditingController expense = new TextEditingController();
   TextEditingController x = new TextEditingController();
   TextEditingController y = new TextEditingController();
+
+  SharedPreferences preferences;
+  String id = "";
 
   void calculatePotential(String value, int r, int t) {
     setState(() {
@@ -39,6 +51,18 @@ class _IncomePageState extends State<IncomePage> {
       }
       potentialValue = potential.toInt();
     });
+  }
+
+     void readData() async{
+
+     preferences = await SharedPreferences.getInstance();
+     id = preferences.getString("id");
+   }
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readData();
   }
 
   @override
@@ -75,7 +99,7 @@ class _IncomePageState extends State<IncomePage> {
                   children: <Widget>[
                     Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+                      EdgeInsets.symmetric(horizontal: 18, vertical: 18),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -151,8 +175,8 @@ class _IncomePageState extends State<IncomePage> {
                                                   left: 10, right: 10),
                                               child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                MainAxisAlignment
+                                                    .spaceBetween,
                                                 children: <Widget>[
                                                   Text(typei),
                                                   Text(income.text),
@@ -167,7 +191,7 @@ class _IncomePageState extends State<IncomePage> {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Padding(
                                           padding: EdgeInsets.only(left: 10),
@@ -196,12 +220,16 @@ class _IncomePageState extends State<IncomePage> {
                                                 'Business',
                                                 'Others'
                                               ].map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
+                                                      (String value) {
+
+                                                    return DropdownMenuItem<String>(
+
+                                                          value: value,
+                                                          child: Text(value),
+
+
+                                                    );
+                                                  }).toList(),
                                             ),
                                           ),
                                         ),
@@ -213,28 +241,28 @@ class _IncomePageState extends State<IncomePage> {
                                                 : false,
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
                                                 Container(
                                                   width: 180,
                                                   height: 50,
                                                   child: TextField(
                                                     keyboardType:
-                                                        TextInputType.number,
+                                                    TextInputType.number,
                                                     controller: income,
                                                     decoration: InputDecoration(
                                                       hintText: "Enter amount",
                                                       enabledBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Color(
                                                                 0xff373D3F)),
                                                       ),
                                                       focusedBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                           color:
-                                                              Color(0xff63E2E0),
+                                                          Color(0xff63E2E0),
                                                         ),
                                                       ),
                                                     ),
@@ -245,15 +273,21 @@ class _IncomePageState extends State<IncomePage> {
                                                     setState(() {
                                                       c1 = c1 + 1;
                                                       typei = incometype;
+                                                      saveIncomeType = incometype;
+
                                                       incometype = null;
                                                       totalincome =
                                                           totalincome +
                                                               int.parse(
                                                                   income.text);
+                                                      incomeVal = int.parse(
+                                                          income.text);
+                                                     // print(incomeVal);
                                                     });
+                                                    saveIncomeToFireStore();
                                                   },
                                                   icon:
-                                                      Icon(Icons.arrow_forward),
+                                                  Icon(Icons.arrow_forward),
                                                   color: Color(0xff373D3F),
                                                 )
                                               ],
@@ -267,7 +301,7 @@ class _IncomePageState extends State<IncomePage> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.only(left: 10),
@@ -283,7 +317,7 @@ class _IncomePageState extends State<IncomePage> {
                                       child: (totalincome == null)
                                           ? textpart(context, "00")
                                           : textpart(
-                                              context, totalincome.toString())),
+                                          context, totalincome.toString())),
                                 ],
                               ),
                             ],
@@ -331,8 +365,8 @@ class _IncomePageState extends State<IncomePage> {
                                                   left: 10, right: 10),
                                               child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                MainAxisAlignment
+                                                    .spaceBetween,
                                                 children: <Widget>[
                                                   Text(typee),
                                                   Text(expense.text),
@@ -347,7 +381,7 @@ class _IncomePageState extends State<IncomePage> {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Padding(
                                           padding: EdgeInsets.only(left: 10),
@@ -381,12 +415,12 @@ class _IncomePageState extends State<IncomePage> {
                                                 'Shopping',
                                                 'Other'
                                               ].map<DropdownMenuItem<String>>(
-                                                  (String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
+                                                      (String value) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: value,
+                                                      child: Text(value),
+                                                    );
+                                                  }).toList(),
                                             ),
                                           ),
                                         ),
@@ -398,28 +432,28 @@ class _IncomePageState extends State<IncomePage> {
                                                 : false,
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
                                                 Container(
                                                   width: 180,
                                                   height: 50,
                                                   child: TextField(
                                                     keyboardType:
-                                                        TextInputType.number,
+                                                    TextInputType.number,
                                                     controller: expense,
                                                     decoration: InputDecoration(
                                                       hintText: "Enter amount",
                                                       enabledBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color: Color(
                                                                 0xff373D3F)),
                                                       ),
                                                       focusedBorder:
-                                                          OutlineInputBorder(
+                                                      OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                           color:
-                                                              Color(0xff63E2E0),
+                                                          Color(0xff63E2E0),
                                                         ),
                                                       ),
                                                     ),
@@ -430,17 +464,21 @@ class _IncomePageState extends State<IncomePage> {
                                                     setState(() {
                                                       c2 = c2 + 1;
                                                       typee = expensetype;
+                                                      saveExpenseType = expensetype;
                                                       expensetype = null;
                                                       totalexpense =
                                                           totalexpense +
                                                               int.parse(
                                                                   expense.text);
+                                                      expenseVal = totalexpense;
                                                       savings = totalincome -
                                                           totalexpense;
+                                                      saveSavings = savings;
                                                     });
+                                                    saveExpenseToFireStore();
                                                   },
                                                   icon:
-                                                      Icon(Icons.arrow_forward),
+                                                  Icon(Icons.arrow_forward),
                                                   color: Color(0xff373D3F),
                                                 )
                                               ],
@@ -454,7 +492,7 @@ class _IncomePageState extends State<IncomePage> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.only(left: 10),
@@ -470,7 +508,7 @@ class _IncomePageState extends State<IncomePage> {
                                       child: (totalexpense == null)
                                           ? textpart(context, "00")
                                           : textpart(context,
-                                              totalexpense.toString())),
+                                          totalexpense.toString())),
                                 ],
                               ),
                             ],
@@ -525,7 +563,7 @@ class _IncomePageState extends State<IncomePage> {
                             ),
                             color: Color(0xff63E2E0),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
+                            BorderRadius.all(Radius.circular(15.0)),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -563,7 +601,7 @@ class _IncomePageState extends State<IncomePage> {
                                           decoration: InputDecoration(
                                             hintText: "Y",
                                             contentPadding:
-                                                EdgeInsets.only(bottom: 10),
+                                            EdgeInsets.only(bottom: 10),
                                           ),
                                         ),
                                       ),
@@ -590,7 +628,7 @@ class _IncomePageState extends State<IncomePage> {
                                           decoration: InputDecoration(
                                             hintText: "X",
                                             contentPadding:
-                                                EdgeInsets.only(bottom: 10),
+                                            EdgeInsets.only(bottom: 10),
                                           ),
                                         ),
                                       ),
@@ -627,4 +665,25 @@ class _IncomePageState extends State<IncomePage> {
       ),
     );
   }
+
+  Future<Null> saveIncomeToFireStore() async{
+    Fluttertoast.showToast(msg: saveIncomeType);
+
+    Firestore.instance.collection('users').document(id).updateData(
+      {
+        saveIncomeType: incomeVal
+      }
+    );
+
+  }
+
+  Future<Null> saveExpenseToFireStore() async{
+
+    Firestore.instance.collection('users').document(id).updateData(
+        {
+          saveExpenseType: expenseVal,
+          "Savings": saveSavings
+        }
+    );
+}
 }

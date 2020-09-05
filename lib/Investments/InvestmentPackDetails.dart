@@ -172,170 +172,176 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                 height: height * 0.4,
                                 child: Padding(
                                   padding: EdgeInsets.all(10.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Funds in this pack",
-                                        style: TextStyle(
-                                            color: Color(0xff373D3F),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Container(
-                                        height: height * 0.35,
-                                        child: ListView.builder(
-                                            physics: ScrollPhysics(),
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: FundsInfo.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Column(
-                                                children: <Widget>[
-                                                  Container(
-                                                    height: height * 0.2,
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: <Widget>[
-                                                              Text(
-                                                                FundsInfo[index]
-                                                                    .fundName,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Color(
-                                                                      0xff373D3F),
-                                                                  fontSize: 16,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 8,
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .end,
-                                                                children: <
-                                                                    Widget>[
-                                                                  GestureDetector(
-                                                                      onTap:
-                                                                          () {},
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .arrow_forward_ios)),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceEvenly,
-                                                                children: <
-                                                                    Widget>[
-                                                                  Column(
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Text(
-                                                                        "Min. Invest",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Color(0xff373D3F),
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        FundsInfo[index]
-                                                                            .minInvest,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Color(0xff373D3F),
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  Column(
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Text(
-                                                                        "Allocation",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Color(0xff373D3F),
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                          "${FundsInfo[index].allocate}%")
-                                                                    ],
-                                                                  ),
-                                                                  Column(
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Text(
-                                                                        "Returns",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Color(0xff373D3F),
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        FundsInfo[index]
-                                                                            .output,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Color(0xff373D3F),
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        LinearPercentIndicator(
-                                                          lineHeight: 14.0,
-                                                          percent: double.parse(
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          "Funds in this pack",
+                                          style: TextStyle(
+                                              color: Color(0xff373D3F),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Container(
+                                          height: height * 0.38,
+                                          child: ListView.builder(
+                                              physics: ScrollPhysics(),
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: FundsInfo.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: height * 0.22,
+                                                      child: Column(
+                                                        children: <Widget>[
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <
+                                                                  Widget>[
+                                                                Text(
                                                                   FundsInfo[
                                                                           index]
-                                                                      .allocate) /
-                                                              100,
-                                                          center: Text(
-                                                              "${FundsInfo[index].allocate}%"),
-                                                          backgroundColor:
-                                                              Colors.grey,
-                                                          progressColor:
-                                                              Color(0xff63E2E0),
-                                                        ),
-                                                        Divider(
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ],
+                                                                      .fundName,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Color(
+                                                                        0xff373D3F),
+                                                                    fontSize:
+                                                                        16,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 8,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .end,
+                                                                  children: <
+                                                                      Widget>[
+                                                                    GestureDetector(
+                                                                        onTap:
+                                                                            () {},
+                                                                        child: Icon(
+                                                                            Icons.arrow_forward_ios)),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceEvenly,
+                                                                  children: <
+                                                                      Widget>[
+                                                                    Column(
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Text(
+                                                                          "Min. Invest",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xff373D3F),
+                                                                            fontSize:
+                                                                                14,
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          FundsInfo[index]
+                                                                              .minInvest,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xff373D3F),
+                                                                            fontSize:
+                                                                                14,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Column(
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Text(
+                                                                          "Allocation",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xff373D3F),
+                                                                            fontSize:
+                                                                                14,
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                            "${FundsInfo[index].allocate}%")
+                                                                      ],
+                                                                    ),
+                                                                    Column(
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Text(
+                                                                          "Returns",
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xff373D3F),
+                                                                            fontSize:
+                                                                                14,
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          FundsInfo[index]
+                                                                              .output,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xff373D3F),
+                                                                            fontSize:
+                                                                                14,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          LinearPercentIndicator(
+                                                            lineHeight: 14.0,
+                                                            percent: double.parse(
+                                                                    FundsInfo[
+                                                                            index]
+                                                                        .allocate) /
+                                                                100,
+                                                            center: Text(
+                                                                "${FundsInfo[index].allocate}%"),
+                                                            backgroundColor:
+                                                                Colors.grey,
+                                                            progressColor:
+                                                                Color(
+                                                                    0xff63E2E0),
+                                                          ),
+                                                          Divider(
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                      )
-                                    ],
+                                                  ],
+                                                );
+                                              }),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

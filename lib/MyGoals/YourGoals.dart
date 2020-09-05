@@ -14,9 +14,15 @@ Widget yourGoals(BuildContext context, List typeGoal, double height,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 1.0, // soften the shadow
+                        spreadRadius: 0, //extend the shadow
+                      ),
+                    ]),
                 height: height * 0.3,
                 width: width,
                 child: Column(
@@ -55,7 +61,7 @@ Widget yourGoals(BuildContext context, List typeGoal, double height,
                       padding: EdgeInsets.all(6.0),
                       child: LinearPercentIndicator(
                         lineHeight: 14.0,
-                        percent: 0.5,
+                        percent: (goal_info[index].completion) / 100,
                         backgroundColor: Colors.grey,
                         progressColor: Color(0xff63E2E0),
                       ),

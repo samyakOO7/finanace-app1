@@ -25,10 +25,10 @@ class _AddGoalsState extends State<AddGoals> {
           icon: Icon(Icons.arrow_back_ios),
           color: Color(0xff373D3F),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff63E2E0),
         centerTitle: true,
         title: Text(
-          'Add Goal',
+          'ADD GOAL',
           style: TextStyle(color: Color(0xff373D3F)),
         ),
       ),
@@ -141,16 +141,18 @@ class _AddGoalsState extends State<AddGoals> {
                             child: TextFormField(
                               controller: name,
                               decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xff373D3F)),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xff373D3F)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xff63E2E0),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xff63E2E0),
-                                    ),
-                                  ),
-                                  hintText: "Enter name"),
+                                ),
+                                hintText: "Enter name",
+                              ),
+                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),
@@ -181,6 +183,7 @@ class _AddGoalsState extends State<AddGoals> {
                                     ),
                                   ),
                                   hintText: "Enter Amount"),
+                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),
@@ -211,6 +214,7 @@ class _AddGoalsState extends State<AddGoals> {
                                     ),
                                   ),
                                   hintText: "Enter year"),
+                              textAlign: TextAlign.justify,
                             ),
                           ),
                         ),

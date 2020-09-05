@@ -11,7 +11,8 @@ class GoalInfo {
   final String name;
   final String value;
   final String year;
-  GoalInfo({this.type, this.name, this.value, this.year});
+  final double completion;
+  GoalInfo({this.type, this.name, this.value, this.year, this.completion});
 }
 
 final GoalCategory education = GoalCategory(
@@ -79,16 +80,30 @@ List<GoalInfo> ownCurrentGoals = [
     name: 'Dream Home',
     value: '120000000',
     year: '2034',
+    completion: 50,
   ),
   GoalInfo(
     type: other,
     name: 'Son',
     value: '5000000',
     year: '2020',
+    completion: 50,
   ),
 ];
 
 List<GoalInfo> ownCompletedGoals = [
-  GoalInfo(type: education, name: "Master", value: "200000", year: "2015"),
-  GoalInfo(type: vacation, name: "Solo trip", value: "2156000", year: "2010")
+  GoalInfo(
+    type: education,
+    name: "Master",
+    value: "200000",
+    year: "2015",
+    completion: 100,
+  ),
+  GoalInfo(
+    type: vacation,
+    name: "Solo trip",
+    value: "2156000",
+    year: "2010",
+    completion: 100,
+  ),
 ];
