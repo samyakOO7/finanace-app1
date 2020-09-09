@@ -3,11 +3,15 @@ import 'package:finance_app/Income_Expenses/widgetcode.dart';
 import 'package:flutter/material.dart';
 
 class IncomePage extends StatefulWidget {
+  final String currentUserID;
+  IncomePage({@required this.currentUserID});
   @override
-  _IncomePageState createState() => _IncomePageState();
+  _IncomePageState createState() => _IncomePageState(currentUserID: currentUserID);
 }
 
 class _IncomePageState extends State<IncomePage> {
+  final String currentUserID;
+  _IncomePageState({@required this.currentUserID});
   TextEditingController newiamt = TextEditingController();
   TextEditingController neweamt = TextEditingController();
   Widget Income(double height, double width) {

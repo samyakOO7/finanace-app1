@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NotificationPage extends StatefulWidget {
+  String currentUserID;
+  NotificationPage({@required this.currentUserID});
   @override
-  _NotificationPageState createState() => _NotificationPageState();
+  _NotificationPageState createState() => _NotificationPageState(currentUserID: currentUserID);
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+  String currentUserID;
+  _NotificationPageState({@required this.currentUserID});
   String userName = 'Ganesh';
   List<String> notificationDetails = [
     'Notification Details',

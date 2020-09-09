@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'GoalsType.dart';
 
 class AddGoals extends StatefulWidget {
+  String currentUserID;
+  AddGoals({@required this.currentUserID});
   @override
-  _AddGoalsState createState() => _AddGoalsState();
+  _AddGoalsState createState() => _AddGoalsState(currentUserID: currentUserID);
 }
 
 class _AddGoalsState extends State<AddGoals> {
+  String currentUserID;
+  _AddGoalsState({@required this.currentUserID});
   var goalselected = 0;
   TextEditingController name = new TextEditingController();
   TextEditingController value = new TextEditingController();

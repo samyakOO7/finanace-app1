@@ -19,6 +19,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String currentUserID;
   var val;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
   final _phoneController = TextEditingController();
@@ -137,7 +138,7 @@ class _SignUpState extends State<SignUp> {
 
             if (user != null) {
               Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => HomeScreen()
+                  builder: (context) => HomeScreen(currentUserId: currentUserID,)
               ));
             } else {
               print("Error");
@@ -181,7 +182,7 @@ class _SignUpState extends State<SignUp> {
 
                           if (user != null) {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => HomeScreen()
+                                builder: (context) => HomeScreen(currentUserId: currentUserID,)
                             ));
                           } else {
                             print("Error");

@@ -3,11 +3,15 @@ import '../NotificationPage.dart';
 import '../menu_page.dart';
 
 class HomePage extends StatefulWidget {
+  final String currentUserID;
+  HomePage({@required this.currentUserID});
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(currentUserID: currentUserID);
 }
 
 class _HomePageState extends State<HomePage> {
+  final String currentUserID;
+  _HomePageState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -27,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       drawer: Drawer(
-        child: menuPage(),
+        child: menuPage(currentUserID: currentUserID,),
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
@@ -58,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        NotificationPage()));
+                                        NotificationPage(currentUserID: currentUserID,)));
                           },
                           icon: Icon(Icons.notifications_none),
                           color: Color(0xff373D3F),

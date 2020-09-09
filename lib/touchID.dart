@@ -7,6 +7,7 @@ import 'package:local_auth/local_auth.dart';
 
 class TouchScreen extends StatelessWidget {
   final LocalAuthentication localAuth = LocalAuthentication();
+  String currentUserID;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class TouchScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => HomeScreen(currentUserId: currentUserID,),
                 ),
               );
             }

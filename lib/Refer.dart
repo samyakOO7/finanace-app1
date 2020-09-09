@@ -5,11 +5,16 @@ import 'RewardHistory.dart';
 import 'components/ButtonsWidget.dart';
 
 class RewardsPages extends StatefulWidget {
+  String currentUserID;
+  RewardsPages({@required this.currentUserID});
+
   @override
-  _RewardsPagesState createState() => _RewardsPagesState();
+  _RewardsPagesState createState() => _RewardsPagesState(currentUserID: currentUserID);
 }
 
 class _RewardsPagesState extends State<RewardsPages> {
+  String currentUserID;
+  _RewardsPagesState({@required this.currentUserID});
   String rCode = 'ASd3f2';
   List<List> redeems = [
     ["p45ik9", 15],

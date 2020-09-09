@@ -4,11 +4,15 @@ import 'InvestmentPackDetails.dart';
 import 'PacksInfo.dart';
 
 class Recommend extends StatefulWidget {
+  String currentUserID;
+  Recommend({this.currentUserID});
   @override
-  _RecommendState createState() => _RecommendState();
+  _RecommendState createState() => _RecommendState(currentUserID: currentUserID);
 }
 
 class _RecommendState extends State<Recommend> {
+  String currentUserID;
+  _RecommendState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -78,7 +82,7 @@ class _RecommendState extends State<Recommend> {
                                                       (BuildContext context) =>
                                                           InvestmentPackPage(
                                                               recommend[index]
-                                                                  .name)));
+                                                                  .name,currentUserID: currentUserID,)));
                                         },
                                         child: Icon(Icons.arrow_forward_ios)),
                                   ],
@@ -157,11 +161,15 @@ class _RecommendState extends State<Recommend> {
 }
 
 class AllPacks extends StatefulWidget {
+  String currentUserID;
+  AllPacks({this.currentUserID});
   @override
-  _AllPacksState createState() => _AllPacksState();
+  _AllPacksState createState() => _AllPacksState(currentUserID: currentUserID);
 }
 
 class _AllPacksState extends State<AllPacks> {
+  String currentUserID;
+  _AllPacksState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -230,7 +238,7 @@ class _AllPacksState extends State<AllPacks> {
                                                 builder:
                                                     (BuildContext context) =>
                                                         InvestmentPackPage(
-                                                            all[index].name)));
+                                                            all[index].name,currentUserID: currentUserID,)));
                                       },
                                       child: Icon(Icons.arrow_forward_ios),
                                     ),

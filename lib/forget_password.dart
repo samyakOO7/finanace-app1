@@ -11,6 +11,7 @@ enum authProblems { UserNotFound, PasswordNotValid, NetworkError }
 class _ForgetPassPageState extends State<ForgetPassPage> {
 
   bool linkSend = false;
+  String currentUserID;
   bool isEmail = false;
   String email = "", errorMessage = "";
   var _formKey = GlobalKey<FormState>();

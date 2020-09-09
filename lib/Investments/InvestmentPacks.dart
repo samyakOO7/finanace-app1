@@ -4,11 +4,15 @@ import 'BodyTabs.dart';
 import 'BottomBar.dart';
 
 class InvestmentPack extends StatefulWidget {
+  String currentUserID;
+  InvestmentPack({@required this.currentUserID});
   @override
-  _InvestmentPackState createState() => _InvestmentPackState();
+  _InvestmentPackState createState() => _InvestmentPackState(currentUserID: currentUserID);
 }
 
 class _InvestmentPackState extends State<InvestmentPack> {
+  String currentUserID;
+  _InvestmentPackState({@required this.currentUserID});
   int current = 0;
   final List<Widget> bodyopt = [Recommend(), AllPacks()];
   void changes(int index) {

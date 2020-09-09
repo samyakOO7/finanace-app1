@@ -7,11 +7,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IncomePage extends StatefulWidget {
+  String currentUserID;
+  IncomePage({@required this.currentUserID});
   @override
-  _IncomePageState createState() => _IncomePageState();
+  _IncomePageState createState() => _IncomePageState(currentUserID: currentUserID);
 }
 
 class _IncomePageState extends State<IncomePage> {
+  String currentUserID;
+  _IncomePageState({@required this.currentUserID});
   String dropdown = "YEARLY";
   int saveSavings;
   int incomeVal;

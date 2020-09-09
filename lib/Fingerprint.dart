@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'mPinPage.dart';
 
 class fingerPrint extends StatelessWidget {
+  String currentUserID;
   @override
   Widget build(BuildContext context) {
     double tileHeight = MediaQuery.of(context).size.height;

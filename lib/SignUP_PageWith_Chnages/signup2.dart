@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finance_app/HomePage.dart';
+import 'package:finance_app/HomePage/homepage.dart';
 import 'package:finance_app/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +23,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   var val;
+  String currentUserID;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
 
 
@@ -49,21 +50,24 @@ class _SignUpState extends State<SignUp> {
     String phone = _phoneController.text;
     String name = _usernameController.text;
     var url = 'http://sanjayagarwal.in/Finance App/signup.php';
+    print("****************************************************");
+    print("$email,$password,$phone,$name");
+    print("****************************************************");
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
         "email": email,
         "password": password,
-        "Name": name,
+        "name": name,
         "phone": phone
       }),
     );
     var message = jsonDecode(response.body);
-    if (message == "Successful Signup") {
+    if (message["message"] == "Successful Signup") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen(currentUserId: null)));
+          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
     } else {
-      print(message);
+      print(message["message"]);
     }
   }
 
@@ -86,7 +90,7 @@ class _SignUpState extends State<SignUp> {
 
     if (isLoggedIn) {
       Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          HomeScreen(currentUserId: preferences.getString("id"))));
+          HomePage(currentUserID: currentUserID)));
     }
     this.setState(() {
       isLoading = false;
@@ -165,7 +169,7 @@ class _SignUpState extends State<SignUp> {
 
             if (user != null) {
               Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => HomeScreen()
+                  builder: (context) => HomePage(currentUserID: currentUserID)
               ));
             } else {
               print("Error");
@@ -209,7 +213,7 @@ class _SignUpState extends State<SignUp> {
 
                           if (user != null) {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => HomeScreen()
+                                builder: (context) => HomePage(currentUserID: currentUserID,)
                             ));
                           } else {
                             print("Error");
@@ -706,7 +710,7 @@ class _SignUpState extends State<SignUp> {
       });
 
       Navigator.push(context, MaterialPageRoute(
-          builder: (context) => HomeScreen(currentUserId: firebaseUser.uid)));
+          builder: (context) => HomePage(currentUserID: currentUserID)));
     }
 
 // sign in failed
