@@ -5,12 +5,16 @@ import 'AddGoals.dart';
 import 'Graph.dart';
 
 class GoalsHomePage extends StatefulWidget {
+  String currentUserID;
+  GoalsHomePage({@required this.currentUserID});
   @override
-  _GoalsHomePageState createState() => _GoalsHomePageState();
+  _GoalsHomePageState createState() => _GoalsHomePageState(currentUserID: currentUserID);
 }
 
 class _GoalsHomePageState extends State<GoalsHomePage> {
   int selectedIndex = 0;
+  String currentUserID;
+  _GoalsHomePageState({@required this.currentUserID});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +80,7 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        AddGoals()));
+                                        AddGoals(currentUserID: currentUserID,)));
                           },
                           child: Text(' + Add Goal'),
                           color: Color(0xff63E2E0),

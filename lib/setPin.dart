@@ -33,13 +33,15 @@ void readData() async{
 
  class SetPin extends StatefulWidget {
 
-   final String currentUserId;
-   SetPin({Key key, @required this.currentUserId}) : super(key: key);
+   final String currentUserID;
+   SetPin({Key key, @required this.currentUserID}) : super(key: key);
   @override
-  _SetPinState createState() => _SetPinState();
+  _SetPinState createState() => _SetPinState(currentUserID: currentUserID);
 }
 
  class _SetPinState extends State<SetPin> {
+   String currentUserID;
+   _SetPinState({@required this.currentUserID});
    final _formKey = GlobalKey<FormState>();
    var val;
    FirebaseUser currentUser;

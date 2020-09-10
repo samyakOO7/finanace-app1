@@ -14,12 +14,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String currentUserID;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   Future userLogin() async {
     String email = emailController.text;
     String password = passwordController.text;
-    var url = 'http://sanjayagarwal.in/Finance App/signin2.php';
+    var url = 'http://sanjayagarwal.in/Finance App/Signin3.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     var message = jsonDecode(response.body);
     if (message == "Login Matched") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
     } else {
       print(message);
     }

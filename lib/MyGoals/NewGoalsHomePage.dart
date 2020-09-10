@@ -5,11 +5,15 @@ import 'GoalsType.dart';
 import 'YourGoals.dart';
 
 class NewGoalsPage extends StatefulWidget {
+  String currentUserID;
+  NewGoalsPage({@required this.currentUserID});
   @override
-  _NewGoalsPageState createState() => _NewGoalsPageState();
+  _NewGoalsPageState createState() => _NewGoalsPageState(currentUserID: currentUserID);
 }
 
 class _NewGoalsPageState extends State<NewGoalsPage> {
+  String currentUserID;
+  _NewGoalsPageState({@required this.currentUserID});
   int current = 0;
   void changes(int index) {
     setState(() {
@@ -79,7 +83,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => AddGoals()));
+                          builder: (BuildContext context) => AddGoals(currentUserID: currentUserID,)));
                 },
                 child: Text(' + Add '),
                 color: Color(0xff63E2E0),

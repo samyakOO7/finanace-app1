@@ -3,11 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfile extends StatefulWidget {
+  String currentUserID;
+  UserProfile({@required this.currentUserID});
   @override
-  _UserProfileState createState() => _UserProfileState();
+  _UserProfileState createState() => _UserProfileState(currentUserID: currentUserID);
 }
 
 class _UserProfileState extends State<UserProfile> {
+  String currentUserID;
+  _UserProfileState({@required this.currentUserID});
   String dropdownValue;
   String userName;
   String userPan;

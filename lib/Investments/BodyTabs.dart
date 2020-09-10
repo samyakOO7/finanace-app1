@@ -3,12 +3,15 @@ import 'InvestmentPackDetails.dart';
 import 'PacksInfo.dart';
 
 class Tabs extends StatefulWidget {
+  String currentUserID;
+  Tabs({@required this.currentUserID});
   @override
-  Tabs();
-  _TabsState createState() => _TabsState();
+  _TabsState createState() => _TabsState(currentUserID: currentUserID);
 }
 
 class _TabsState extends State<Tabs> {
+  String currentUserID;
+  _TabsState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -85,7 +88,7 @@ class _TabsState extends State<Tabs> {
                                                                 context) =>
                                                             InvestmentPackPage(
                                                                 recommend[index]
-                                                                    .name)));
+                                                                    .name,currentUserID: currentUserID,)));
                                               },
                                               child: Icon(
                                                   Icons.arrow_forward_ios)),
@@ -219,7 +222,7 @@ class _TabsState extends State<Tabs> {
                                                               context) =>
                                                           InvestmentPackPage(
                                                               all[index]
-                                                                  .name)));
+                                                                  .name,currentUserID: currentUserID,)));
                                             },
                                             child:
                                                 Icon(Icons.arrow_forward_ios),

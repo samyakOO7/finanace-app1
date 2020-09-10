@@ -3,13 +3,16 @@ import 'PacksInfo.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class InvestmentPackPage extends StatefulWidget {
+  String currentUserID;
   final String packname;
-  InvestmentPackPage(this.packname, {Key key}) : super(key: key);
+  InvestmentPackPage(this.packname, {Key key,@required this.currentUserID}) : super(key: key);
   @override
-  _InvestmentPackPageState createState() => _InvestmentPackPageState();
+  _InvestmentPackPageState createState() => _InvestmentPackPageState(currentUserID: currentUserID);
 }
 
 class _InvestmentPackPageState extends State<InvestmentPackPage> {
+  String currentUserID;
+  _InvestmentPackPageState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Introduction extends StatefulWidget {
+  String currentUserID;
   String moduleno; //if you have multiple values add here
-  Introduction(this.moduleno, {Key key}) : super(key: key);
+  Introduction(this.moduleno, {Key key,@required this.currentUserID}) : super(key: key);
   @override
-  _IntroductionState createState() => _IntroductionState();
+  _IntroductionState createState() => _IntroductionState(currentUserID: currentUserID);
 }
 
 class _IntroductionState extends State<Introduction> {
+  String currentUserID;
+  _IntroductionState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

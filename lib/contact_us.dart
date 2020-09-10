@@ -3,20 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 class Contact_us extends StatelessWidget {
+  final String currentUserID;
+  Contact_us({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return MyHomePage(currentUserID: currentUserID,);
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  String currentUserID;
+  MyHomePage({Key key,@required this.currentUserID}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(currentUserID: currentUserID);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String currentUserID;
+  _MyHomePageState({@required this.currentUserID});
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
   Icon searchIcon = Icon(Icons.search);

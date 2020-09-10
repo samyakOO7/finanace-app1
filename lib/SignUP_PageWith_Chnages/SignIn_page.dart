@@ -26,6 +26,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   //final _formKey2 = GlobalKey<FormState>();
+  String currentUserID;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   Future userLogin() async {
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     var message = jsonDecode(response.body);
     if (message == "Login Matched") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
     } else {
       print(message);
     }
@@ -128,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
           .logIn(_authData['email'], _authData['password']);
 
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen(currentUserId: currentUserID,)));
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again';
       _showErrorDailog(errorMessage);

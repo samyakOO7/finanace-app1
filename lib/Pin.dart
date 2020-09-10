@@ -2,6 +2,7 @@
 
 
 import 'package:finance_app/HomePage.dart';
+import 'package:finance_app/HomePage/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lock_screen/flutter_lock_screen.dart';
 import 'package:local_auth/local_auth.dart';
@@ -42,6 +43,7 @@ class _PassCodeScreenState extends State<PassCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String currentUserID;
     var myPass = [1, 2, 3, 4];
     return LockScreen(
         title: "Security Pin ",
@@ -68,7 +70,7 @@ class _PassCodeScreenState extends State<PassCodeScreen> {
         onSuccess: () {
           Navigator.of(context).pushReplacement(
               new MaterialPageRoute(builder: (BuildContext context) {
-                return HomeScreen();
+                return HomePage(currentUserID: currentUserID);
               }));
         });
   }

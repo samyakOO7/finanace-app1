@@ -3,11 +3,15 @@ import 'Code_widgets.dart';
 import 'InvestmentPacks.dart';
 
 class InvestmentHomePage extends StatefulWidget {
+  String currentUserID;
+  InvestmentHomePage({@required this.currentUserID});
   @override
-  _InvestmentHomePageState createState() => _InvestmentHomePageState();
+  _InvestmentHomePageState createState() => _InvestmentHomePageState(currentUserID: currentUserID);
 }
 
 class _InvestmentHomePageState extends State<InvestmentHomePage> {
+  String currentUserID;
+  _InvestmentHomePageState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -47,7 +51,7 @@ class _InvestmentHomePageState extends State<InvestmentHomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      InvestmentPack()));
+                                      InvestmentPack(currentUserID: currentUserID,)));
                         },
                         child: investmentbuttons(
                             "assets/images/bundles.jpg",

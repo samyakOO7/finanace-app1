@@ -4,11 +4,15 @@ import 'package:finance_app/Income_Expenses/widgetcode.dart';
 import 'package:flutter/material.dart';
 
 class IncomeHomePage extends StatefulWidget {
+  String currentUserID;
+  IncomeHomePage({@required this.currentUserID});
   @override
-  _IncomeHomePageState createState() => _IncomeHomePageState();
+  _IncomeHomePageState createState() => _IncomeHomePageState(currentUserID: currentUserID);
 }
 
 class _IncomeHomePageState extends State<IncomeHomePage> {
+  String currentUserID;
+  _IncomeHomePageState({@required this.currentUserID});
   String dropdown = "YEARLY";
   int totalincome = 0,
       totalexpense = 0,

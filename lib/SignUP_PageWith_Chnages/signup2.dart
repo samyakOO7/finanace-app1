@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finance_app/HomePage.dart';
+import 'package:finance_app/HomePage/homepage.dart';
 import 'package:finance_app/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,9 @@ import 'Widgets.dart';
 import 'SignIn_page.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
@@ -19,11 +22,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String currentUserID;
   var val;
+  String currentUserID;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
-  final _phoneController = TextEditingController();
-  final _codeController = TextEditingController();
+
 
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -38,7 +40,36 @@ class _SignUpState extends State<SignUp> {
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _codeController = TextEditingController();
+  final _emailController = TextEditingController();
   var _isProcessing;
+  Future userSignup() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String phone = _phoneController.text;
+    String name = _usernameController.text;
+    var url = 'http://sanjayagarwal.in/Finance App/signup.php';
+    print("****************************************************");
+    print("$email,$password,$phone,$name");
+    print("****************************************************");
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "password": password,
+        "name": name,
+        "phone": phone
+      }),
+    );
+    var message = jsonDecode(response.body);
+    if (message["message"] == "Successful Signup") {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
+    } else {
+      print(message["message"]);
+    }
+  }
 
   @override
   void initState() {
@@ -59,7 +90,7 @@ class _SignUpState extends State<SignUp> {
 
     if (isLoggedIn) {
       Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          HomeScreen(currentUserId: preferences.getString("id"))));
+          HomePage(currentUserID: currentUserID)));
     }
     this.setState(() {
       isLoading = false;
@@ -138,7 +169,7 @@ class _SignUpState extends State<SignUp> {
 
             if (user != null) {
               Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => HomeScreen(currentUserId: currentUserID,)
+                  builder: (context) => HomePage(currentUserID: currentUserID)
               ));
             } else {
               print("Error");
@@ -182,7 +213,7 @@ class _SignUpState extends State<SignUp> {
 
                           if (user != null) {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => HomeScreen(currentUserId: currentUserID,)
+                                builder: (context) => HomePage(currentUserID: currentUserID,)
                             ));
                           } else {
                             print("Error");
@@ -369,6 +400,7 @@ class _SignUpState extends State<SignUp> {
                             children: <Widget>[
                               TextFormField(
                                 decoration: textfield("Username"),
+                                controller: _usernameController,
                                 validator: (String value) {
                                   if (value.isEmpty) {
                                     return 'Please enter a username';
@@ -386,6 +418,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 15,
                               ),
                               TextFormField(
+                                controller: _phoneController,
                                 keyboardType: TextInputType.number,
                                 decoration: textfield("Phone Number"),
                                 validator: (String value) {
@@ -399,6 +432,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 15,
                               ),
                               TextFormField(
+                                controller: _emailController,
                                 decoration: textfield("Email (Optional)"),
                                 validator: (String value) {
                                   if (value.isEmpty) {
@@ -421,6 +455,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 15,
                               ),
                               TextFormField(
+                                controller: _passwordController,
                                 obscureText: _isHidden,
                                 decoration:  InputDecoration(
                                     hintText: ' Password',
@@ -432,16 +467,16 @@ class _SignUpState extends State<SignUp> {
                                       icon: Icon(Icons.visibility_off),
                                     )),
 
-                                    validator: (String value) {
-                              val = value;
-                              if (value.isEmpty) {
-                              return 'Please enter a password';
-                              }
-                              if (value.length < 8) {
-                              return 'Password must be greater than 8 alphabets';
-                              }
-                              return null;
-                              },
+                                validator: (String value) {
+                                  val = value;
+                                  if (value.isEmpty) {
+                                    return 'Please enter a password';
+                                  }
+                                  if (value.length < 8) {
+                                    return 'Password must be greater than 8 alphabets';
+                                  }
+                                  return null;
+                                },
                                 onSaved: (value)
                                 {
                                   _authData['password']=value;
@@ -453,20 +488,20 @@ class _SignUpState extends State<SignUp> {
                               TextFormField(
                                 obscureText: _isHidden2,
                                 decoration:  InputDecoration(
-                                    hintText: 'Confirm Password',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0.5),
-                                    ),
-                                    suffixIcon: IconButton(
-                                      onPressed: _toggleVisibility2,
-                                      icon: Icon(Icons.visibility_off),
-                                    ),),
-                                    validator: (String value) {
-                              if (val != value) {
-                              return 'Passwords do not match';
-                              }
-                              return null;
-                              },
+                                  hintText: 'Confirm Password',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0.5),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: _toggleVisibility2,
+                                    icon: Icon(Icons.visibility_off),
+                                  ),),
+                                validator: (String value) {
+                                  if (val != value) {
+                                    return 'Passwords do not match';
+                                  }
+                                  return null;
+                                },
                               ),
                             ],
                           ),
@@ -476,9 +511,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            final phone = _phoneController.text.trim();
-
-                            loginUser(phone, context);
+                            userSignup();
 //                         setState(() {
 //                           toggleMobile();
 //                           if (_formKey.currentState.validate()) ;
@@ -677,7 +710,7 @@ class _SignUpState extends State<SignUp> {
       });
 
       Navigator.push(context, MaterialPageRoute(
-          builder: (context) => HomeScreen(currentUserId: firebaseUser.uid)));
+          builder: (context) => HomePage(currentUserID: currentUserID)));
     }
 
 // sign in failed

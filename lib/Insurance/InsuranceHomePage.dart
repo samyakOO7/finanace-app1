@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'InsuranceButtons.dart';
 
 class InsuranceHomePage extends StatefulWidget {
+  String currentUserID;
+  InsuranceHomePage({@required this.currentUserID});
   @override
-  _InsuranceHomePageState createState() => _InsuranceHomePageState();
+  _InsuranceHomePageState createState() => _InsuranceHomePageState(currentUserID: currentUserID);
 }
 
 class _InsuranceHomePageState extends State<InsuranceHomePage> {
+  String currentUserID;
+  _InsuranceHomePageState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;

@@ -6,11 +6,15 @@ import 'Introduction.dart';
 import 'ModuleCode.dart';
 
 class LearningHomePage extends StatefulWidget {
+  String currentUserID;
+  LearningHomePage({@required this.currentUserID});
   @override
-  _LearningHomePageState createState() => _LearningHomePageState();
+  _LearningHomePageState createState() => _LearningHomePageState(currentUserID: currentUserID);
 }
 
 class _LearningHomePageState extends State<LearningHomePage> {
+  String currentUserID;
+  _LearningHomePageState({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -155,7 +159,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            Introduction("1")));
+                                            Introduction("1",currentUserID: currentUserID,)));
                               },
                               child: modules(width, height, Color(0xff48F5D9),
                                   Color(0xff17AD94), 1),
@@ -166,7 +170,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            Introduction("2")));
+                                            Introduction("2",currentUserID: currentUserID,)));
                               },
                               child: modules(width, height, Color(0xffB370FF),
                                   Color(0xff9E49FF), 2),
@@ -177,7 +181,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            Introduction("3")));
+                                            Introduction("3",currentUserID: currentUserID,)));
                               },
                               child: modules(width, height, Color(0xffFFFAB40),
                                   Color(0xffFF9340), 3),
@@ -188,7 +192,7 @@ class _LearningHomePageState extends State<LearningHomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            Introduction("4")));
+                                            Introduction("4",currentUserID: currentUserID,)));
                               },
                               child: modules(width, height, Color(0xff6BC412),
                                   Color(0xff5BB600), 4),

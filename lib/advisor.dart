@@ -3,6 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:responsive_text_field/responsive_text_field.dart';
 
 class Advisor extends StatelessWidget {
+  final String currentUserID;
+  Advisor({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
