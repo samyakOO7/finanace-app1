@@ -1,4 +1,6 @@
+import 'package:finance_app/MyGoals/NewGoalsHomePage.dart';
 import 'package:flutter/material.dart';
+import 'Income_Expenses/FinalIncomeHomePage.dart';
 import 'Income_Expenses/NewIncomePage.dart';
 import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
@@ -51,7 +53,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => UserProfile(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => UserProfile(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.person_outline),
@@ -66,8 +70,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              InvestmentHomePage(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => InvestmentHomePage(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.attach_money),
@@ -77,8 +82,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              InsuranceHomePage(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => InsuranceHomePage(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.home),
@@ -93,8 +99,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              LearningHomePage(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => LearningHomePage(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.trending_up),
@@ -104,7 +111,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => IncomeHomePage(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => IncomePage(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.compare_arrows),
@@ -114,7 +123,9 @@ class _menuPageState extends State<menuPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => GoalsHomePage(currentUserID: currentUserID,)));
+                        builder: (BuildContext context) => NewGoalsPage(
+                              currentUserID: currentUserID,
+                            )));
               },
               width: tileWidth,
               icon: Icons.outlined_flag,
@@ -125,7 +136,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => RewardsPages(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => RewardsPages(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.card_giftcard),
@@ -135,7 +148,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Advisor(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => Advisor(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.assistant),
@@ -150,7 +165,9 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Contact_us(currentUserID: currentUserID,)));
+                          builder: (BuildContext context) => Contact_us(
+                                currentUserID: currentUserID,
+                              )));
                 },
                 width: tileWidth,
                 icon: Icons.call),
