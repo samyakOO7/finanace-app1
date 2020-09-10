@@ -4,7 +4,6 @@ import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
 import 'package:finance_app/UserProfile.dart';
 import 'package:finance_app/Refer.dart';
-import 'Income_Expenses/IncomeHomePage.dart';
 import 'package:finance_app/MyGoals/GoalsHomePage.dart';
 import 'advisor.dart';
 import 'contact_us.dart';
