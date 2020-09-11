@@ -7,7 +7,8 @@ class Recommend extends StatefulWidget {
   String currentUserID;
   Recommend({this.currentUserID});
   @override
-  _RecommendState createState() => _RecommendState(currentUserID: currentUserID);
+  _RecommendState createState() =>
+      _RecommendState(currentUserID: currentUserID);
 }
 
 class _RecommendState extends State<Recommend> {
@@ -19,7 +20,7 @@ class _RecommendState extends State<Recommend> {
     var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
             Center(
@@ -37,7 +38,7 @@ class _RecommendState extends State<Recommend> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Container(
-                height: height * 0.38,
+                height: height,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: recommend.length,
@@ -81,8 +82,11 @@ class _RecommendState extends State<Recommend> {
                                                   builder:
                                                       (BuildContext context) =>
                                                           InvestmentPackPage(
-                                                              recommend[index]
-                                                                  .name,currentUserID: currentUserID,)));
+                                                            recommend[index]
+                                                                .name,
+                                                            currentUserID:
+                                                                currentUserID,
+                                                          )));
                                         },
                                         child: Icon(Icons.arrow_forward_ios)),
                                   ],
@@ -176,7 +180,7 @@ class _AllPacksState extends State<AllPacks> {
     var width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
             Center(
@@ -194,7 +198,7 @@ class _AllPacksState extends State<AllPacks> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Container(
-                height: height * 0.6,
+                height: height,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: all.length,
@@ -238,7 +242,10 @@ class _AllPacksState extends State<AllPacks> {
                                                 builder:
                                                     (BuildContext context) =>
                                                         InvestmentPackPage(
-                                                            all[index].name,currentUserID: currentUserID,)));
+                                                          all[index].name,
+                                                          currentUserID:
+                                                              currentUserID,
+                                                        )));
                                       },
                                       child: Icon(Icons.arrow_forward_ios),
                                     ),

@@ -5,9 +5,11 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 class InvestmentPackPage extends StatefulWidget {
   String currentUserID;
   final String packname;
-  InvestmentPackPage(this.packname, {Key key,@required this.currentUserID}) : super(key: key);
+  InvestmentPackPage(this.packname, {Key key, @required this.currentUserID})
+      : super(key: key);
   @override
-  _InvestmentPackPageState createState() => _InvestmentPackPageState(currentUserID: currentUserID);
+  _InvestmentPackPageState createState() =>
+      _InvestmentPackPageState(currentUserID: currentUserID);
 }
 
 class _InvestmentPackPageState extends State<InvestmentPackPage> {
@@ -186,7 +188,7 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Container(
-                                          height: height * 0.38,
+                                          height: height * 0.4,
                                           child: ListView.builder(
                                               physics: ScrollPhysics(),
                                               scrollDirection: Axis.vertical,
@@ -197,7 +199,9 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                                 return Column(
                                                   children: <Widget>[
                                                     Container(
-                                                      height: height * 0.22,
+                                                      height: height < 640
+                                                          ? height * 0.3
+                                                          : height * 0.22,
                                                       child: Column(
                                                         children: <Widget>[
                                                           Padding(
@@ -319,7 +323,7 @@ class _InvestmentPackPageState extends State<InvestmentPackPage> {
                                                             ),
                                                           ),
                                                           LinearPercentIndicator(
-                                                            lineHeight: 14.0,
+                                                            lineHeight: 16.0,
                                                             percent: double.parse(
                                                                     FundsInfo[
                                                                             index]
