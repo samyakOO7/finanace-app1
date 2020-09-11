@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 Widget investmentbuttons(
     String imgurl, String name, String info, double height) {
   return Container(
-    height: height * 0.12,
+    height: height < 640 ? height * 0.15 : height * 0.12,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'BodyTabs.dart';
 import 'BottomBar.dart';
 
 class InvestmentPack extends StatefulWidget {
   String currentUserID;
   InvestmentPack({@required this.currentUserID});
   @override
-  _InvestmentPackState createState() => _InvestmentPackState(currentUserID: currentUserID);
+  _InvestmentPackState createState() =>
+      _InvestmentPackState(currentUserID: currentUserID);
 }
 
 class _InvestmentPackState extends State<InvestmentPack> {
@@ -44,8 +43,8 @@ class _InvestmentPackState extends State<InvestmentPack> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color(0xff63E2E0),
         currentIndex: current,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.black,
         onTap: changes,
         items: [
           BottomNavigationBarItem(

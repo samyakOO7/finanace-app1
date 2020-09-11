@@ -6,7 +6,8 @@ class IncomePage extends StatefulWidget {
   final String currentUserID;
   IncomePage({@required this.currentUserID});
   @override
-  _IncomePageState createState() => _IncomePageState(currentUserID: currentUserID);
+  _IncomePageState createState() =>
+      _IncomePageState(currentUserID: currentUserID);
 }
 
 class _IncomePageState extends State<IncomePage> {
@@ -16,7 +17,7 @@ class _IncomePageState extends State<IncomePage> {
   TextEditingController neweamt = TextEditingController();
   Widget Income(double height, double width) {
     return Container(
-      height: height * 0.35,
+      height: height < 640 ? height * 0.55 : height * 0.35,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child:
@@ -75,6 +76,8 @@ class _IncomePageState extends State<IncomePage> {
                                                   savings = totalincome -
                                                       totalexpense;
                                                   iamt[index] = newiamt.text;
+                                                  calculatePotential(
+                                                      dropdown, rate, time);
                                                   Navigator.of(context).pop();
                                                 });
                                               },
@@ -135,50 +138,46 @@ class _IncomePageState extends State<IncomePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: Visibility(
-                    visible: incometype != null ? true : false,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Container(
-                          width: 180,
-                          height: 50,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            controller: income,
-                            decoration: InputDecoration(
-                              hintText: "Enter amount",
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xff373D3F)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xff63E2E0),
-                                ),
+                Visibility(
+                  visible: incometype != null ? true : false,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        width: width * 0.4,
+                        height: height * 0.07,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          controller: income,
+                          decoration: InputDecoration(
+                            hintText: "Enter amount",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff373D3F)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff63E2E0),
                               ),
                             ),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              c1 = c1 + 1;
-                              typei = incometype;
-                              incometype = null;
-                              totalincome =
-                                  totalincome + int.parse(income.text);
-                              savings = totalincome - totalexpense;
-                              iamt.add(income.text);
-                            });
-                          },
-                          icon: Icon(Icons.arrow_forward),
-                          color: Color(0xff373D3F),
-                        )
-                      ],
-                    ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            c1 = c1 + 1;
+                            typei = incometype;
+                            incometype = null;
+                            totalincome = totalincome + int.parse(income.text);
+                            savings = totalincome - totalexpense;
+                            iamt.add(income.text);
+                            calculatePotential(dropdown, rate, time);
+                          });
+                        },
+                        icon: Icon(Icons.arrow_forward),
+                        color: Color(0xff373D3F),
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -191,7 +190,7 @@ class _IncomePageState extends State<IncomePage> {
 
   Widget Expense(double height, double width) {
     return Container(
-      height: height * 0.35,
+      height: height < 640 ? height * 0.55 : height * 0.35,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Column(
@@ -254,6 +253,8 @@ class _IncomePageState extends State<IncomePage> {
                                                     savings = totalincome -
                                                         totalexpense;
                                                     eamt[index] = neweamt.text;
+                                                    calculatePotential(
+                                                        dropdown, rate, time);
                                                     Navigator.of(context).pop();
                                                   });
                                                 },
@@ -319,50 +320,48 @@ class _IncomePageState extends State<IncomePage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Visibility(
-                      visible: expensetype != null ? true : false,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                            width: 180,
-                            height: 50,
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              controller: expense,
-                              decoration: InputDecoration(
-                                hintText: "Enter amount",
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff373D3F)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff63E2E0),
-                                  ),
+                  Visibility(
+                    visible: expensetype != null ? true : false,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: width * 0.4,
+                          height: height * 0.07,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            controller: expense,
+                            decoration: InputDecoration(
+                              hintText: "Enter amount",
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff373D3F)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff63E2E0),
                                 ),
                               ),
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                c2 = c2 + 1;
-                                typee = expensetype;
-                                expensetype = null;
-                                totalexpense =
-                                    totalexpense + int.parse(expense.text);
-                                savings = totalincome - totalexpense;
-                                eamt.add(expense.text);
-                              });
-                            },
-                            icon: Icon(Icons.arrow_forward),
-                            color: Color(0xff373D3F),
-                          )
-                        ],
-                      ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              c2 = c2 + 1;
+                              typee = expensetype;
+                              expensetype = null;
+                              totalexpense =
+                                  totalexpense + int.parse(expense.text);
+                              savings = totalincome - totalexpense;
+                              eamt.add(expense.text);
+                              calculatePotential(dropdown, rate, time);
+                            });
+                          },
+                          icon: Icon(Icons.arrow_forward),
+                          color: Color(0xff373D3F),
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -385,8 +384,8 @@ class _IncomePageState extends State<IncomePage> {
       c1 = 0,
       c2 = 0,
       potentialValue = 0,
-      rate,
-      time;
+      rate = 15,
+      time = 10;
   double potential = 0;
   String incometype, expensetype, typei, typee;
   String selected = "income";
@@ -485,7 +484,7 @@ class _IncomePageState extends State<IncomePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      height: height * 0.6,
+                      height: height < 640 ? height * 0.8 : height * 0.6,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Color(0xff373D3F),
@@ -646,9 +645,9 @@ class _IncomePageState extends State<IncomePage> {
                   SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Container(
-                        height: height * 0.15,
+                        height: height < 640 ? height * 0.2 : height * 0.15,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Color(0xff373D3F),
@@ -690,7 +689,7 @@ class _IncomePageState extends State<IncomePage> {
                                         textAlign: TextAlign.center,
                                         controller: y,
                                         decoration: InputDecoration(
-                                          hintText: "Y",
+                                          hintText: "10",
                                           contentPadding:
                                               EdgeInsets.only(bottom: 10),
                                         ),
@@ -717,7 +716,7 @@ class _IncomePageState extends State<IncomePage> {
                                         textAlign: TextAlign.center,
                                         controller: x,
                                         decoration: InputDecoration(
-                                          hintText: "X",
+                                          hintText: "15",
                                           contentPadding:
                                               EdgeInsets.only(bottom: 10),
                                         ),
@@ -733,14 +732,10 @@ class _IncomePageState extends State<IncomePage> {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 10),
-                              child: Center(
-                                child: Text("Rs. $potentialValue",
-                                    style: TextStyle(
-                                        color: Color(0xff373D3F),
-                                        fontSize: 24)),
-                              ),
+                            Center(
+                              child: Text("Rs. $potentialValue",
+                                  style: TextStyle(
+                                      color: Color(0xff373D3F), fontSize: 24)),
                             ),
                           ],
                         ),

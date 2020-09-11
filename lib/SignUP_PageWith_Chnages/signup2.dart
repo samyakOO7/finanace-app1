@@ -26,17 +26,13 @@ class _SignUpState extends State<SignUp> {
   String currentUserID;
   static final userNameRegExp = RegExp(r'^[A-Za-z0-9_.-]+$');
 
-
-
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   SharedPreferences preferences;
 
-
   bool isLoggedIn = false;
   bool isLoading = false;
   FirebaseUser currentUser;
-
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -65,7 +61,11 @@ class _SignUpState extends State<SignUp> {
     var message = jsonDecode(response.body);
     if (message["message"] == "Successful Signup") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message["message"]);
     }
@@ -89,8 +89,10 @@ class _SignUpState extends State<SignUp> {
     isLoggedIn = await googleSignIn.isSignedIn();
 
     if (isLoggedIn) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          HomePage(currentUserID: currentUserID)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(currentUserID: currentUserID)));
     }
     this.setState(() {
       isLoading = false;
@@ -104,56 +106,46 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
-
-
   final _formKey = GlobalKey<FormState>();
   bool confirmMobile = false;
-  void checkMobileOTP(String otp){
+  void checkMobileOTP(String otp) {
     setState(() {
       confirmMobile = true;
     });
   }
+
   bool _isHidden = true;
 
-  void _toggleVisibility(){
+  void _toggleVisibility() {
     setState(() {
       _isHidden = !_isHidden;
     });
   }
+
   bool _isHidden2 = true;
 
-  void _toggleVisibility2(){
+  void _toggleVisibility2() {
     setState(() {
       _isHidden2 = !_isHidden2;
     });
   }
 
-  Map<String, String> _authData= {
-    'email' : '',
-    'password' : ''
-
-  };
-  Future<void> _submit() async{
-    if(!_formKey.currentState.validate())
-    {
-      return ;
+  Map<String, String> _authData = {'email': '', 'password': ''};
+  Future<void> _submit() async {
+    if (!_formKey.currentState.validate()) {
+      return;
     }
     _formKey.currentState.save();
-    try{
-      await  Provider.of<Authentication>(context, listen: false).
-      signUp(_authData['email'],
-          _authData['password']);
-
-    }
-    catch(error)
-    {
+    try {
+      await Provider.of<Authentication>(context, listen: false)
+          .signUp(_authData['email'], _authData['password']);
+    } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again';
       _showErrorDailog(errorMessage);
     }
-
   }
 
-  Future<bool> loginUser(String phone, BuildContext context) async{
+  Future<bool> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     try {
@@ -168,9 +160,11 @@ class _SignUpState extends State<SignUp> {
             FirebaseUser user = result.user;
 
             if (user != null) {
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => HomePage(currentUserID: currentUserID)
-              ));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          HomePage(currentUserID: currentUserID)));
             } else {
               print("Error");
             }
@@ -202,19 +196,23 @@ class _SignUpState extends State<SignUp> {
                         color: Colors.blue,
                         onPressed: () async {
                           final code = _codeController.text.trim();
-                          AuthCredential credential = PhoneAuthProvider
-                              .getCredential(
-                              verificationId: verificationId, smsCode: code);
+                          AuthCredential credential =
+                              PhoneAuthProvider.getCredential(
+                                  verificationId: verificationId,
+                                  smsCode: code);
 
-                          AuthResult result = await _auth.signInWithCredential(
-                              credential);
+                          AuthResult result =
+                              await _auth.signInWithCredential(credential);
 
                           FirebaseUser user = result.user;
 
                           if (user != null) {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => HomePage(currentUserID: currentUserID,)
-                            ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage(
+                                          currentUserID: currentUserID,
+                                        )));
                           } else {
                             print("Error");
                           }
@@ -222,34 +220,29 @@ class _SignUpState extends State<SignUp> {
                       )
                     ],
                   );
-                }
-            );
+                });
           },
-          codeAutoRetrievalTimeout: null
-      );
-    }
-    catch(error)
-    {
+          codeAutoRetrievalTimeout: null);
+    } catch (error) {
       throw error;
     }
   }
-  void _showErrorDailog(String msg)
-  {
+
+  void _showErrorDailog(String msg) {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('An Error Occurred'),
-          content: Text(msg),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Okay'),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            )
-          ],
-        )
-    );
+              title: Text('An Error Occurred'),
+              content: Text(msg),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                )
+              ],
+            ));
   }
 
   void toggleMobile() {
@@ -273,19 +266,19 @@ class _SignUpState extends State<SignUp> {
                 ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[OTPTextField(
-                    length: 6,
-                    width: MediaQuery.of(context).size.width,
-                    fieldWidth: 16,
-                    style: TextStyle(
-                        fontSize: 14
+                  children: <Widget>[
+                    OTPTextField(
+                      length: 6,
+                      width: MediaQuery.of(context).size.width,
+                      fieldWidth: 16,
+                      style: TextStyle(fontSize: 14),
+                      textFieldAlignment: MainAxisAlignment.spaceAround,
+                      fieldStyle: FieldStyle.underline,
+                      onCompleted: (pin) {
+                        print("Completed: " + pin);
+                      },
                     ),
-                    textFieldAlignment: MainAxisAlignment.spaceAround,
-                    fieldStyle: FieldStyle.underline,
-                    onCompleted: (pin) {
-                      print("Completed: " + pin);
-                    },
-                  ),],
+                  ],
                 ),
                 actions: <Widget>[
                   FlatButton(
@@ -313,7 +306,6 @@ class _SignUpState extends State<SignUp> {
       });
     }
   }
-
 
   bool checked = false;
   void toggle(bool check) {
@@ -370,278 +362,296 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
-                ),
-                child: Container(
-                  height: height * 1.2,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    color: Colors.white,
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: viewportConstraints.maxHeight,
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              color: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 40, bottom: 20),
+                    child: Container(
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            color: Color(0xff373D3F), fontSize: width * 0.09),
+                      ),
+                    ),
+                  ),
+                  Form(
+                    key: _formKey,
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 20, right: 20, top: 40, bottom: 20),
-                          child: Container(
-                            child: Text(
-                              'SIGN UP',
-                              style: TextStyle(
-                                  color: Color(0xff373D3F), fontSize: width * 0.09),
-                            ),
-                          ),
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: <Widget>[
-                              TextFormField(
-                                decoration: textfield("Username"),
-                                controller: _usernameController,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter a username';
-                                  }
-                                  if (!userNameRegExp.hasMatch(value)) {
-                                    return 'Only Alphanumerics, underscore or period, allowed';
-                                  }
-                                  if (value[0] == value[0].toUpperCase()) {
-                                    return 'First letter should not be uppercase in username';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              TextFormField(
-                                controller: _phoneController,
-                                keyboardType: TextInputType.number,
-                                decoration: textfield("Phone Number"),
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter a PhoneNumber';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              TextFormField(
-                                controller: _emailController,
-                                decoration: textfield("Email (Optional)"),
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter an email address';
-                                  }
-                                  if (st_validator.isEmail(value)) {
-                                    return 'Enter a valid email address';
-                                  }
-                                  if (value.split('@').length != 2) {
-                                    return 'Enter a valid email address';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value)
-                                {
-                                  _authData['email']=value;
-                                },
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: _isHidden,
-                                decoration:  InputDecoration(
-                                    hintText: ' Password',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0.5),
-                                    ),
-                                    suffixIcon: IconButton(
-                                      onPressed: _toggleVisibility,
-                                      icon: Icon(Icons.visibility_off),
-                                    )),
-
-                                validator: (String value) {
-                                  val = value;
-                                  if (value.isEmpty) {
-                                    return 'Please enter a password';
-                                  }
-                                  if (value.length < 8) {
-                                    return 'Password must be greater than 8 alphabets';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value)
-                                {
-                                  _authData['password']=value;
-                                },
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              TextFormField(
-                                obscureText: _isHidden2,
-                                decoration:  InputDecoration(
-                                  hintText: 'Confirm Password',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0.5),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    onPressed: _toggleVisibility2,
-                                    icon: Icon(Icons.visibility_off),
-                                  ),),
-                                validator: (String value) {
-                                  if (val != value) {
-                                    return 'Passwords do not match';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            userSignup();
-//                         setState(() {
-//                           toggleMobile();
-//                           if (_formKey.currentState.validate()) ;
-//                         });
+                        TextFormField(
+                          decoration: textfield("Username"),
+                          controller: _usernameController,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter a username';
+                            }
+                            if (!userNameRegExp.hasMatch(value)) {
+                              return 'Only Alphanumerics, underscore or period, allowed';
+                            }
+                            if (value[0] == value[0].toUpperCase()) {
+                              return 'First letter should not be uppercase in username';
+                            }
+                            return null;
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'SIGN UP',
-                              style: TextStyle(
-                                  color: Color(0xff373D3F), fontSize: width * 0.05),
-                            ),
-                          ),
-                          color: Color(0xff63E2E0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 15,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Already have an account? ',
-                              style: TextStyle(
-                                  color: Color(0xff373D3F), fontSize: width * 0.04),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            LoginPage()));
-                              },
-                              child: Text(
-                                'Sign In',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff63E2E0),
-                                    fontSize: width * 0.04),
-                              ),
-                            ),
-                          ],
+                        TextFormField(
+                          controller: _phoneController,
+                          keyboardType: TextInputType.number,
+                          decoration: textfield("Phone Number"),
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter a PhoneNumber';
+                            }
+                            return null;
+                          },
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Divider(
-                                color: Color(0xff616161),
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: textfield("Email (Optional)"),
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'Please enter an email address';
+                            }
+                            if (st_validator.isEmail(value)) {
+                              return 'Enter a valid email address';
+                            }
+                            if (value.split('@').length != 2) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _authData['email'] = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: _isHidden,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "OR",
-                                style: TextStyle(
-                                  color: Color(0xff373D3F),
-                                  fontSize: width * 0.04,
+                              hintText: ' Password',
+                              hintStyle: TextStyle(color: Color(0xff373D3F)),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xff63E2E0),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                color: Color(0xff616161),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0.5),
                               ),
-                            ),
-                          ],
+                              suffixIcon: IconButton(
+                                onPressed: _toggleVisibility,
+                                icon: Icon(Icons.visibility_off),
+                              )),
+                          validator: (String value) {
+                            val = value;
+                            if (value.isEmpty) {
+                              return 'Please enter a password';
+                            }
+                            if (value.length < 8) {
+                              return 'Password must be greater than 8 alphabets';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _authData['password'] = value;
+                          },
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
-                        Container(
-                          width: width * 0.7,
-                          child: RaisedButton(
-                            color: Colors.white,
-                            onPressed: controlSignIn,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Image.asset('assets/images/google.jpg',
-                                    height: 50, width: 40),
-                                Text(
-                                  'Login with Google',
-                                  style: TextStyle(
-                                    color: Color(0xff373D3F),
-                                    fontSize: width * 0.04,
-                                  ),
-                                ),
-                              ],
+                        TextFormField(
+                          obscureText: _isHidden2,
+                          decoration: InputDecoration(
+                            hintText: 'Confirm Password',
+                            hintStyle: TextStyle(color: Color(0xff373D3F)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff63E2E0),
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0.5),
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: _toggleVisibility2,
+                              icon: Icon(Icons.visibility_off),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Got any promo/referral code? ',
-                                style: TextStyle(
-                                  color: Color(0xff373D3F),
-                                ),
-                              ),
-                              Checkbox(
-                                value: checked,
-                                onChanged: (bool value) {
-                                  toggle(value);
-                                },
-                                activeColor: Color(0xff616161),
-                                checkColor: Colors.white,
-                                tristate: false,
-                              )
-                            ],
-                          ),
+                          validator: (String value) {
+                            if (val != value) {
+                              return 'Passwords do not match';
+                            }
+                            return null;
+                          },
                         ),
                       ],
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      userSignup();
+//                         setState(() {
+//                           toggleMobile();
+//                           if (_formKey.currentState.validate()) ;
+//                         });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            color: Color(0xff373D3F), fontSize: width * 0.05),
+                      ),
+                    ),
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Already have an account? ',
+                        style: TextStyle(
+                            color: Color(0xff373D3F), fontSize: width * 0.04),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      LoginPage()));
+                        },
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff63E2E0),
+                              fontSize: width * 0.04),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff616161),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "OR",
+                          style: TextStyle(
+                            color: Color(0xff373D3F),
+                            fontSize: width * 0.04,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff616161),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    child: FlatButton(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      onPressed: controlSignIn,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset('assets/images/google.jpg',
+                              height: 50, width: 40),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Login with Google',
+                            style: TextStyle(
+                              color: Color(0xff373D3F),
+                              fontSize: width * 0.04,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Got any promo/referral code? ',
+                        style: TextStyle(
+                          color: Color(0xff373D3F),
+                        ),
+                      ),
+                      Checkbox(
+                        value: checked,
+                        onChanged: (bool value) {
+                          toggle(value);
+                        },
+                        activeColor: Color(0xff616161),
+                        checkColor: Colors.white,
+                        tristate: false,
+                      )
+                    ],
+                  ),
+                ],
               ),
-            );
-          }),
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -652,14 +662,14 @@ class _SignUpState extends State<SignUp> {
     });
 
     GoogleSignInAccount googleUser = await googleSignIn.signIn();
-    GoogleSignInAuthentication googleAuthentication = await googleUser
-        .authentication;
-    final AuthCredential credential = GoogleAuthProvider
-        .getCredential(idToken: googleAuthentication.idToken,
+    GoogleSignInAuthentication googleAuthentication =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        idToken: googleAuthentication.idToken,
         accessToken: googleAuthentication.accessToken);
 
-    FirebaseUser firebaseUser = (await firebaseAuth.signInWithCredential(
-        credential)).user;
+    FirebaseUser firebaseUser =
+        (await firebaseAuth.signInWithCredential(credential)).user;
 
 // Sign in success
 
@@ -675,16 +685,13 @@ class _SignUpState extends State<SignUp> {
       // if user is new
 
       if (documentSnapshots.length == 0) {
-        Firestore.instance.collection("users")
+        Firestore.instance
+            .collection("users")
             .document(firebaseUser.uid)
             .setData({
-
           "username": firebaseUser.displayName,
           "photoUrl": firebaseUser.photoUrl,
-          "createdAt": DateTime
-              .now()
-              .millisecondsSinceEpoch
-              .toString(),
+          "createdAt": DateTime.now().millisecondsSinceEpoch.toString(),
         });
 
         // write data locally
@@ -693,8 +700,7 @@ class _SignUpState extends State<SignUp> {
         await preferences.setString("id", currentUser.uid);
         await preferences.setString("username", currentUser.displayName);
         await preferences.setString("photoUrl", currentUser.photoUrl);
-      }
-      else {
+      } else {
         //retrieve data from firebase
         currentUser = firebaseUser;
         await preferences.setString("id", documentSnapshots[0]["id"]);
@@ -709,8 +715,10 @@ class _SignUpState extends State<SignUp> {
         isLoading = false;
       });
 
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => HomePage(currentUserID: currentUserID)));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(currentUserID: currentUserID)));
     }
 
 // sign in failed

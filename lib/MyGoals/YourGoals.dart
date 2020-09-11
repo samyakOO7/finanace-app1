@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'modifygoals.dart';
 
 Widget yourGoals(BuildContext context, List typeGoal, double height,
     double width, List goal_info) {
@@ -47,13 +48,26 @@ Widget yourGoals(BuildContext context, List typeGoal, double height,
                           Text(
                             goal_info[index].name,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.more_horiz,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
+                          PopupMenuButton(
+                            icon: Icon(Icons.more_horiz),
+                            onSelected: (value) {
+                              if (value == 1) {}
+                            },
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 1,
+                                child: Text("Edit"),
+                              ),
+                              PopupMenuItem(
+                                value: 2,
+                                child: Text("Mark as completed"),
+                              ),
+                              PopupMenuItem(
+                                value: 3,
+                                child: Text("Delete goal"),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
