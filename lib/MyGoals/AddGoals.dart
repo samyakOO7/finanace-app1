@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'GoalsType.dart';
+import 'dart:convert';
+import 'GoalsHomePage.dart';
+import 'package:http/http.dart' as http;
 
 class AddGoals extends StatefulWidget {
   String currentUserID;
@@ -16,6 +19,53 @@ class _AddGoalsState extends State<AddGoals> {
   TextEditingController value = new TextEditingController();
   TextEditingController year = new TextEditingController();
 
+  Future goalInsert() async {
+    String nam = name.text;
+    String amoun = value.text;
+    String yea = year.text;
+    String type = goalselected.toString();
+    var url1 = 'http://sanjayagarwal.in/Finance App/GoalIdMax.php';
+    final response = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message = jsonDecode(response.body);
+    String oldGoalID = message[0]['max(GoalID)'];
+    int intermediateId = int.parse(oldGoalID);
+    int newGoalID = intermediateId+1;
+
+
+
+    var url = 'http://sanjayagarwal.in/Finance App/GoalInsert.php';
+    print("****************************************************");
+    print("$name,$amoun,$year,$type");
+    print("****************************************************");
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Name": nam,
+        "Amount": amoun,
+        "Type":type,
+        "Year":yea,
+        "UserID":currentUserID,
+        "GoalID": newGoalID.toString()
+      }),
+    );
+    var message1 = jsonDecode(response1.body);
+    if (message1["message"] == "Successful Insertion") {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GoalsHomePage(currentUserID: currentUserID,)));
+    } else {
+      print(message1["message"]);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -227,7 +277,9 @@ class _AddGoalsState extends State<AddGoals> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              goalInsert();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
