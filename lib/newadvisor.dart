@@ -46,77 +46,105 @@ class _AdvisorPageState extends State<AdvisorPage> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Advisor',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        color: Color(0xff373D3F),
-                      ),
-                    ),
-                    Text(
-                      'Mr. ABC',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xff373D3F),
-                      ),
-                    ),
-                    Text(
-                      'Advisor Code : 09XDF',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xff373D3F),
+                    Container(
+                      height: height < 640 ? height * 0.2 : height * 0.15,
+                      child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text(
+                                'Advisor',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20,
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                              Text(
+                                'Mr. ABC',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                              Text(
+                                'Advisor Code : 09XDF',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xff373D3F),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     Divider(
                       color: Colors.grey,
                     ),
-                    Text(
-                      'Contact your Advisor',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20.0,
-                        color: Color(0xff373D3F),
+                    Container(
+                      height: height < 640 ? height * 0.3 : height * 0.18,
+                      child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                  'Contact your Advisor',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.0,
+                                    color: Color(0xff373D3F),
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.phone,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      '+033-2564 6777',
+                                      style: TextStyle(
+                                        color: Color(0xff373D3F),
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.mail,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      'xyz@gmail.com',
+                                      style: TextStyle(
+                                        fontSize: 17.5,
+                                        color: Color(0xff373D3F),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Icon(
-                          Icons.phone,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            '+033-2564 6777',
-                            style: TextStyle(
-                              color: Color(0xff373D3F),
-                              fontSize: 17,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Icon(
-                          Icons.mail,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            'xyz@gmail.com',
-                            style: TextStyle(
-                              fontSize: 17.5,
-                              color: Color(0xff373D3F),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                     Divider(
                       color: Colors.grey,
@@ -136,33 +164,26 @@ class _AdvisorPageState extends State<AdvisorPage> {
                         print(rating);
                       },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 20,
+                    Container(
+                      height: height < 640 ? height * 0.13 : height * 0.05,
+                      width: width * 0.6,
+                      child: ResponsiveTextField(
+                        textAlign: TextAlign.center,
+                        availableWidth: MediaQuery.of(context).size.width,
+                        minLines: 1,
+                        maxLines: 5,
+                        style: TextStyle(fontSize: 16),
+                        decoration: InputDecoration(
+                          hintText: 'Give your feedback (Optional)',
                         ),
-                        Container(
-                          height: height < 640 ? height * 0.13 : height * 0.1,
-                          width: width * 0.6,
-                          child: ResponsiveTextField(
-                            availableWidth: MediaQuery.of(context).size.width,
-                            minLines: 1,
-                            maxLines: 5,
-                            style: TextStyle(fontSize: 16),
-                            decoration: InputDecoration(
-                              hintText: 'Give your feedback (Optional)',
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_forward),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      color: Color(0xff63E2E0),
+                      child: Text("Send feedback"),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                     Divider(
                       color: Colors.grey,
