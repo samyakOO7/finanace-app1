@@ -137,8 +137,11 @@ class _AdvisorPageState extends State<AdvisorPage> {
                       },
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        SizedBox(
+                          width: 20,
+                        ),
                         Container(
                           height: height < 640 ? height * 0.13 : height * 0.1,
                           width: width * 0.6,
@@ -152,10 +155,13 @@ class _AdvisorPageState extends State<AdvisorPage> {
                             ),
                           ),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward),
-                          onPressed: () {},
-                        )
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_forward),
+                            onPressed: () {},
+                          ),
+                        ),
                       ],
                     ),
                     Divider(
