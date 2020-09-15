@@ -17,26 +17,12 @@ class _GoalsHomePageState extends State<GoalsHomePage> {
   String currentUserID;
   _GoalsHomePageState({@required this.currentUserID});
 
-  Future getGoals() async {
-    var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
-    final response = await http.post(
-      url,
-      body: jsonEncode(<String, String>{
-        "UserID": currentUserID,
-      }),
-    );
-    var message = jsonDecode(response.body);
-    print("****************************************");
-    print(message);
-    print("****************************************");
-  }
 
   @override
   void initState() {
     print("****************************************");
     print(currentUserID);
     print("****************************************");
-    getGoals();
     // TODO: implement initState
     super.initState();
   }
