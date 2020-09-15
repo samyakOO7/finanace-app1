@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:finance_app/HomePage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 class ForgetPassPage extends StatefulWidget {
   @override
@@ -14,9 +18,11 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
   bool linkSend = false;
   String currentUserID;
   bool isEmail = false;
-  String email = "", errorMessage = "";
+  String email = "",
+      errorMessage = "";
   var _formKey = GlobalKey<FormState>();
   String error = "";
+
   String defineText(isEmail, linkSend) {
     String finalStatement;
     if (linkSend == false) {
@@ -24,10 +30,10 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
     } else {
       if (isEmail) {
         finalStatement =
-            'A link is sent to the above Email to change your password \n\*Please check your MailBox and Spams\*';
+        'A link is sent to the above Email to change your password \n\*Please check your MailBox and Spams\*';
       } else {
         finalStatement =
-            'A link is sent to the above Phone No. to change your password \n\*Please check your SMS\*';
+        'A link is sent to the above Phone No. to change your password \n\*Please check your SMS\*';
       }
     }
     return finalStatement;
@@ -36,7 +42,8 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
   void _showErrorDailog(String msg) {
     showDialog(
         context: context,
-        builder: (ctx) => AlertDialog(
+        builder: (ctx) =>
+            AlertDialog(
               title: Text('An Error Occurred'),
               content: Text(msg),
               actions: <Widget>[
@@ -52,8 +59,14 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
 
   @override
   Widget build(BuildContext context) {
-    double tileHeight = MediaQuery.of(context).size.height;
-    double tileWidth = MediaQuery.of(context).size.width;
+    double tileHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double tileWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
@@ -144,7 +157,7 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
                                 FirebaseAuth.instance
                                     .sendPasswordResetEmail(email: email)
                                     .then((value) =>
-                                        print("Check your email box"));
+                                    print("Check your email box"));
                               }
                             } catch (error) {
                               Fluttertoast.showToast(msg: "Sign In Success !!");
@@ -185,36 +198,34 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
   }
 
   Future<void> forgetPassword() async {
-    try {
-      if (_formKey.currentState.validate()) {
-        dynamic result = FirebaseAuth.instance
-            .sendPasswordResetEmail(email: email)
-            .then((value) => print("Check your email box"));
-
-        if (result.runtimeType == PlatformException) {
-          error = "Error occurred. Please try again !!";
-          _showErrorDailog(error);
-
-//           if (result.message != null) {
-//             setState(() {
-//               error = "Error occurred. Please try again !!";
-//             });
-//           } else {
-//             setState(() {
-//               error = "Unknown Error";
-//             });
-//           }
-        }
-        //
-      }
+    var url = 'http://sanjayagarwal.in/Finance App/forget.php';
+    print("****************************************************");
+    print("$email");
+    print("****************************************************");
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "email": email,
+        "UserID": currentUserID,
+      }),
+    );
+    var message = jsonDecode(response.body);
+    if (message["message"] == "Successful") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  HomePage(
+                    currentUserID: currentUserID,
+                  )));
 
       setState(() {
         isEmail = true;
         linkSend = true;
       });
-    } on PlatformException catch (error) {
-      var errorMessage = 'Authentication Failed. Please try again !';
-      _showErrorDailog(errorMessage);
+    } else {
+      print(message["message"]);
     }
   }
+
 }
