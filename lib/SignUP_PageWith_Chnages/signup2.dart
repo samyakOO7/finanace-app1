@@ -258,7 +258,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 title: Center(
                   child: Text(
-                    'Enter the OTP',
+                    'Enter the OTP for Mobile Verification',
                     style: TextStyle(
                       color: Color(0xff373D3F),
                     ),
@@ -287,6 +287,19 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text(
+                      'Resend OTP',
+                      style: TextStyle(
+                        color: Color(0xff373D3F),
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                  FlatButton(
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
                       'Verify',
                       style: TextStyle(
                         color: Color(0xff373D3F),
@@ -294,6 +307,21 @@ class _SignUpState extends State<SignUp> {
                     ),
                     onPressed: () {
                       checkMobileOTP('otp');
+                    },
+                  ),
+                  FlatButton(
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
+                      'Close',
+                      style: TextStyle(
+                        color: Color(0xff373D3F),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
                   )
                 ],
@@ -518,6 +546,9 @@ class _SignUpState extends State<SignUp> {
                   RaisedButton(
                     onPressed: () {
                       userSignup();
+                      if (_phoneController.text.isNotEmpty) {
+                        toggleMobile();
+                      }
 //                         setState(() {
 //                           toggleMobile();
 //                           if (_formKey.currentState.validate()) ;

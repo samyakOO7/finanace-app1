@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:finance_app/forget_password.dart';
 import 'dart:convert';
 import 'signup2.dart';
 
@@ -148,7 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ForgetPassPage()));
+                          },
                           child: Text('Forgot Password?',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
