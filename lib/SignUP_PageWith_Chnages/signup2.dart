@@ -45,7 +45,7 @@ class _SignUpState extends State<SignUp> {
     String password = _passwordController.text;
     String phone = _phoneController.text;
     String name = _usernameController.text;
-    var url = 'http://sanjayagarwal.in/Finance App/signupAdvisor.php';
+    var url = 'http://sanjayagarwal.in/Finance App/signup.php';
     print("****************************************************");
     print("$email,$password,$phone,$name");
     print("****************************************************");
@@ -258,7 +258,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 title: Center(
                   child: Text(
-                    'Enter the OTP for Mobile Verification',
+                    'Enter the OTP for Email Verification',
                     style: TextStyle(
                       color: Color(0xff373D3F),
                     ),
@@ -546,7 +546,7 @@ class _SignUpState extends State<SignUp> {
                   RaisedButton(
                     onPressed: () {
                       userSignup();
-                      if (_phoneController.text.isNotEmpty) {
+                      if (_emailController.text.isNotEmpty) {
                         toggleMobile();
                       }
 //                         setState(() {
