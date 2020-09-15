@@ -3,7 +3,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'AddGoals.dart';
 import 'GoalsType.dart';
-import 'YourGoals.dart';
 import 'modifygoals.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -25,7 +24,9 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
       current = index;
     });
   }
-  Future getGoals() async {
+
+  List data = [];
+  void getGoals() async {
     var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
     final response = await http.post(
       url,
@@ -33,10 +34,13 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
         "UserID": currentUserID,
       }),
     );
-    var message = jsonDecode(response.body);
+    var message = await jsonDecode(response.body);
     print("****************************************");
     print(message);
     print("****************************************");
+    setState(() {
+      data = message;
+    });
   }
 
   @override
@@ -52,9 +56,9 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
   Widget yourGoals(BuildContext context, List typeGoal, double height,
       double width, List goal_info) {
     return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: ScrollPhysics(),
         shrinkWrap: true,
-        itemCount: goal_info.length,
+        itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: <Widget>[
@@ -86,14 +90,15 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                               children: <Widget>[
                                 Container(
                                   child: Image.asset(
-                                      goal_info[index].type.imageUrl),
+                                      category[int.parse(data[index]['Type'])]
+                                          .imageUrl),
                                   height: 50,
                                   width: 50,
                                 )
                               ],
                             ),
                             Text(
-                              goal_info[index].name,
+                              data[index]['Name'],
                             ),
                             PopupMenuButton(
                               icon: Icon(Icons.more_horiz),
@@ -140,7 +145,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                         padding: EdgeInsets.all(6.0),
                         child: LinearPercentIndicator(
                           lineHeight: 14.0,
-                          percent: (goal_info[index].completion) / 100,
+                          percent: 0.5,
                           backgroundColor: Colors.grey,
                           progressColor: Color(0xff63E2E0),
                         ),
@@ -159,7 +164,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                         style:
                                             TextStyle(color: Color(0xff373D3F)),
                                       ),
-                                      Text(goal_info[index].year,
+                                      Text(data[index]['Year'],
                                           style: TextStyle(
                                               color: Color(0xff373D3F))),
                                     ],
@@ -169,7 +174,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                       Text("Target: ",
                                           style: TextStyle(
                                               color: Color(0xff373D3F))),
-                                      Text(goal_info[index].value,
+                                      Text(data[index]['Amount'],
                                           style: TextStyle(
                                               color: Color(0xff373D3F))),
                                     ],
@@ -240,6 +245,27 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
           'MY GOALS',
           style: TextStyle(color: Color(0xff373D3F)),
         ),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => AddGoals(
+                              currentUserID: currentUserID,
+                            )));
+              },
+              child: Text(' + Add '),
+              color: Color(0xff63E2E0),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color(0xff63E2E0),
@@ -258,41 +284,28 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
           )
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Center(
-                    child: Text(
-                      current == 0 ? "Current Goals" : "Completed Goals",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Center(
+                      child: Text(
+                        current == 0 ? "Current Goals" : "Completed Goals",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => AddGoals(
-                                currentUserID: currentUserID,
-                              )));
-                },
-                child: Text(' + Add '),
-                color: Color(0xff63E2E0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ],
-          ),
-          goalsoptions[current],
-        ],
+              ],
+            ),
+            goalsoptions[current],
+          ],
+        ),
       ),
     );
   }
