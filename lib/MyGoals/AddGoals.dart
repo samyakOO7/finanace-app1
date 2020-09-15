@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'GoalsType.dart';
 import 'dart:convert';
-import 'GoalsHomePage.dart';
+import 'NewGoalsHomePage.dart';
 import 'package:http/http.dart' as http;
 
 class AddGoals extends StatefulWidget {
@@ -55,7 +55,7 @@ class _AddGoalsState extends State<AddGoals> {
     );
     var message1 = jsonDecode(response1.body);
     if (message1["message"] == "Successful Insertion") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GoalsHomePage(currentUserID: currentUserID,)));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewGoalsPage(currentUserID: currentUserID,)));
     } else {
       print(message1["message"]);
     }

@@ -5,6 +5,8 @@ import 'AddGoals.dart';
 import 'GoalsType.dart';
 import 'YourGoals.dart';
 import 'modifygoals.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class NewGoalsPage extends StatefulWidget {
   String currentUserID;
@@ -22,6 +24,29 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
     setState(() {
       current = index;
     });
+  }
+  Future getGoals() async {
+    var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message = jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+  }
+
+  @override
+  void initState() {
+    print("****************************************");
+    print(currentUserID);
+    print("****************************************");
+    getGoals();
+    // TODO: implement initState
+    super.initState();
   }
 
   Widget yourGoals(BuildContext context, List typeGoal, double height,
