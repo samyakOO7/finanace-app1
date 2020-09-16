@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       // home: AddSplit(),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(currentUserID: '987654321'),
+        '/': (context) => LoginPage(),
       },
     );
   }

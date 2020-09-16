@@ -18,8 +18,8 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
   bool linkSend = false;
   String currentUserID;
   bool isEmail = false;
-  String email = "",
-      errorMessage = "";
+  String email = "";
+  String errorMessage = "";
   var _formKey = GlobalKey<FormState>();
   String error = "";
 
@@ -96,13 +96,20 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: TextFormField(
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please enter your email";
-                        } else {
-                          email = value;
-                        }
-                        return null;
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return "Please enter your email";
+                      //   } else {
+                      //     email = value;
+                      //
+                      //
+                      //   }
+                      //   return null;
+                      // },
+                      onChanged: (value)
+                      {
+                        email = value;
+                        Fluttertoast.showToast(msg: email);
                       },
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
@@ -200,12 +207,12 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
   Future<void> forgetPassword() async {
     var url = 'http://sanjayagarwal.in/Finance App/forget.php';
     print("****************************************************");
-    print("$email");
+    print(email);
     print("****************************************************");
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
-        "email": email,
+        "Email": email,
         "UserID": currentUserID,
       }),
     );
@@ -224,7 +231,9 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
         linkSend = true;
       });
     } else {
+      print("****************************************************");
       print(message["message"]);
+      print("****************************************************");
     }
   }
 
