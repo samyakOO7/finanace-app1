@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class UserProfile extends StatefulWidget {
   String currentUserID;
@@ -13,41 +15,56 @@ class _UserProfileState extends State<UserProfile> {
   String currentUserID;
   _UserProfileState({@required this.currentUserID});
   String dropdownValue;
-  String userName;
-  String userPan;
-  String userStatus;
-  String userMobile;
-  String userDob;
   String userCode;
   bool isEditing = false;
    SharedPreferences preferences;
   String id = "";
 
-  void getUserData()  async{
-    
-     preferences = await SharedPreferences.getInstance();
-    id = preferences.getString("id");
-
-//     //function to get user data
-//     dropdownValue = 'Male';
-//     userName = 'Ganesh';
-//     userPan = 'po87uin';
-//     userCode = '3218526547';
-//     userDob = '';
-//     userStatus = 'Single';
-//     userMobile = '9564832178';
-
-    Firestore.instance.collection('users').document(id)
-        .get().then((DocumentSnapshot) {
-      userName = (DocumentSnapshot.data['Name'].toString());
-      userDob = (DocumentSnapshot.data['Date of Birth'].toString());
-      userMobile = (DocumentSnapshot.data['Mobile Number'].toString());
-      userPan = (DocumentSnapshot.data['Pan Number'].toString());
-      userStatus = (DocumentSnapshot.data['Marital Status'].toString());
-      dropdownValue = (DocumentSnapshot.data['Gender'].toString());
-      userCode = (DocumentSnapshot.data['Unique Client Code'].toString());
+  void getUserData() async {
+    var url = 'http://sanjayagarwal.in/Finance App/UserDetails.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+    setState(() {
+      name = message[0]['Name'];
+      dob = message[0]['DOB'];
+      mobile =message[0]['Mobile'];
+      pan = message[0]['PAN'];
+      referalCode = message[0]['ReferalCode'];
+      dropdownValue = message[0]['Gender'];
+      userCode = message[0]['UserID'];
+      email = message[0]['Email'];
     });
+  }
+  void profileUpdate() async {
+    var url = 'http://sanjayagarwal.in/Finance App/UserUpdate.php';
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Name": name,
+        "DOB": dob,
+        "Mobile": mobile,
+        "PAN": pan,
+        "Email": email,
+        "UserID": userCode,
+        "Gender":dropdownValue,
+        "ReferalCode":referalCode
 
+      }),
+    );
+    var message1 = await jsonDecode(response1.body);
+    if (message1["message"] == "Successful Updation") {
+      print("Successfully Updated");
+    } else {
+      print(message1["message"]);
+    }
   }
 
   void switchState() {
@@ -57,7 +74,7 @@ class _UserProfileState extends State<UserProfile> {
       isEditing = true;
     }
   }
-String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = "", code = "";
+String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
   void updateUserData() {
     //function to update the data of user to sync database
      Firestore.instance.collection('users').document(id).updateData(
@@ -66,9 +83,9 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
           'Date of Birth': dob,
           'Mobile Number': mobile,
           'Pan Number': pan,
-          'Marital Status': maritalStatus,
-          'Gender': gender,
-          'Unique Client Code': code
+          'Marital Status': referalCode,
+          'Gender': dropdownValue,
+          'Unique Client Code': userCode
         }
     );
   }
@@ -91,7 +108,8 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (isEditing) {
-            updateUserData();
+            profileUpdate();
+            getUserData();
           }
           setState(() {
             switchState();
@@ -122,13 +140,14 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                   ),
                   isEditing
                       ? TextFormField(
+                    initialValue: name,
                     onChanged: (value)
                     {
                       name = value;
                     },
                   )
                       : Text(
-                          '$userName',
+                          '$name',
                           style: TextStyle(
                             fontSize: tileHeight / 55,
                             color: Colors.black45,
@@ -154,13 +173,14 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                   ),
                   isEditing
                       ? TextFormField(
+                    initialValue: dob,
                     onChanged: (value)
                     {
                       dob = value;
                     },
                   )
                       : Text(
-                          '$userDob',
+                          '$dob',
                           style: TextStyle(
                             fontSize: tileHeight / 55,
                             color: Colors.black45,
@@ -186,13 +206,14 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                   ),
                   isEditing
                       ? TextFormField(
+                    initialValue: mobile,
                     onChanged: (value)
                     {
                       mobile = value;
                     },
                   )
                       : Text(
-                          '$userMobile',
+                          '$mobile',
                           style: TextStyle(
                             fontSize: tileHeight / 55,
                             color: Colors.black45,
@@ -203,6 +224,39 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                       : Divider(
                           color: Colors.black45,
                         ),
+                  SizedBox(
+                    height: tileHeight / 40,
+                  ),
+                  Text(
+                    'Email',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  isEditing
+                      ? TextFormField(
+                    initialValue: email,
+                    onChanged: (value)
+                    {
+                      email = value;
+                    },
+                  )
+                      : Text(
+                    '$email',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  isEditing
+                      ? SizedBox()
+                      : Divider(
+                    color: Colors.black45,
+                  ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -218,45 +272,14 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                   ),
                   isEditing
                       ? TextFormField(
+                    initialValue: pan,
                     onChanged: (value)
                     {
                       pan = value;
                     },
                   )
                       : Text(
-                          '$userPan',
-                          style: TextStyle(
-                            fontSize: tileHeight / 55,
-                            color: Colors.black45,
-                          ),
-                        ),
-                  isEditing
-                      ? SizedBox()
-                      : Divider(
-                          color: Colors.black45,
-                        ),
-                  SizedBox(
-                    height: tileHeight / 40,
-                  ),
-                  Text(
-                    'Marital Status',
-                    style: TextStyle(
-                      fontSize: tileHeight / 40,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  SizedBox(
-                    height: tileHeight / 80,
-                  ),
-                  isEditing
-                      ? TextFormField(
-                    onChanged: (value)
-                    {
-                      maritalStatus = value;
-                    },
-                  )
-                      : Text(
-                          '$userStatus',
+                          '$pan',
                           style: TextStyle(
                             fontSize: tileHeight / 55,
                             color: Colors.black45,
@@ -293,13 +316,12 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                             color: Colors.black45,
                           ),
                           onChanged: (String newValue) {
-                            gender = newValue;
                             setState(() {
                               dropdownValue = newValue;
 
                             });
                           },
-                          items: <String>['Male', 'Female']
+                          items: <String>['Male', 'Female','']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -319,6 +341,29 @@ String name = "", dob="", mobile = "", pan = "", maritalStatus = "", gender = ""
                       : Divider(
                           color: Colors.black45,
                         ),
+                  SizedBox(
+                    height: tileHeight / 40,
+                  ),
+                  Text(
+                    'Referal Code',
+                    style: TextStyle(
+                      fontSize: tileHeight / 40,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(
+                    height: tileHeight / 80,
+                  ),
+                  Text(
+                    '$referalCode',
+                    style: TextStyle(
+                      fontSize: tileHeight / 55,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black45,
+                  ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
