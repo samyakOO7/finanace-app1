@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
-import 'SignIn_page.dart';
+import 'Working_signin.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:http/http.dart' as http;
@@ -258,7 +258,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 title: Center(
                   child: Text(
-                    'Enter the OTP',
+                    'Enter the OTP for Email Verification',
                     style: TextStyle(
                       color: Color(0xff373D3F),
                     ),
@@ -287,6 +287,19 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text(
+                      'Resend OTP',
+                      style: TextStyle(
+                        color: Color(0xff373D3F),
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                  FlatButton(
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
                       'Verify',
                       style: TextStyle(
                         color: Color(0xff373D3F),
@@ -294,6 +307,21 @@ class _SignUpState extends State<SignUp> {
                     ),
                     onPressed: () {
                       checkMobileOTP('otp');
+                    },
+                  ),
+                  FlatButton(
+                    color: Color(0xff63E2E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Text(
+                      'Close',
+                      style: TextStyle(
+                        color: Color(0xff373D3F),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
                   )
                 ],
@@ -518,6 +546,9 @@ class _SignUpState extends State<SignUp> {
                   RaisedButton(
                     onPressed: () {
                       userSignup();
+                      if (_emailController.text.isNotEmpty) {
+                        toggleMobile();
+                      }
 //                         setState(() {
 //                           toggleMobile();
 //                           if (_formKey.currentState.validate()) ;

@@ -109,10 +109,14 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
                                               ModifyGoalsPage(
-                                                goal_info[index].type.id,
-                                                goal_info[index].name,
-                                                goal_info[index].value,
-                                                goal_info[index].year,
+                                                int.parse(
+                                                    data[index]['GoalID']),
+                                                category[int.parse(
+                                                        data[index]['Type'])]
+                                                    .id,
+                                                data[index]['Name'],
+                                                data[index]['Amount'],
+                                                data[index]['Year'],
                                                 currentUserID: currentUserID,
                                               )));
                                 }

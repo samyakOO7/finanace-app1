@@ -5,8 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:finance_app/forget_password.dart';
 import 'dart:convert';
-import 'SignUp_page.dart';
+import 'signup2.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,12 +16,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String currentUserID;
+  var val;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _isHidden = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
+
   Future userLogin() async {
     String email = emailController.text;
     String password = passwordController.text;
-    var url = 'http://sanjayagarwal.in/Finance App/Signin3.php';
+    var url = 'http://sanjayagarwal.in/Finance App/signinAdvisor.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -31,7 +41,11 @@ class _LoginPageState extends State<LoginPage> {
     var message = jsonDecode(response.body);
     if (message == "Login Matched") {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message);
     }
@@ -94,14 +108,36 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           TextFormField(
                             controller: passwordController,
-                            obscureText: true,
-                            decoration: textfield("Password"),
-                            validator: (value1) {
-                              if (value1.isEmpty) {
+                            obscureText: _isHidden,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                hintText: ' Password',
+                                hintStyle: TextStyle(color: Color(0xff373D3F)),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xff63E2E0),
+                                  ),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0.5),
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: _toggleVisibility,
+                                  icon: Icon(Icons.visibility_off),
+                                )),
+                            validator: (String value) {
+                              val = value;
+                              if (value.isEmpty) {
                                 return 'Please enter a password';
+                              }
+                              if (value.length < 8) {
+                                return 'Password must be greater than 8 alphabets';
                               }
                               return null;
                             },
+                            onSaved: (value) {},
                           ),
                         ],
                       ),
@@ -113,7 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ForgetPassPage()));
+                          },
                           child: Text('Forgot Password?',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,

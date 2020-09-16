@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'package:finance_app/authentication.dart';
 import 'SignUp_page.dart';
 
+import 'SignUp_page.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -41,11 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     var message = jsonDecode(response.body);
     if (message == "Login Matched") {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomePage(
-                    currentUserID: currentUserID,
-                  )));
+          context, MaterialPageRoute(builder: (context) => HomePage(currentUserID: currentUserID,)));
     } else {
       print(message);
     }
@@ -130,12 +128,8 @@ class _LoginPageState extends State<LoginPage> {
       await Provider.of<Authentication>(context, listen: false)
           .logIn(_authData['email'], _authData['password']);
 
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => HomeScreen(
-                    currentUserId: currentUserID,
-                  )));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen(currentUserId: currentUserID,)));
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again';
       _showErrorDailog(errorMessage);
@@ -219,18 +213,6 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: _isHidden,
                             decoration: InputDecoration(
                                 hintText: 'Password',
-                                hintStyle: TextStyle(color: Color(0xff373D3F)),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff63E2E0),
-                                  ),
-                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(0.5),
                                 ),

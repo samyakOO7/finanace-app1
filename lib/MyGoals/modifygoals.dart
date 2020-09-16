@@ -4,9 +4,10 @@ import 'GoalsType.dart';
 
 class ModifyGoalsPage extends StatefulWidget {
   String currentUserID;
+  int goalid;
   String gname, gamt, gyear;
   int index;
-  ModifyGoalsPage(this.index, this.gname, this.gamt, this.gyear,
+  ModifyGoalsPage(this.goalid, this.index, this.gname, this.gamt, this.gyear,
       {@required this.currentUserID});
   @override
   _ModifyGoalsPageState createState() =>
