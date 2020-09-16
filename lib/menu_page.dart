@@ -28,24 +28,22 @@ class _menuPageState extends State<menuPage> {
   @override
   Widget build(BuildContext context) {
     double tileWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-          child: Center(
+    return SafeArea(
+      child: Center(
         child: ListView(
           children: <Widget>[
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 1.5,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            Container(
+              height: 80,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xff63E2E0),
+                ),
                 child: Text(
                   '$userName',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      .copyWith(fontSize: 20.0, color: Color(0xFF373D3F)),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Color(0xff373D3F),
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
@@ -175,7 +173,7 @@ class _menuPageState extends State<menuPage> {
                 icon: Icons.call),
           ],
         ),
-      )),
+      ),
     );
   }
 }
