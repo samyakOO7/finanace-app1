@@ -1,25 +1,58 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Contact_us extends StatelessWidget {
   final String currentUserID;
   Contact_us({@required this.currentUserID});
   @override
   Widget build(BuildContext context) {
-    return MyHomePage(currentUserID: currentUserID,);
+    return MyHomePage(
+      currentUserID: currentUserID,
+    );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   String currentUserID;
-  MyHomePage({Key key,@required this.currentUserID}) : super(key: key);
+  MyHomePage({Key key, @required this.currentUserID}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(currentUserID: currentUserID);
+  _MyHomePageState createState() =>
+      _MyHomePageState(currentUserID: currentUserID);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List ques = [];
+  void getQues() async {
+    var url = 'http://sanjayagarwal.in/Finance App/support.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+    setState(() {
+      ques = message;
+    });
+  }
+
+  @override
+  void initState() {
+    print("****************************************");
+    print(currentUserID);
+    print("****************************************");
+    getQues();
+    // TODO: implement initState
+    super.initState();
+  }
+
   String currentUserID;
   _MyHomePageState({@required this.currentUserID});
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
@@ -81,34 +114,27 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         child: ListView.builder(
-            itemCount: 15,
+            itemCount: ques.length,
             itemBuilder: (BuildContext cntx, int index) {
               return Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Column(
                   children: <Widget>[
-                    ExpansionTileCard(
-                      title: Text('1. Question 1'),
+                    ExpansionTile(
+                      title: Text(ques[index]["sname"]),
                       children: <Widget>[
                         Divider(
                           thickness: 0.8,
                           height: 1.0,
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40.0,
-                              vertical: 8.0,
+                        ExpansionTile(
+                          title: Text(ques[index]["question"]),
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(ques[index]['answer']),
                             ),
-                            child: Text(
-                              'Answer 1',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(fontSize: 16),
-                            ),
-                          ),
+                          ],
                         ),
                       ],
                     ),

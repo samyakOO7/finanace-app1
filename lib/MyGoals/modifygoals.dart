@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'NewGoalsHomePage.dart';
 import 'GoalsType.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+
 
 class ModifyGoalsPage extends StatefulWidget {
   String currentUserID;
+  int goalid;
   String gname, gamt, gyear;
   int index;
-  ModifyGoalsPage(this.index, this.gname, this.gamt, this.gyear,
+  ModifyGoalsPage(this.goalid, this.index, this.gname, this.gamt, this.gyear,
       {@required this.currentUserID});
   @override
   _ModifyGoalsPageState createState() =>
@@ -15,11 +20,33 @@ class ModifyGoalsPage extends StatefulWidget {
 
 class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
   var goalselected = 0;
-  TextEditingController name = new TextEditingController();
-  TextEditingController value = new TextEditingController();
-  TextEditingController year = new TextEditingController();
+  String name;
+  String value;
+  String year;
+
   String currentUserID;
   _ModifyGoalsPageState({@required this.currentUserID});
+
+  Future goalUpdate() async {
+    var url = 'http://sanjayagarwal.in/Finance App/GoalUpdate.php';
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Name": name,
+        "Amount": value,
+        "Type": widget.index.toString(),
+        "Year": year,
+        "UserID":currentUserID,
+        "GoalID": widget.goalid.toString(),
+      }),
+    );
+    var message1 = jsonDecode(response1.body);
+    if (message1["message"] == "Successful Updation") {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewGoalsPage(currentUserID: currentUserID,)));
+    } else {
+      print(message1["message"]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +177,10 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
                               initialValue: widget.gname,
+                              onChanged: (value)
+                              {
+                                name = value;
+                              },
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
@@ -181,6 +212,10 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
+                              onChanged: (valu)
+                              {
+                                value = valu;
+                              },
                               initialValue: widget.gamt,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -213,6 +248,10 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               initialValue: widget.gyear,
+                              onChanged: (value)
+                              {
+                                year = value;
+                              },
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                     borderSide:
@@ -233,7 +272,9 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              goalUpdate();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

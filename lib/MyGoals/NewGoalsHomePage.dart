@@ -26,6 +26,23 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
   }
 
   List data = [];
+  void deleteGoals(var goalID) async {
+    var url = 'http://sanjayagarwal.in/Finance App/GoalDelete.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+        "GoalID": goalID
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    if (message["message"] == "Successfully Deleted") {
+     getGoals();
+    } else {
+      print(message["message"]);
+    }
+
+  }
   void getGoals() async {
     var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
     final response = await http.post(
@@ -44,7 +61,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
   }
 
   @override
-  void initState() {
+  void initState(){
     print("****************************************");
     print(currentUserID);
     print("****************************************");
@@ -109,10 +126,14 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
                                               ModifyGoalsPage(
-                                                goal_info[index].type.id,
-                                                goal_info[index].name,
-                                                goal_info[index].value,
-                                                goal_info[index].year,
+                                                int.parse(
+                                                    data[index]['GoalID']),
+                                                category[int.parse(
+                                                        data[index]['Type'])]
+                                                    .id,
+                                                data[index]['Name'],
+                                                data[index]['Amount'],
+                                                data[index]['Year'],
                                                 currentUserID: currentUserID,
                                               )));
                                 }
@@ -120,7 +141,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                   print("Completed");
                                 }
                                 if (value == 3) {
-                                  print("Deleted");
+                                  deleteGoals(data[index]['GoalID']);
                                 }
                               },
                               itemBuilder: (context) => [
@@ -135,6 +156,7 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                 PopupMenuItem(
                                   value: 3,
                                   child: Text("Delete goal"),
+
                                 ),
                               ],
                             )
