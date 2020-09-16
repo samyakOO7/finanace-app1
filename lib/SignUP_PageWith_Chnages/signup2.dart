@@ -40,6 +40,46 @@ class _SignUpState extends State<SignUp> {
   final _codeController = TextEditingController();
   final _emailController = TextEditingController();
   var _isProcessing;
+
+  Future<void> emailVerification() async{
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String phone = _phoneController.text;
+    String name = _usernameController.text;
+    var url = 'http://sanjayagarwal.in/Finance App/Signup3.php';
+    print("****************************************************");
+    print(email);
+    print("****************************************************");
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Email": email,
+        "UserID": currentUserID,
+        "Password": password,
+        "Name":name,
+        "Phone": phone
+      }),
+    );
+    if (response.body.isNotEmpty) {
+      var message = jsonDecode(response.body);
+      if (message["message"] == "Successful Signup" && message[0]['OTP']==otp) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(
+                      currentUserID: currentUserID,
+                    )));
+      }
+      else {
+        print("****************************************************");
+        print(message["message"]);
+        print("****************************************************");
+      }
+    }
+  }
+
+
   Future userSignup() async {
     String email = _emailController.text;
     String password = _passwordController.text;
@@ -244,7 +284,7 @@ class _SignUpState extends State<SignUp> {
               ],
             ));
   }
-
+String otp = "";
   void toggleMobile() {
     if (confirmMobile == false) {
       setState(() {
@@ -276,6 +316,7 @@ class _SignUpState extends State<SignUp> {
                       fieldStyle: FieldStyle.underline,
                       onCompleted: (pin) {
                         print("Completed: " + pin);
+                        otp = pin;
                       },
                     ),
                   ],
@@ -292,7 +333,9 @@ class _SignUpState extends State<SignUp> {
                         color: Color(0xff373D3F),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      emailVerification();
+                    },
                   ),
                   FlatButton(
                     color: Color(0xff63E2E0),
@@ -466,6 +509,10 @@ class _SignUpState extends State<SignUp> {
                           },
                           onSaved: (value) {
                             _authData['email'] = value;
+                            String email = value;
+                            print("****************************************************");
+                            print(email);
+                            print("****************************************************");
                           },
                         ),
                         SizedBox(
