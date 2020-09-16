@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+
 //button for signin and sign up
 class ProfileButtons extends StatelessWidget {
-  ProfileButtons({this.color, @required this.title, @required this.onPress, this.radius = 15.0, @required this.width, @required this.icon});
+  ProfileButtons(
+      {this.color,
+      @required this.title,
+      @required this.onPress,
+      this.radius = 15.0,
+      @required this.width,
+      @required this.icon});
 
   final String title;
   final Color color;
@@ -25,13 +32,25 @@ class ProfileButtons extends StatelessWidget {
             color: Colors.white,
             child: Row(
               children: <Widget>[
-                Icon(icon,color: Colors.black54,),
-                SizedBox(width: 8.0,),
+                Icon(
+                  icon,
+                  color: Color(0xff63E2E0),
+                ),
+                SizedBox(
+                  width: 8.0,
+                ),
                 Text(
                   title,
-                  style: TextStyle(color: Color(0xFF373D3F),fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      color: Color(0xFF373D3F), fontWeight: FontWeight.normal),
                 ),
-                Expanded(child: Align(alignment: Alignment.bottomRight,child: Icon(Icons.keyboard_arrow_right,color: Colors.black26,)))
+                Expanded(
+                    child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          color: Colors.black26,
+                        )))
               ],
             ),
           ),
