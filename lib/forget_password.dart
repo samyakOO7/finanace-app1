@@ -216,25 +216,31 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
         "UserID": currentUserID,
       }),
     );
-    var message = jsonDecode(response.body);
-    if (message["message"] == "Successful") {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  HomePage(
-                    currentUserID: currentUserID,
-                  )));
+    if (response.body.isNotEmpty) {
+      var message = jsonDecode(response.body);
+      if (message["message"] == "Successful") {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(
+                      currentUserID: currentUserID,
+                    )));
 
-      setState(() {
-        isEmail = true;
-        linkSend = true;
-      });
-    } else {
+        setState(() {
+          isEmail = true;
+          linkSend = true;
+        });
+      }
+
+
+    else {
       print("****************************************************");
       print(message["message"]);
       print("****************************************************");
     }
+  }
+
   }
 
 }
