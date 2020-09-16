@@ -4,14 +4,12 @@ import 'GoalsType.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
-
 class ModifyGoalsPage extends StatefulWidget {
   String currentUserID;
   int goalid;
   String gname, gamt, gyear;
-  int index;
-  ModifyGoalsPage(this.goalid, this.index, this.gname, this.gamt, this.gyear,
+  int indexone;
+  ModifyGoalsPage(this.goalid, this.indexone, this.gname, this.gamt, this.gyear,
       {@required this.currentUserID});
   @override
   _ModifyGoalsPageState createState() =>
@@ -20,6 +18,7 @@ class ModifyGoalsPage extends StatefulWidget {
 
 class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
   var goalselected = 0;
+  var newgoal;
   String name;
   String value;
   String year;
@@ -34,15 +33,20 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
       body: jsonEncode(<String, String>{
         "Name": name,
         "Amount": value,
-        "Type": widget.index.toString(),
+        "Type": newgoal.toString(),
         "Year": year,
-        "UserID":currentUserID,
+        "UserID": currentUserID,
         "GoalID": widget.goalid.toString(),
       }),
     );
     var message1 = jsonDecode(response1.body);
     if (message1["message"] == "Successful Updation") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewGoalsPage(currentUserID: currentUserID,)));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NewGoalsPage(
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message1["message"]);
     }
@@ -50,7 +54,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
 
   @override
   Widget build(BuildContext context) {
-    goalselected = widget.index;
+    goalselected = widget.indexone;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -114,11 +118,12 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
+                                        newgoal = index;
                                         goalselected = index;
                                       });
                                     },
                                     child: Container(
-                                      decoration: goalselected == index
+                                      decoration: newgoal == index
                                           ? BoxDecoration(
                                               border: Border.all(
                                                 width: 4,
@@ -148,10 +153,9 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                                             category[index].name,
                                             style: TextStyle(
                                                 color: Color(0xff373D3F),
-                                                fontWeight:
-                                                    goalselected == index
-                                                        ? FontWeight.bold
-                                                        : FontWeight.w400),
+                                                fontWeight: newgoal == index
+                                                    ? FontWeight.bold
+                                                    : FontWeight.w400),
                                           ),
                                         ],
                                       ),
@@ -177,8 +181,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
                               initialValue: widget.gname,
-                              onChanged: (value)
-                              {
+                              onChanged: (value) {
                                 name = value;
                               },
                               decoration: InputDecoration(
@@ -212,8 +215,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
-                              onChanged: (valu)
-                              {
+                              onChanged: (valu) {
                                 value = valu;
                               },
                               initialValue: widget.gamt,
@@ -248,8 +250,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               initialValue: widget.gyear,
-                              onChanged: (value)
-                              {
+                              onChanged: (value) {
                                 year = value;
                               },
                               decoration: InputDecoration(
