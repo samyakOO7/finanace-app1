@@ -10,10 +10,12 @@ class modifyI extends StatefulWidget {
   modifyI(this.incid, this.indexone, this.inamt,
       {@required this.currentUserID});
   @override
-  _modifyIState createState() => _modifyIState();
+  _modifyIState createState() => _modifyIState(currentUserID: currentUserID);
 }
 
 class _modifyIState extends State<modifyI> {
+  String currentUserID;
+  _modifyIState({@required this.currentUserID});
   var newinc;
   var incselected = 0;
   String iamt;
@@ -203,10 +205,12 @@ class modifyE extends StatefulWidget {
   int indexe;
   modifyE(this.expid, this.indexe, this.examt, {@required this.currentUserID});
   @override
-  _modifyEState createState() => _modifyEState();
+  _modifyEState createState() => _modifyEState(currentUserID: currentUserID);
 }
 
 class _modifyEState extends State<modifyE> {
+  String currentUserID;
+  _modifyEState({@required this.currentUserID});
   var newexp;
   var expselected = 0;
   String eamt;
