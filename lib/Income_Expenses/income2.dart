@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'categoryinfo.dart';
 
 class income2 extends StatefulWidget {
   String currentUserID;
@@ -18,6 +19,7 @@ class income2 extends StatefulWidget {
 
 class _income2State extends State<income2> {
   String currentUserID;
+  List i = [], e = [];
   _income2State({@required this.currentUserID});
 
   void getIncome() async {
@@ -32,6 +34,9 @@ class _income2State extends State<income2> {
     print("****************************************");
     print(message1);
     print("****************************************");
+    setState(() {
+      i = message1;
+    });
   }
 
   void getExpense() async {
@@ -46,14 +51,28 @@ class _income2State extends State<income2> {
     print("****************************************");
     print(message2);
     print("****************************************");
+    setState(() {
+      e = message2;
+    });
+  }
+
+  @override
+  void initState() {
+    print("****************************************");
+    print(currentUserID);
+    print("****************************************");
+    getIncome();
+    getExpense();
+    // TODO: implement initState
+    super.initState();
   }
 
   Widget yourValI(
-      BuildContext context, String a, double height, double width, List typer) {
+      BuildContext context, double height, double width, List typer) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: typer.length,
+        itemCount: choice == 0 ? i.length : e.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: <Widget>[
@@ -68,13 +87,15 @@ class _income2State extends State<income2> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          a == "income"
-                              ? typer[index].type.iname
-                              : typer[index].type.ename,
+                          choice == 0
+                              ? inccategory[int.parse(typer[index]['Type'])]
+                                  .iname
+                              : expcategory[int.parse(typer[index]['Type'])]
+                                  .ename,
                         ),
                         Row(
                           children: <Widget>[
-                            Text(typer[index].value),
+                            Text(typer[index]['Amount']),
                             PopupMenuButton(
                               icon: Icon(Icons.more_horiz),
                               onSelected: (value) {
@@ -83,11 +104,13 @@ class _income2State extends State<income2> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              a == "income"
-                                                  ? modifyI(1, index,
-                                                      typer[index].value)
-                                                  : modifyE(1, index,
-                                                      typer[index].value)));
+                                              modifyI(
+                                                int.parse(
+                                                    typer[index]['IncomeID']),
+                                                index,
+                                                typer[index]['Amount'],
+                                                currentUserID: currentUserID,
+                                              )));
                                 }
                                 if (value == 2) {
                                   print("delete");
@@ -177,8 +200,8 @@ class _income2State extends State<income2> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     final List<Widget> moneytype = [
-      yourValI(context, "income", height, width, incom),
-      yourValI(context, "expense", height, width, expens),
+      yourValI(context, height, width, i),
+      yourValI(context, height, width, e),
     ];
     return Scaffold(
       appBar: AppBar(
