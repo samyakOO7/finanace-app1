@@ -1,3 +1,4 @@
+import 'package:finance_app/Income_Expenses/income2.dart';
 import 'package:finance_app/MyGoals/NewGoalsHomePage.dart';
 import 'package:finance_app/newRefer.dart';
 import 'package:finance_app/newadvisor.dart';
@@ -111,7 +112,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => IncomePage(
+                          builder: (BuildContext context) => income2(
                                 currentUserID: currentUserID,
                               )));
                 },
