@@ -5,6 +5,9 @@ import 'package:finance_app/Income_Expenses/addincome.dart';
 import 'package:finance_app/Income_Expenses/modifyIE.dart';
 import 'package:finance_app/Income_Expenses/widgetcode.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class income2 extends StatefulWidget {
   String currentUserID;
@@ -16,6 +19,35 @@ class income2 extends StatefulWidget {
 class _income2State extends State<income2> {
   String currentUserID;
   _income2State({@required this.currentUserID});
+
+  void getIncome() async {
+    var url = 'http://sanjayagarwal.in/Finance App/IncomeDetails.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message1 = await jsonDecode(response.body);
+    print("****************************************");
+    print(message1);
+    print("****************************************");
+  }
+
+  void getExpense() async {
+    var url = 'http://sanjayagarwal.in/Finance App/ExpenseDetails.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message2 = await jsonDecode(response.body);
+    print("****************************************");
+    print(message2);
+    print("****************************************");
+  }
+
   Widget yourValI(
       BuildContext context, String a, double height, double width, List typer) {
     return ListView.builder(

@@ -13,18 +13,17 @@ class ModifyGoalsPage extends StatefulWidget {
       {@required this.currentUserID});
   @override
   _ModifyGoalsPageState createState() =>
-      _ModifyGoalsPageState(currentUserID: currentUserID);
+      _ModifyGoalsPageState(currentUserID: currentUserID,goalselected: indexone,name: gname,value: gamt,year: gyear);
 }
 
 class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
-  var goalselected = 0;
-  var newgoal;
+  var goalselected;
   String name;
   String value;
   String year;
 
   String currentUserID;
-  _ModifyGoalsPageState({@required this.currentUserID});
+  _ModifyGoalsPageState({@required this.currentUserID, this.goalselected,this.name,this.year,this.value});
 
   Future goalUpdate() async {
     var url = 'http://sanjayagarwal.in/Finance App/GoalUpdate.php';
@@ -33,7 +32,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
       body: jsonEncode(<String, String>{
         "Name": name,
         "Amount": value,
-        "Type": newgoal.toString(),
+        "Type": goalselected.toString(),
         "Year": year,
         "UserID": currentUserID,
         "GoalID": widget.goalid.toString(),
@@ -54,7 +53,6 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
 
   @override
   Widget build(BuildContext context) {
-    goalselected = widget.indexone;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -118,12 +116,11 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        newgoal = index;
                                         goalselected = index;
                                       });
                                     },
                                     child: Container(
-                                      decoration: newgoal == index
+                                      decoration: goalselected == index
                                           ? BoxDecoration(
                                               border: Border.all(
                                                 width: 4,
@@ -153,7 +150,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                                             category[index].name,
                                             style: TextStyle(
                                                 color: Color(0xff373D3F),
-                                                fontWeight: newgoal == index
+                                                fontWeight: goalselected == index
                                                     ? FontWeight.bold
                                                     : FontWeight.w400),
                                           ),
@@ -180,7 +177,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
-                              initialValue: widget.gname,
+                              initialValue: name,
                               onChanged: (value) {
                                 name = value;
                               },
@@ -218,7 +215,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                               onChanged: (valu) {
                                 value = valu;
                               },
-                              initialValue: widget.gamt,
+                              initialValue: value,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                     borderSide:
@@ -249,7 +246,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
-                              initialValue: widget.gyear,
+                              initialValue: year,
                               onChanged: (value) {
                                 year = value;
                               },
