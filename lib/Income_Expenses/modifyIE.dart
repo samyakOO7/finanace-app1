@@ -23,9 +23,6 @@ class _modifyIState extends State<modifyI> {
   String incomeID;
   String iamt;
   Future incomeUpdate() async {
-    print("********************************************************");
-    print("ch1,$incselected,$iamt,$currentUserID,$incomeID");
-    print("********************************************************");
     var url = 'http://sanjayagarwal.in/Finance App/updateincome.php';
     final response1 = await http.post(
       url,
@@ -36,13 +33,7 @@ class _modifyIState extends State<modifyI> {
         "IncomeID":incomeID
       }),
     );
-    print("********************************************************");
-    print("ch2");
-    print("********************************************************");
     var message1 = jsonDecode(response1.body);
-    print("********************************************************");
-    print("ch1,$message1");
-    print("********************************************************");
     if (message1["message"] == "Successful Updation") {
       Navigator.pushReplacement(
           context,
@@ -207,9 +198,6 @@ class _modifyIState extends State<modifyI> {
                         Center(
                           child: RaisedButton(
                             onPressed: () {
-                              print("********************************************************");
-                              print("ch1");
-                              print("********************************************************");
                               incomeUpdate();
                             },
                             child: Padding(
@@ -246,14 +234,38 @@ class modifyE extends StatefulWidget {
   modifyE(this.expid, this.indexe, this.examt, {@required this.currentUserID});
   @override
   _modifyEState createState() => _modifyEState(
-      currentUserID: currentUserID, expselected: indexe, eamt: examt);
+      currentUserID: currentUserID, expselected: indexe, eamt: examt,expenseId: expid.toString());
 }
 
 class _modifyEState extends State<modifyE> {
   String currentUserID;
-  _modifyEState({@required this.currentUserID, this.expselected, this.eamt});
+  _modifyEState({@required this.currentUserID, this.expselected, this.eamt, this.expenseId});
   var expselected;
   String eamt;
+  String expenseId;
+  Future expenseUpdate() async {
+    var url = 'http://sanjayagarwal.in/Finance App/ExpenseUpdate.php';
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Type":expselected.toString(),
+        "Amount":eamt,
+        "UserID":currentUserID,
+        "ExpenseID":expenseId
+      }),
+    );
+    var message1 = jsonDecode(response1.body);
+    if (message1["message"] == "Successful Insertion") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => income2(
+                currentUserID: currentUserID,
+              )));
+    } else {
+      print(message1["message"]);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -405,7 +417,9 @@ class _modifyEState extends State<modifyE> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              expenseUpdate();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

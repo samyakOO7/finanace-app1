@@ -19,6 +19,46 @@ class _income2State extends State<income2> {
   String currentUserID;
   List i = [], e = [];
   _income2State({@required this.currentUserID});
+  void deleteIncome(var incomeID) async {
+    var url = 'http://sanjayagarwal.in/Finance App/deleteincome.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+        "IncomeID": incomeID
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+    if (message["message"] == "Successfully Deleted") {
+      getIncome();
+    } else {
+      print(message["message"]);
+    }
+
+  }
+  void deleteExpense(var expenseID) async {
+    var url = 'http://sanjayagarwal.in/Finance App/ExpenseDelete.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+        "ExpenseID": expenseID
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+    if (message["message"] == "Successfully Deleted") {
+      getExpense();
+    } else {
+      print(message["message"]);
+    }
+
+  }
 
   void getIncome() async {
     var url = 'http://sanjayagarwal.in/Finance App/IncomeDetails.php';
@@ -114,7 +154,9 @@ class _income2State extends State<income2> {
                                                 )));
                             }
                             if (value == 2) {
-                              print("delete");
+                              choice == 0?deleteIncome(typer[index]['IncomeID']):deleteExpense(typer[index]
+                              ['ExpenseID']);
+
                             }
                           },
                           itemBuilder: (context) => [
