@@ -59,8 +59,40 @@ class _income2State extends State<income2> {
     }
 
   }
+  String ayee;
+  Future IncomeSum() async {
+    var url1 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
+    final response2 = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message2 = jsonDecode(response2.body);
+    totalincome = message2[0]["sum(Amount)"];
+  }
 
   void getIncome() async {
+    var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
+    final response2 = await http.post(
+      url2,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message2 = jsonDecode(response2.body);
+    totalincome = int.parse(message2[0]["sum(Amount)"]);
+    var url3 = 'http://sanjayagarwal.in/Finance App/ExpenseSum.php';
+    final response3 = await http.post(
+      url3,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message3 = jsonDecode(response3.body);
+    totalexpense = int.parse(message3[0]["sum(Amount)"]);
+    savings = totalincome - totalexpense;
+    calculatePotential(dropdown, rate, time);
     var url = 'http://sanjayagarwal.in/Finance App/IncomeDetails.php';
     final response = await http.post(
       url,
@@ -154,9 +186,7 @@ class _income2State extends State<income2> {
                                                 )));
                             }
                             if (value == 2) {
-                              choice == 0?deleteIncome(typer[index]['IncomeID']):deleteExpense(typer[index]
-                              ['ExpenseID']);
-
+                              print("delete");
                             }
                           },
                           itemBuilder: (context) => [
