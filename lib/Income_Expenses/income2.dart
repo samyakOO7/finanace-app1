@@ -76,60 +76,61 @@ class _income2State extends State<income2> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Container(
-                  height: height * 0.1,
-                  width: width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      choice == 0
+                          ? inccategory[int.parse(typer[index]['Type'])].iname
+                          : expcategory[int.parse(typer[index]['Type'])].ename,
+                    ),
+                    Row(
                       children: <Widget>[
-                        Text(
-                          choice == 0
-                              ? inccategory[int.parse(typer[index]['Type'])]
-                                  .iname
-                              : expcategory[int.parse(typer[index]['Type'])]
-                                  .ename,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(typer[index]['Amount']),
-                            PopupMenuButton(
-                              icon: Icon(Icons.more_horiz),
-                              onSelected: (value) {
-                                if (value == 1) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              modifyI(
-                                                int.parse(
-                                                    typer[index]['IncomeID']),
-                                                index,
-                                                typer[index]['Amount'],
-                                                currentUserID: currentUserID,
-                                              )));
-                                }
-                                if (value == 2) {
-                                  print("delete");
-                                }
-                              },
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  value: 1,
-                                  child: Text("Edit"),
-                                ),
-                                PopupMenuItem(
-                                  value: 2,
-                                  child: Text("Delete"),
-                                ),
-                              ],
-                            )
+                        Text(typer[index]['Amount']),
+                        PopupMenuButton(
+                          icon: Icon(Icons.more_horiz),
+                          onSelected: (value) {
+                            if (value == 1) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          choice == 0
+                                              ? modifyI(
+                                                  int.parse(
+                                                      typer[index]['IncomeID']),
+                                                  int.parse(
+                                                      typer[index]['Type']),
+                                                  typer[index]['Amount'],
+                                                  currentUserID: currentUserID,
+                                                )
+                                              : modifyE(
+                                                  int.parse(typer[index]
+                                                      ['ExpenseID']),
+                                                  int.parse(
+                                                      typer[index]['Type']),
+                                                  typer[index]['Amount'],
+                                                  currentUserID: currentUserID,
+                                                )));
+                            }
+                            if (value == 2) {
+                              print("delete");
+                            }
+                          },
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                              value: 1,
+                              child: Text("Edit"),
+                            ),
+                            PopupMenuItem(
+                              value: 2,
+                              child: Text("Delete"),
+                            ),
                           ],
-                        ),
+                        )
                       ],
                     ),
-                  ),
+                  ],
                 ),
               ),
               Divider(
@@ -272,8 +273,13 @@ class _income2State extends State<income2> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  choice == 0 ? Add(currentUserId: currentUserID,) : AddE(currentUserId: currentUserID,)));
+                              builder: (BuildContext context) => choice == 0
+                                  ? Add(
+                                      currentUserId: currentUserID,
+                                    )
+                                  : AddE(
+                                      currentUserId: currentUserID,
+                                    )));
                     },
                     child: Text(' + Add '),
                     color: Color(0xff63E2E0),
