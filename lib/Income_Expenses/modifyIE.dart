@@ -13,38 +13,55 @@ class modifyI extends StatefulWidget {
       {@required this.currentUserID});
   @override
   _modifyIState createState() => _modifyIState(
-      currentUserID: currentUserID, incselected: indexone, iamt: inamt,incomeID: incid.toString());
+      currentUserID: currentUserID,
+      incselected: indexone,
+      iamt: inamt,
+      incomeID: incid.toString());
 }
 
 class _modifyIState extends State<modifyI> {
   String currentUserID;
-  _modifyIState({@required this.currentUserID, this.incselected, this.iamt,this.incomeID});
+  _modifyIState(
+      {@required this.currentUserID,
+      this.incselected,
+      this.iamt,
+      this.incomeID});
   var incselected;
   String incomeID;
   String iamt;
   Future incomeUpdate() async {
-    var url = 'http://sanjayagarwal.in/Finance App/updateincome.php';
+    print("********************************************************");
+    print("ch1,$incselected,$iamt,$currentUserID,$incomeID");
+    print("********************************************************");
+    var url = 'http://sanjayagarwal.in/Finance App/IncomeUpdate.php';
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
-        "Type":incselected.toString(),
-        "Amount":iamt,
-        "UserID":currentUserID,
-        "IncomeID":incomeID
+        "Type": incselected.toString(),
+        "Amount": iamt,
+        "UserID": currentUserID,
+        "IncomeID": incomeID
       }),
     );
+    print("********************************************************");
+    print("ch2");
+    print("********************************************************");
     var message1 = jsonDecode(response1.body);
+    print("********************************************************");
+    print("ch1,$message1");
+    print("********************************************************");
     if (message1["message"] == "Successful Updation") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => income2(
-                currentUserID: currentUserID,
-              )));
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message1["message"]);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -198,6 +215,11 @@ class _modifyIState extends State<modifyI> {
                         Center(
                           child: RaisedButton(
                             onPressed: () {
+                              print(
+                                  "********************************************************");
+                              print("ch1");
+                              print(
+                                  "********************************************************");
                               incomeUpdate();
                             },
                             child: Padding(
@@ -234,38 +256,52 @@ class modifyE extends StatefulWidget {
   modifyE(this.expid, this.indexe, this.examt, {@required this.currentUserID});
   @override
   _modifyEState createState() => _modifyEState(
-      currentUserID: currentUserID, expselected: indexe, eamt: examt,expenseId: expid.toString());
+      currentUserID: currentUserID, expselected: indexe, eamt: examt);
 }
 
 class _modifyEState extends State<modifyE> {
-  String currentUserID;
-  _modifyEState({@required this.currentUserID, this.expselected, this.eamt, this.expenseId});
-  var expselected;
-  String eamt;
-  String expenseId;
   Future expenseUpdate() async {
+    print("********************************************************");
+    print("ch1,$expselected,$eamt,$currentUserID,$expenseID");
+    print("********************************************************");
     var url = 'http://sanjayagarwal.in/Finance App/ExpenseUpdate.php';
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
-        "Type":expselected.toString(),
-        "Amount":eamt,
-        "UserID":currentUserID,
-        "ExpenseID":expenseId
+        "Type": expselected.toString(),
+        "Amount": eamt,
+        "UserID": currentUserID,
+        "IncomeID": expenseID
       }),
     );
+    print("********************************************************");
+    print("ch2");
+    print("********************************************************");
     var message1 = jsonDecode(response1.body);
-    if (message1["message"] == "Successful Insertion") {
+    print("********************************************************");
+    print("ch1,$message1");
+    print("********************************************************");
+    if (message1["message"] == "Successful Updation") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => income2(
-                currentUserID: currentUserID,
-              )));
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message1["message"]);
     }
   }
+
+  String currentUserID;
+  _modifyEState(
+      {@required this.currentUserID,
+      this.expselected,
+      this.eamt,
+      this.expenseID});
+  var expselected;
+  String eamt;
+  String expenseID;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
