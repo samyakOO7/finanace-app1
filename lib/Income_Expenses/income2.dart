@@ -23,10 +23,8 @@ class _income2State extends State<income2> {
     var url = 'http://sanjayagarwal.in/Finance App/deleteincome.php';
     final response = await http.post(
       url,
-      body: jsonEncode(<String, String>{
-        "UserID": currentUserID,
-        "IncomeID": incomeID
-      }),
+      body: jsonEncode(
+          <String, String>{"UserID": currentUserID, "IncomeID": incomeID}),
     );
     var message = await jsonDecode(response.body);
     print("****************************************");
@@ -37,16 +35,14 @@ class _income2State extends State<income2> {
     } else {
       print(message["message"]);
     }
-
   }
+
   void deleteExpense(var expenseID) async {
     var url = 'http://sanjayagarwal.in/Finance App/ExpenseDelete.php';
     final response = await http.post(
       url,
-      body: jsonEncode(<String, String>{
-        "UserID": currentUserID,
-        "ExpenseID": expenseID
-      }),
+      body: jsonEncode(
+          <String, String>{"UserID": currentUserID, "ExpenseID": expenseID}),
     );
     var message = await jsonDecode(response.body);
     print("****************************************");
@@ -57,19 +53,6 @@ class _income2State extends State<income2> {
     } else {
       print(message["message"]);
     }
-
-  }
-  String ayee;
-  Future IncomeSum() async {
-    var url1 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
-    final response2 = await http.post(
-      url1,
-      body: jsonEncode(<String, String>{
-        "UserID": widget.currentUserID,
-      }),
-    );
-    var message2 = jsonDecode(response2.body);
-    totalincome = message2[0]["sum(Amount)"];
   }
 
   void getIncome() async {
@@ -110,6 +93,26 @@ class _income2State extends State<income2> {
   }
 
   void getExpense() async {
+    var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
+    final response2 = await http.post(
+      url2,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message2 = jsonDecode(response2.body);
+    totalincome = int.parse(message2[0]["sum(Amount)"]);
+    var url3 = 'http://sanjayagarwal.in/Finance App/ExpenseSum.php';
+    final response3 = await http.post(
+      url3,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message3 = jsonDecode(response3.body);
+    totalexpense = int.parse(message3[0]["sum(Amount)"]);
+    savings = totalincome - totalexpense;
+    calculatePotential(dropdown, rate, time);
     var url = 'http://sanjayagarwal.in/Finance App/ExpenseDetails.php';
     final response = await http.post(
       url,
@@ -117,12 +120,12 @@ class _income2State extends State<income2> {
         "UserID": currentUserID,
       }),
     );
-    var message2 = await jsonDecode(response.body);
+    var message4 = await jsonDecode(response.body);
     print("****************************************");
-    print(message2);
+    print(message4);
     print("****************************************");
     setState(() {
-      e = message2;
+      e = message4;
     });
   }
 
@@ -186,7 +189,13 @@ class _income2State extends State<income2> {
                                                 )));
                             }
                             if (value == 2) {
-                              print("delete");
+                              choice == 0
+                                  ? deleteIncome(
+                                      typer[index]['IncomeID'],
+                                    )
+                                  : deleteExpense(
+                                      typer[index]['ExpenseID'],
+                                    );
                             }
                           },
                           itemBuilder: (context) => [
