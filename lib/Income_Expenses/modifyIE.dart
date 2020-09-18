@@ -10,14 +10,14 @@ class modifyI extends StatefulWidget {
   modifyI(this.incid, this.indexone, this.inamt,
       {@required this.currentUserID});
   @override
-  _modifyIState createState() => _modifyIState(currentUserID: currentUserID);
+  _modifyIState createState() => _modifyIState(
+      currentUserID: currentUserID, incselected: indexone, iamt: inamt);
 }
 
 class _modifyIState extends State<modifyI> {
   String currentUserID;
-  _modifyIState({@required this.currentUserID});
-  var newinc;
-  var incselected = 0;
+  _modifyIState({@required this.currentUserID, this.incselected, this.iamt});
+  var incselected;
   String iamt;
   @override
   Widget build(BuildContext context) {
@@ -84,12 +84,11 @@ class _modifyIState extends State<modifyI> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        newinc = index;
                                         incselected = index;
                                       });
                                     },
                                     child: Container(
-                                      decoration: newinc == index
+                                      decoration: incselected == index
                                           ? BoxDecoration(
                                               border: Border.all(
                                                 width: 4,
@@ -119,7 +118,7 @@ class _modifyIState extends State<modifyI> {
                                             inccategory[index].iname,
                                             style: TextStyle(
                                                 color: Color(0xff373D3F),
-                                                fontWeight: newinc == index
+                                                fontWeight: incselected == index
                                                     ? FontWeight.bold
                                                     : FontWeight.w400),
                                           ),
@@ -205,14 +204,14 @@ class modifyE extends StatefulWidget {
   int indexe;
   modifyE(this.expid, this.indexe, this.examt, {@required this.currentUserID});
   @override
-  _modifyEState createState() => _modifyEState(currentUserID: currentUserID);
+  _modifyEState createState() => _modifyEState(
+      currentUserID: currentUserID, expselected: indexe, eamt: examt);
 }
 
 class _modifyEState extends State<modifyE> {
   String currentUserID;
-  _modifyEState({@required this.currentUserID});
-  var newexp;
-  var expselected = 0;
+  _modifyEState({@required this.currentUserID, this.expselected, this.eamt});
+  var expselected;
   String eamt;
   @override
   Widget build(BuildContext context) {
@@ -279,12 +278,11 @@ class _modifyEState extends State<modifyE> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        newexp = index;
                                         expselected = index;
                                       });
                                     },
                                     child: Container(
-                                      decoration: newexp == index
+                                      decoration: expselected == index
                                           ? BoxDecoration(
                                               border: Border.all(
                                                 width: 4,
@@ -314,7 +312,7 @@ class _modifyEState extends State<modifyE> {
                                             expcategory[index].ename,
                                             style: TextStyle(
                                                 color: Color(0xff373D3F),
-                                                fontWeight: newexp == index
+                                                fontWeight: expselected == index
                                                     ? FontWeight.bold
                                                     : FontWeight.w400),
                                           ),
