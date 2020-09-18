@@ -1,19 +1,51 @@
 import 'package:finance_app/Income_Expenses/categoryinfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:finance_app/Income_Expenses/categoryinfo.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'income2.dart';
 class Add extends StatefulWidget {
+  String currentUserId;
+  Add({@required this.currentUserId});
   @override
   _AddState createState() => _AddState();
 }
 
 class _AddState extends State<Add> {
   int incsel = 0;
-  TextEditingController name = TextEditingController();
+  Future incomeInsert() async {
+    var url1 = 'http://sanjayagarwal.in/Finance App/IncomeIdMax.php';
+    final response = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserId,
+      }),
+    );
+    var message = jsonDecode(response.body);
+    String oldIncomeID = message[0]['max(IncomeID)'];
+    int intermediateId = int.parse(oldIncomeID);
+    int newIncomeID = intermediateId+1;
+    var url = 'http://sanjayagarwal.in/Finance App/InsertIncome.php';
+    print("****************************************************");
+    print("$incsel,${value.text},${widget.currentUserId},$newIncomeID");
+    print("****************************************************");
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Type":incsel.toString(),
+        "Amount":value.text,
+        "UserID":widget.currentUserId,
+        "IncomeID": newIncomeID.toString()
+      }),
+    );
+    var message1 = jsonDecode(response1.body);
+    if (message1["message"] == "Successful Insertion") {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => income2(currentUserID: widget.currentUserId,)));
+    } else {
+      print(message1["message"]);
+    }
+  }
+
   TextEditingController value = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -168,7 +200,9 @@ class _AddState extends State<Add> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              incomeInsert();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
@@ -196,12 +230,46 @@ class _AddState extends State<Add> {
 }
 
 class AddE extends StatefulWidget {
+  String currentUserId;
+  AddE({@required this.currentUserId});
   @override
   _AddEState createState() => _AddEState();
 }
 
 class _AddEState extends State<AddE> {
   int expsel = 0;
+  Future expenseInsert() async {
+    var url1 = 'http://sanjayagarwal.in/Finance App/ExpenseIdMax.php';
+    final response = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserId,
+      }),
+    );
+    var message = jsonDecode(response.body);
+    String oldExpenseID = message[0]['max(ExpenseID)'];
+    int intermediateId = int.parse(oldExpenseID);
+    int newExpenseID = intermediateId+1;
+    var url = 'http://sanjayagarwal.in/Finance App/ExpenseInsert.php';
+    print("****************************************************");
+    print("$expsel,${val.text},${widget.currentUserId},$newExpenseID");
+    print("****************************************************");
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Type":expsel.toString(),
+        "Amount":val.text,
+        "UserID":widget.currentUserId,
+        "IncomeID": newExpenseID.toString()
+      }),
+    );
+    var message1 = jsonDecode(response1.body);
+    if (message1["message"] == "Successful Insertion") {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => income2(currentUserID: widget.currentUserId,)));
+    } else {
+      print(message1["message"]);
+    }
+  }
   TextEditingController val = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -359,7 +427,9 @@ class _AddEState extends State<AddE> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              expenseInsert();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(

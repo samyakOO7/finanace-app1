@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:finance_app/Income_Expenses/Info.dart';
 import 'package:finance_app/Income_Expenses/addincome.dart';
 import 'package:finance_app/Income_Expenses/modifyIE.dart';
 import 'package:finance_app/Income_Expenses/widgetcode.dart';
@@ -275,7 +273,7 @@ class _income2State extends State<income2> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  choice == 0 ? Add() : AddE()));
+                                  choice == 0 ? Add(currentUserId: currentUserID,) : AddE(currentUserId: currentUserID,)));
                     },
                     child: Text(' + Add '),
                     color: Color(0xff63E2E0),
