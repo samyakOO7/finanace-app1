@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'categoryinfo.dart';
+import 'income2.dart';
 
 class modifyI extends StatefulWidget {
   String currentUserID;
@@ -11,14 +13,47 @@ class modifyI extends StatefulWidget {
       {@required this.currentUserID});
   @override
   _modifyIState createState() => _modifyIState(
-      currentUserID: currentUserID, incselected: indexone, iamt: inamt);
+      currentUserID: currentUserID, incselected: indexone, iamt: inamt,incomeID: incid.toString());
 }
 
 class _modifyIState extends State<modifyI> {
   String currentUserID;
-  _modifyIState({@required this.currentUserID, this.incselected, this.iamt});
+  _modifyIState({@required this.currentUserID, this.incselected, this.iamt,this.incomeID});
   var incselected;
+  String incomeID;
   String iamt;
+  Future incomeUpdate() async {
+    print("********************************************************");
+    print("ch1,$incselected,$iamt,$currentUserID,$incomeID");
+    print("********************************************************");
+    var url = 'http://sanjayagarwal.in/Finance App/updateincome.php';
+    final response1 = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "Type":incselected.toString(),
+        "Amount":iamt,
+        "UserID":currentUserID,
+        "IncomeID":incomeID
+      }),
+    );
+    print("********************************************************");
+    print("ch2");
+    print("********************************************************");
+    var message1 = jsonDecode(response1.body);
+    print("********************************************************");
+    print("ch1,$message1");
+    print("********************************************************");
+    if (message1["message"] == "Successful Updation") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => income2(
+                currentUserID: currentUserID,
+              )));
+    } else {
+      print(message1["message"]);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -63,7 +98,7 @@ class _modifyIState extends State<modifyI> {
                         Padding(
                           padding: EdgeInsets.only(
                               left: 10, right: 8, top: 15, bottom: 10),
-                          child: Text('Goal Type',
+                          child: Text('Income Type',
                               style: TextStyle(color: Color(0xff373D3F))),
                         ),
                         Container(
@@ -145,7 +180,8 @@ class _modifyIState extends State<modifyI> {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10),
                             child: TextFormField(
-                              initialValue: widget.inamt,
+                              initialValue: iamt,
+                              keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 iamt = value;
                               },
@@ -170,7 +206,12 @@ class _modifyIState extends State<modifyI> {
                         ),
                         Center(
                           child: RaisedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print("********************************************************");
+                              print("ch1");
+                              print("********************************************************");
+                              incomeUpdate();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
