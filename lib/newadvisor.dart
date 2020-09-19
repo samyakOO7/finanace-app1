@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:responsive_text_field/responsive_text_field.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class AdvisorPage extends StatefulWidget {
   final String currentUserID;
@@ -13,6 +15,46 @@ class AdvisorPage extends StatefulWidget {
 class _AdvisorPageState extends State<AdvisorPage> {
   final String currentUserID;
   _AdvisorPageState({@required this.currentUserID});
+  String adName='';
+  String adCode='';
+  String adEmail = '';
+  String adPhone = '';
+  void getAdvisor() async {
+    var url = 'http://sanjayagarwal.in/Finance App/AdvisorOfUser.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+    var url1 = 'http://sanjayagarwal.in/Finance App/AdvisorPartDetails.php';
+    final response1 = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "AdvisorID": message[0]['AdvisorID'],
+      }),
+    );
+    var message1 = await jsonDecode(response1.body);
+    print("****************************************");
+    print(message1);
+    print("****************************************");
+    setState(() {
+      adEmail= message1[0]['Email'];
+      adName = message1[0]['Name'];
+      adPhone = message1[0]['Mobile'];
+      adCode = message1[0]['AdvisorID'];
+    });
+  }
+  @override
+  void initState() {
+    getAdvisor();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -65,14 +107,14 @@ class _AdvisorPageState extends State<AdvisorPage> {
                                 ),
                               ),
                               Text(
-                                'Mr. ABC',
+                                '$adName',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff373D3F),
                                 ),
                               ),
                               Text(
-                                'Advisor Code : 09XDF',
+                                'Advisor Code : $adCode',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff373D3F),
@@ -114,7 +156,7 @@ class _AdvisorPageState extends State<AdvisorPage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
-                                      '+033-2564 6777',
+                                      '$adPhone',
                                       style: TextStyle(
                                         color: Color(0xff373D3F),
                                         fontSize: 17,
@@ -132,7 +174,7 @@ class _AdvisorPageState extends State<AdvisorPage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
-                                      'xyz@gmail.com',
+                                      '$adEmail',
                                       style: TextStyle(
                                         fontSize: 17.5,
                                         color: Color(0xff373D3F),
