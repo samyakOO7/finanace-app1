@@ -3,6 +3,8 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'RewardHistory.dart';
 import 'components/ButtonsWidget.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class RewardandRefer extends StatefulWidget {
   String currentUserID;
@@ -16,7 +18,7 @@ class _RewardandReferState extends State<RewardandRefer> {
   String currentUserID;
   _RewardandReferState({@required this.currentUserID});
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  String rCode = 'ASd3f2';
+  String rCode = '';
   List<List> rewards = [
     [
       'rewards1',
@@ -26,6 +28,40 @@ class _RewardandReferState extends State<RewardandRefer> {
     ['rewards1', 'rewards detail'],
     ['rewards1', 'rewards detail'],
   ];
+  void getReferData() async {
+    var url = 'http://sanjayagarwal.in/Finance App/UserDetails.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print(message[0]['ReferalCode']);
+    print("****************************************");
+    setState(() {
+      rCode = message[0]['ReferalCode'];
+    });
+    var url1 = 'http://sanjayagarwal.in/Finance App/ReferedToDetails.php';
+    final response1 = await http.post(
+      url1,
+      body: jsonEncode(<String, String>{
+        "CodeUsed": message[0]['ReferalCode'],
+      }),
+    );
+    var message1 = await jsonDecode(response1.body);
+    print("****************************************");
+    print(message1);
+    print("****************************************");
+  }
+  @override
+  void initState() {
+    getReferData();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

@@ -1,10 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:responsive_text_field/responsive_text_field.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class Advisor extends StatelessWidget {
+class Advisor extends StatefulWidget {
   final String currentUserID;
   Advisor({@required this.currentUserID});
+
+  @override
+  _AdvisorState createState() => _AdvisorState();
+}
+
+class _AdvisorState extends State<Advisor> {
+  String adName='';
+  String adCode='';
+  String adEmail = '';
+  String adPhone = '';
+  void getAdvisor() async {
+    print("****************************************");
+    print('ch1');
+    print("****************************************");
+    var url = 'http://sanjayagarwal.in/Finance App/AdvisorOfUser.php';
+    final response = await http.post(
+      url,
+      body: jsonEncode(<String, String>{
+        "UserID": widget.currentUserID,
+      }),
+    );
+    var message = await jsonDecode(response.body);
+    print("****************************************");
+    print(message);
+    print("****************************************");
+  }
+  @override
+  void initState() {
+    getAdvisor();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -71,14 +106,14 @@ class Advisor extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'Mr. ABC',
+                                  '$adName',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color(0xff373D3F),
                                   ),
                                 ),
                                 Text(
-                                  'Advisor Code : 09XDF',
+                                  'Advisor Code : $adCode',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color(0xff373D3F),
@@ -135,7 +170,7 @@ class Advisor extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(
-                                        '+033-2564 6777',
+                                        '$adPhone',
                                         style: TextStyle(
                                           color: Color(0xff373D3F),
                                           fontSize: 17,
@@ -157,7 +192,7 @@ class Advisor extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(
-                                        'xyz@gmail.com',
+                                        '$adEmail',
                                         style: TextStyle(
                                           fontSize: 17.5,
                                           color: Color(0xff373D3F),
