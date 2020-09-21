@@ -1,16 +1,12 @@
 import 'package:finance_app/Income_Expenses/income2.dart';
 import 'package:finance_app/MyGoals/NewGoalsHomePage.dart';
+import 'package:finance_app/NewsLetter/NewsLetter.dart';
 import 'package:finance_app/newRefer.dart';
 import 'package:finance_app/newadvisor.dart';
 import 'package:flutter/material.dart';
-import 'Income_Expenses/FinalIncomeHomePage.dart';
-import 'Income_Expenses/NewIncomePage.dart';
 import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
 import 'package:finance_app/UserProfile.dart';
-import 'package:finance_app/Refer.dart';
-import 'package:finance_app/MyGoals/GoalsHomePage.dart';
-import 'advisor.dart';
 import 'contact_us.dart';
 import 'package:finance_app/Investments/InvestmentHomePage.dart';
 import 'Insurance/InsuranceHomePage.dart';
@@ -155,6 +151,16 @@ class _menuPageState extends State<menuPage> {
                 },
                 width: tileWidth,
                 icon: Icons.assistant),
+            ProfileButtons(
+                title: 'NewsLetter',
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => NewsLetter()));
+                },
+                width: tileWidth,
+                icon: Icons.library_books),
             ProfileButtons(
                 title: 'About Us',
                 onPress: () {},
