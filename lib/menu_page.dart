@@ -4,6 +4,7 @@ import 'package:finance_app/NewsLetter/NewsLetter.dart';
 import 'package:finance_app/newRefer.dart';
 import 'package:finance_app/newadvisor.dart';
 import 'package:flutter/material.dart';
+import 'Support/Support.dart';
 import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
 import 'package:finance_app/UserProfile.dart';
@@ -152,7 +153,7 @@ class _menuPageState extends State<menuPage> {
                 width: tileWidth,
                 icon: Icons.assistant),
             ProfileButtons(
-                title: 'NewsLetter',
+                title: 'News Letter',
                 onPress: () {
                   Navigator.push(
                       context,
@@ -172,7 +173,7 @@ class _menuPageState extends State<menuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Contact_us(
+                          builder: (BuildContext context) => Support(
                                 currentUserID: currentUserID,
                               )));
                 },

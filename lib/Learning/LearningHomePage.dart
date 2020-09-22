@@ -132,8 +132,8 @@ class _LearningHomePageState extends State<LearningHomePage> {
                                           width: width * 0.1,
                                           height: height * 0.05,
                                           child: Center(
-                                              child: Text(
-                                                  learn[index]["moduleno"])),
+                                              child:
+                                                  Text((index + 1).toString())),
                                           color: Color(0xff17AD94), //
                                         )
                                       ],

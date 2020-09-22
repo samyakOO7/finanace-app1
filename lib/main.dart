@@ -23,9 +23,10 @@ import 'MyGoals/GoalsHomePage.dart';
 
 //TESTING COMMENT 2
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();  // load the SplashScreen
+  WidgetsFlutterBinding.ensureInitialized(); // load the SplashScreen
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'finance app',
       theme: ThemeData(
         primaryColor: Color(0xFF40E0D0),
