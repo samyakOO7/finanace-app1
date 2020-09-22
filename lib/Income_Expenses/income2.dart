@@ -19,6 +19,7 @@ class _income2State extends State<income2> {
   String currentUserID;
   List i = [], e = [];
   _income2State({@required this.currentUserID});
+  bool _loading;
   void deleteIncome(var incomeID) async {
     var url = 'http://sanjayagarwal.in/Finance App/deleteincome.php';
     final response = await http.post(
@@ -56,6 +57,9 @@ class _income2State extends State<income2> {
   }
 
   void getIncome() async {
+    setState(() {
+      _loading = true;
+    });
     var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
     final response2 = await http.post(
       url2,
@@ -89,10 +93,14 @@ class _income2State extends State<income2> {
     print("****************************************");
     setState(() {
       i = message1;
+      _loading = false;
     });
   }
 
   void getExpense() async {
+    setState(() {
+      _loading = true;
+    });
     var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
     final response2 = await http.post(
       url2,
@@ -126,6 +134,7 @@ class _income2State extends State<income2> {
     print("****************************************");
     setState(() {
       e = message4;
+      _loading = false;
     });
   }
 
@@ -318,240 +327,262 @@ class _income2State extends State<income2> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      value: dropdown,
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Color(0xff373D3F),
-                      ),
-                      iconSize: 16,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdown = newValue;
-                          calculatePotential(dropdown, rate, time);
-                        });
-                      },
-                      items: <String>['Yearly', 'Monthly']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => choice == 0
-                                  ? Add(
-                                      currentUserId: currentUserID,
-                                    )
-                                  : AddE(
-                                      currentUserId: currentUserID,
-                                    )));
-                    },
-                    child: Text(' + Add '),
-                    color: Color(0xff63E2E0),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ],
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
+                backgroundColor: Color(0xff63E2E0),
               ),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                        choice == 0 ? "Income" : "Expense",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: choice == 0
-                                ? Color(0xff63E2E0)
-                                : choice == 1 ? Colors.red : Colors.black),
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            value: dropdown,
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Color(0xff373D3F),
+                            ),
+                            iconSize: 16,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                dropdown = newValue;
+                                calculatePotential(dropdown, rate, time);
+                              });
+                            },
+                            items: <String>['Yearly', 'Monthly']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        choice == 0
+                                            ? Add(
+                                                currentUserId: currentUserID,
+                                              )
+                                            : AddE(
+                                                currentUserId: currentUserID,
+                                              )));
+                          },
+                          child: Text(' + Add '),
+                          color: Color(0xff63E2E0),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            moneytype[choice],
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Total Income",
-                    style: TextStyle(color: Color(0xff373D3F), fontSize: 16),
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: (totalincome == null)
-                        ? textpart(context, "00")
-                        : textpart(context, totalincome.toString())),
-              ],
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Total Expense",
-                    style: TextStyle(color: Color(0xff373D3F), fontSize: 16),
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: (totalexpense == null)
-                        ? textpart(context, "00")
-                        : textpart(context, totalexpense.toString())),
-              ],
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                      "$dropdown Savings",
-                      style: TextStyle(color: Color(0xff373D3F), fontSize: 16),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: (savings == null)
-                        ? textpart(context, "00")
-                        : textpart(context, savings.toString()),
-                  ),
-                ],
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Container(
-                  height: height < 640 ? height * 0.2 : height * 0.15,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(0xff373D3F),
-                    ),
-                    color: Color(0xff63E2E0),
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text("Potential Value of your Savings ",
-                                style: TextStyle(
-                                    color: Color(0xff373D3F), fontSize: 14)),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              choice == 0 ? "Income" : "Expense",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: choice == 0
+                                      ? Color(0xff63E2E0)
+                                      : choice == 1
+                                          ? Colors.red
+                                          : Colors.black),
+                            ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Text(
-                                "Time(Years)",
-                                style: TextStyle(
-                                    color: Color(0xff373D3F), fontSize: 14),
-                              ),
-                              Container(
-                                height: 20,
-                                width: 30,
-                                child: TextField(
-                                  onChanged: (t) {
-                                    setState(() {
-                                      time = int.parse(t);
-                                      calculatePotential(dropdown, rate, time);
-                                    });
-                                  },
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  controller: y,
-                                  decoration: InputDecoration(
-                                    hintText: "10",
-                                    contentPadding: EdgeInsets.only(bottom: 10),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "Rate(%)",
-                                style: TextStyle(
-                                    color: Color(0xff373D3F), fontSize: 14),
-                              ),
-                              Container(
-                                height: 20,
-                                width: 30,
-                                child: TextField(
-                                  onChanged: (r) {
-                                    setState(() {
-                                      rate = int.parse(r);
-                                      calculatePotential(dropdown, rate, time);
-                                    });
-                                  },
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  controller: x,
-                                  decoration: InputDecoration(
-                                    hintText: "15",
-                                    contentPadding: EdgeInsets.only(bottom: 10),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Center(
-                        child: Text("Rs. $potentialValue",
-                            style: TextStyle(
-                                color: Color(0xff373D3F), fontSize: 24)),
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  Divider(
+                    color: Colors.grey,
+                  ),
+                  moneytype[choice],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Total Income",
+                          style:
+                              TextStyle(color: Color(0xff373D3F), fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: (totalincome == null)
+                              ? textpart(context, "00")
+                              : textpart(context, totalincome.toString())),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Total Expense",
+                          style:
+                              TextStyle(color: Color(0xff373D3F), fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: (totalexpense == null)
+                              ? textpart(context, "00")
+                              : textpart(context, totalexpense.toString())),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            "$dropdown Savings",
+                            style: TextStyle(
+                                color: Color(0xff373D3F), fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: (savings == null)
+                              ? textpart(context, "00")
+                              : textpart(context, savings.toString()),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Container(
+                        height: height < 640 ? height * 0.2 : height * 0.15,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color(0xff373D3F),
+                          ),
+                          color: Color(0xff63E2E0),
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                      "Potential Value of your Savings ",
+                                      style: TextStyle(
+                                          color: Color(0xff373D3F),
+                                          fontSize: 14)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Text(
+                                      "Time(Years)",
+                                      style: TextStyle(
+                                          color: Color(0xff373D3F),
+                                          fontSize: 14),
+                                    ),
+                                    Container(
+                                      height: 20,
+                                      width: 30,
+                                      child: TextField(
+                                        onChanged: (t) {
+                                          setState(() {
+                                            time = int.parse(t);
+                                            calculatePotential(
+                                                dropdown, rate, time);
+                                          });
+                                        },
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        controller: y,
+                                        decoration: InputDecoration(
+                                          hintText: "10",
+                                          contentPadding:
+                                              EdgeInsets.only(bottom: 10),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rate(%)",
+                                      style: TextStyle(
+                                          color: Color(0xff373D3F),
+                                          fontSize: 14),
+                                    ),
+                                    Container(
+                                      height: 20,
+                                      width: 30,
+                                      child: TextField(
+                                        onChanged: (r) {
+                                          setState(() {
+                                            rate = int.parse(r);
+                                            calculatePotential(
+                                                dropdown, rate, time);
+                                          });
+                                        },
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        controller: x,
+                                        decoration: InputDecoration(
+                                          hintText: "15",
+                                          contentPadding:
+                                              EdgeInsets.only(bottom: 10),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Center(
+                              child: Text("Rs. $potentialValue",
+                                  style: TextStyle(
+                                      color: Color(0xff373D3F), fontSize: 24)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

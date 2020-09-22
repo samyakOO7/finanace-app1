@@ -14,8 +14,12 @@ class showQuestion extends StatefulWidget {
 
 class _showQuestionState extends State<showQuestion> {
   List ques = [];
+  bool _loading;
   void getQues() async {
     print(widget.suid.toString());
+    setState(() {
+      _loading = true;
+    });
     var url =
         'http://sanjayagarwal.in/Finance App/UserApp/Support/SupportQuestion.php';
     final response = await http.post(
@@ -30,6 +34,7 @@ class _showQuestionState extends State<showQuestion> {
     print("****************************************");
     setState(() {
       ques = message;
+      _loading = false;
     });
   }
 
@@ -82,50 +87,57 @@ class _showQuestionState extends State<showQuestion> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: height * 0.15,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/app.jpg"),
-                  fit: BoxFit.cover,
-                ),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                backgroundColor: Color(0xff63E2E0),
               ),
+            )
+          : SingleChildScrollView(
+              physics: ScrollPhysics(),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
+                  Container(
+                    height: height * 0.15,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/app.jpg"),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      widget.cate,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.arrow_back_ios),
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            widget.cate,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  QandA(),
                 ],
               ),
             ),
-            QandA(),
-          ],
-        ),
-      ),
     );
   }
 }
