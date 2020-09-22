@@ -25,8 +25,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List ques = [];
+  List ques = [], supcategory = [];
   void getQues() async {
+    var url2 =
+        'http://sanjayagarwal.in/Finance App/UserApp/Support/SupportCategory.php';
+    final response2 = await http.post(
+      url2,
+      body: jsonEncode(<String, String>{
+        "UserID": currentUserID,
+      }),
+    );
+    var message2 = await jsonDecode(response2.body);
+    print("****************************************");
+    print(message2);
+    print("****************************************");
+    setState(() {
+      supcategory = message2;
+    });
     var url = 'http://sanjayagarwal.in/Finance App/support.php';
     final response = await http.post(
       url,
