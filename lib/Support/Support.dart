@@ -16,8 +16,12 @@ class _SupportState extends State<Support> {
   _SupportState({@required this.currentUserID});
 
   List ques = [], supcategory = [];
+  bool _loading;
 
   void getCategory() async {
+    setState(() {
+      _loading = true;
+    });
     var url2 =
         'http://sanjayagarwal.in/Finance App/UserApp/Support/SupportCategory.php';
     final response2 = await http.post(
@@ -32,6 +36,7 @@ class _SupportState extends State<Support> {
     print("****************************************");
     setState(() {
       supcategory = message2;
+      _loading = false;
     });
   }
 
@@ -99,77 +104,84 @@ class _SupportState extends State<Support> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: height * 0.2,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/app.jpg"),
-                  fit: BoxFit.cover,
-                ),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                backgroundColor: Color(0xff63E2E0),
               ),
+            )
+          : SingleChildScrollView(
+              physics: ScrollPhysics(),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
+                  Container(
+                    height: height * 0.2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/app.jpg"),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      "How can we help you?",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          width: width * 0.6,
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              hintText: "Enter your search here",
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.arrow_back_ios),
+                              color: Colors.white,
                             ),
-                            textAlign: TextAlign.center,
-                            controller: searchques,
                           ),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          color: Colors.white,
-                          onPressed: () {},
+                        Center(
+                          child: Text(
+                            "How can we help you?",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                width: width * 0.6,
+                                decoration: BoxDecoration(color: Colors.white),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    hintText: "Enter your search here",
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  controller: searchques,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.search),
+                                color: Colors.white,
+                                onPressed: () {},
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  )
+                  ),
+                  categorybuilder(),
                 ],
               ),
             ),
-            categorybuilder(),
-          ],
-        ),
-      ),
     );
   }
 }

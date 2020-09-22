@@ -12,7 +12,11 @@ class NewsLetter extends StatefulWidget {
 class _NewsLetterState extends State<NewsLetter> {
   String x = "May 2020";
   List letter = [];
+  bool _loading;
   void getLetter() async {
+    setState(() {
+      _loading = true;
+    });
     var url =
         'http://sanjayagarwal.in/Finance App/UserApp/NewsLetter/NewsLetterDetails.php';
     final response = await http.post(
@@ -25,6 +29,7 @@ class _NewsLetterState extends State<NewsLetter> {
     print("****************************************");
     setState(() {
       letter = message;
+      _loading = false;
     });
   }
 
@@ -55,55 +60,62 @@ class _NewsLetterState extends State<NewsLetter> {
           style: TextStyle(color: Color(0xff373D3F)),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              crossAxisSpacing: 20.0,
-              mainAxisSpacing: 20.0,
-              physics: ScrollPhysics(),
-              children: List.generate(letter.length, (index) {
-                return GestureDetector(
-                  onTap: () {
-                    print(letter[index]['nurl']);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => ShowLetter(
-                                  int.parse(letter[index]['nid']),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                backgroundColor: Color(0xff63E2E0),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  GridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 20.0,
+                    physics: ScrollPhysics(),
+                    children: List.generate(letter.length, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          print(letter[index]['nurl']);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => ShowLetter(
+                                        int.parse(letter[index]['nid']),
+                                        letter[index]['ntitle'],
+                                        letter[index]['nurl'],
+                                      )));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Color(0xff48F5D9), Colors.white]),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: Text(
                                   letter[index]['ntitle'],
-                                  letter[index]['nurl'],
-                                )));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Color(0xff48F5D9), Colors.white]),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: Text(
-                            letter[index]['ntitle'],
-                            textAlign: TextAlign.center,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    }),
                   ),
-                );
-              }),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

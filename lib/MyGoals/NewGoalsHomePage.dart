@@ -26,24 +26,26 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
   }
 
   List data = [];
+  bool _loading;
   void deleteGoals(var goalID) async {
     var url = 'http://sanjayagarwal.in/Finance App/GoalDelete.php';
     final response = await http.post(
       url,
-      body: jsonEncode(<String, String>{
-        "UserID": currentUserID,
-        "GoalID": goalID
-      }),
+      body: jsonEncode(
+          <String, String>{"UserID": currentUserID, "GoalID": goalID}),
     );
     var message = await jsonDecode(response.body);
     if (message["message"] == "Successfully Deleted") {
-     getGoals();
+      getGoals();
     } else {
       print(message["message"]);
     }
-
   }
+
   void getGoals() async {
+    setState(() {
+      _loading = true;
+    });
     var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
     final response = await http.post(
       url,
@@ -57,11 +59,12 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
     print("****************************************");
     setState(() {
       data = message;
+      _loading = false;
     });
   }
 
   @override
-  void initState(){
+  void initState() {
     print("****************************************");
     print(currentUserID);
     print("****************************************");
@@ -156,7 +159,6 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
                                 PopupMenuItem(
                                   value: 3,
                                   child: Text("Delete goal"),
-
                                 ),
                               ],
                             )
@@ -306,29 +308,38 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Center(
-                      child: Text(
-                        current == 0 ? "Current Goals" : "Completed Goals",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                backgroundColor: Color(0xff63E2E0),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Center(
+                            child: Text(
+                              current == 0
+                                  ? "Current Goals"
+                                  : "Completed Goals",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
+                  goalsoptions[current],
+                ],
+              ),
             ),
-            goalsoptions[current],
-          ],
-        ),
-      ),
     );
   }
 }
