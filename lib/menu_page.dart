@@ -3,7 +3,9 @@ import 'package:finance_app/MyGoals/NewGoalsHomePage.dart';
 import 'package:finance_app/NewsLetter/NewsLetter.dart';
 import 'package:finance_app/newRefer.dart';
 import 'package:finance_app/newadvisor.dart';
+import 'package:finance_app/SignUP_PageWith_Chnages/Working_signin.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Support/Support.dart';
 import 'Learning/LearningHomePage.dart';
 import 'components/dual_button_tiles.dart';
@@ -179,6 +181,26 @@ class _menuPageState extends State<menuPage> {
                 },
                 width: tileWidth,
                 icon: Icons.call),
+            ProfileButtons(
+                title: 'Sign Out',
+                onPress: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.remove('email');
+                  Navigator.of(context).pushAndRemoveUntil(
+                    // the new route
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => LoginPage(),
+                    ),
+
+                    // this function should return true when we're done removing routes
+                    // but because we want to remove all other screens, we make it
+                    // always return false
+                    (Route route) => false,
+                  );
+                },
+                width: tileWidth,
+                icon: Icons.exit_to_app),
           ],
         ),
       ),

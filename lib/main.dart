@@ -1,9 +1,10 @@
 import 'package:finance_app/HomePage/homepage.dart';
 import 'package:finance_app/Insurance/InsuranceHomePage.dart';
-import 'package:finance_app/SignUP_PageWith_Chnages/SignIn_page.dart';
+import 'package:finance_app/SignUP_PageWith_Chnages/Working_signin.dart';
 import 'package:finance_app/advisor.dart';
 import 'package:finance_app/contact_us.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'UserProfile.dart';
 import 'package:finance_app/Refer.dart';
 import 'package:flutter/services.dart';
@@ -22,34 +23,15 @@ import 'MyGoals/GoalsHomePage.dart';
 // TESTING COMMENT
 
 //TESTING COMMENT 2
-void main() {
-  WidgetsFlutterBinding.ensureInitialized(); // load the SplashScreen
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'finance app',
-      theme: ThemeData(
-        primaryColor: Color(0xFF40E0D0),
-        scaffoldBackgroundColor: Colors.white, // Color(0xFF393073)
-//        accentColor: PurpleTheme.pinkishPurple,
-//        canvasColor: PurpleTheme.blue,
-//        textTheme:
-//        Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
-      ),
-      // home: AddSplit(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(currentUserID: '987654321'),
-      },
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString('email');
+  runApp(MaterialApp(
+    home: email == null
+        ? LoginPage()
+        : HomePage(
+            currentUserID: '987654321',
+          ),
+  ));
 }
