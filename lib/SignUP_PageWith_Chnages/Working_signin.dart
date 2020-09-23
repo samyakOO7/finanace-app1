@@ -2,6 +2,7 @@ import 'package:finance_app/HomePage/homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_validator/string_validator.dart' as st_validator;
 import 'Widgets.dart';
 import 'package:http/http.dart' as http;
@@ -40,6 +41,8 @@ class _LoginPageState extends State<LoginPage> {
     );
     var message = jsonDecode(response.body);
     if (message == "Login Matched") {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email', email);
       Navigator.push(
           context,
           MaterialPageRoute(
