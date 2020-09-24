@@ -21,7 +21,8 @@ class _income2State extends State<income2> {
   _income2State({@required this.currentUserID});
   bool _loading;
   void deleteIncome(var incomeID) async {
-    var url = 'http://sanjayagarwal.in/Finance App/deleteincome.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeDelete.php';
     final response = await http.post(
       url,
       body: jsonEncode(
@@ -31,7 +32,7 @@ class _income2State extends State<income2> {
     print("****************************************");
     print(message);
     print("****************************************");
-    if (message["message"] == "Successfully Deleted") {
+    if (message == "Successfully Deleted") {
       getIncome();
     } else {
       print(message["message"]);
@@ -39,7 +40,8 @@ class _income2State extends State<income2> {
   }
 
   void deleteExpense(var expenseID) async {
-    var url = 'http://sanjayagarwal.in/Finance App/ExpenseDelete.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseDelete.php';
     final response = await http.post(
       url,
       body: jsonEncode(
@@ -49,7 +51,7 @@ class _income2State extends State<income2> {
     print("****************************************");
     print(message);
     print("****************************************");
-    if (message["message"] == "Successfully Deleted") {
+    if (message == "Successfully Deleted") {
       getExpense();
     } else {
       print(message["message"]);
@@ -60,7 +62,8 @@ class _income2State extends State<income2> {
     setState(() {
       _loading = true;
     });
-    var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
+    var url2 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeSum.php';
     final response2 = await http.post(
       url2,
       body: jsonEncode(<String, String>{
@@ -69,7 +72,8 @@ class _income2State extends State<income2> {
     );
     var message2 = jsonDecode(response2.body);
     totalincome = int.parse(message2[0]["sum(Amount)"]);
-    var url3 = 'http://sanjayagarwal.in/Finance App/ExpenseSum.php';
+    var url3 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseSum.php';
     final response3 = await http.post(
       url3,
       body: jsonEncode(<String, String>{
@@ -80,7 +84,8 @@ class _income2State extends State<income2> {
     totalexpense = int.parse(message3[0]["sum(Amount)"]);
     savings = totalincome - totalexpense;
     calculatePotential(dropdown, rate, time);
-    var url = 'http://sanjayagarwal.in/Finance App/IncomeDetails.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeDetails.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -101,7 +106,8 @@ class _income2State extends State<income2> {
     setState(() {
       _loading = true;
     });
-    var url2 = 'http://sanjayagarwal.in/Finance App/IncomeSum.php';
+    var url2 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeSum.php';
     final response2 = await http.post(
       url2,
       body: jsonEncode(<String, String>{
@@ -110,7 +116,8 @@ class _income2State extends State<income2> {
     );
     var message2 = jsonDecode(response2.body);
     totalincome = int.parse(message2[0]["sum(Amount)"]);
-    var url3 = 'http://sanjayagarwal.in/Finance App/ExpenseSum.php';
+    var url3 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseSum.php';
     final response3 = await http.post(
       url3,
       body: jsonEncode(<String, String>{
@@ -121,7 +128,8 @@ class _income2State extends State<income2> {
     totalexpense = int.parse(message3[0]["sum(Amount)"]);
     savings = totalincome - totalexpense;
     calculatePotential(dropdown, rate, time);
-    var url = 'http://sanjayagarwal.in/Finance App/ExpenseDetails.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseDetails.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{

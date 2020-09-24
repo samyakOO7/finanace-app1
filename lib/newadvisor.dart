@@ -15,12 +15,13 @@ class AdvisorPage extends StatefulWidget {
 class _AdvisorPageState extends State<AdvisorPage> {
   final String currentUserID;
   _AdvisorPageState({@required this.currentUserID});
-  String adName='';
-  String adCode='';
+  String adName = '';
+  String adCode = '';
   String adEmail = '';
   String adPhone = '';
   void getAdvisor() async {
-    var url = 'http://sanjayagarwal.in/Finance App/AdvisorOfUser.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Advisor/AdvisorOfUser.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -31,7 +32,8 @@ class _AdvisorPageState extends State<AdvisorPage> {
     print("****************************************");
     print(message);
     print("****************************************");
-    var url1 = 'http://sanjayagarwal.in/Finance App/AdvisorPartDetails.php';
+    var url1 =
+        'http://sanjayagarwal.in/Finance App/UserApp/Advisor/AdvisorPartDetails.php';
     final response1 = await http.post(
       url1,
       body: jsonEncode(<String, String>{
@@ -43,18 +45,20 @@ class _AdvisorPageState extends State<AdvisorPage> {
     print(message1);
     print("****************************************");
     setState(() {
-      adEmail= message1[0]['Email'];
+      adEmail = message1[0]['Email'];
       adName = message1[0]['Name'];
       adPhone = message1[0]['Mobile'];
       adCode = message1[0]['AdvisorID'];
     });
   }
+
   @override
   void initState() {
     getAdvisor();
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

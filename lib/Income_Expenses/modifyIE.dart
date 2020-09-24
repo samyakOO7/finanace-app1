@@ -33,7 +33,8 @@ class _modifyIState extends State<modifyI> {
     print("********************************************************");
     print("ch1,$incselected,$iamt,$currentUserID,$incomeID");
     print("********************************************************");
-    var url = 'http://sanjayagarwal.in/Finance App/IncomeUpdate.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeUpdate.php';
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -50,7 +51,7 @@ class _modifyIState extends State<modifyI> {
     print("********************************************************");
     print("ch1,$message1");
     print("********************************************************");
-    if (message1["message"] == "Successful Updation") {
+    if (message1 == "Successful Updation") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -256,7 +257,10 @@ class modifyE extends StatefulWidget {
   modifyE(this.expid, this.indexe, this.examt, {@required this.currentUserID});
   @override
   _modifyEState createState() => _modifyEState(
-      currentUserID: currentUserID, expselected: indexe, eamt: examt);
+      currentUserID: currentUserID,
+      expselected: indexe,
+      eamt: examt,
+      expenseID: expid.toString());
 }
 
 class _modifyEState extends State<modifyE> {
@@ -264,14 +268,15 @@ class _modifyEState extends State<modifyE> {
     print("********************************************************");
     print("ch1,$expselected,$eamt,$currentUserID,$expenseID");
     print("********************************************************");
-    var url = 'http://sanjayagarwal.in/Finance App/ExpenseUpdate.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseUpdate.php';
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
         "Type": expselected.toString(),
         "Amount": eamt,
         "UserID": currentUserID,
-        "IncomeID": expenseID
+        "ExpenseID": expenseID
       }),
     );
     print("********************************************************");
@@ -281,7 +286,7 @@ class _modifyEState extends State<modifyE> {
     print("********************************************************");
     print("ch1,$message1");
     print("********************************************************");
-    if (message1["message"] == "Successful Updation") {
+    if (message1 == "Successful Updation") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(

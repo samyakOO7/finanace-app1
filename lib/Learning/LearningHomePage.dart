@@ -22,7 +22,8 @@ class _LearningHomePageState extends State<LearningHomePage> {
     setState(() {
       _loading = true;
     });
-    var url = 'http://sanjayagarwal.in/Finance App/learning.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Learning/Learning.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
