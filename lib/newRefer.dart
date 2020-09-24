@@ -29,7 +29,8 @@ class _RewardandReferState extends State<RewardandRefer> {
     ['rewards1', 'rewards detail'],
   ];
   void getReferData() async {
-    var url = 'http://sanjayagarwal.in/Finance App/UserDetails.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Profile/UserDetails.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -56,12 +57,14 @@ class _RewardandReferState extends State<RewardandRefer> {
     print(message1);
     print("****************************************");
   }
+
   @override
   void initState() {
     getReferData();
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

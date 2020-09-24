@@ -8,7 +8,8 @@ class UserProfile extends StatefulWidget {
   String currentUserID;
   UserProfile({@required this.currentUserID});
   @override
-  _UserProfileState createState() => _UserProfileState(currentUserID: currentUserID);
+  _UserProfileState createState() =>
+      _UserProfileState(currentUserID: currentUserID);
 }
 
 class _UserProfileState extends State<UserProfile> {
@@ -17,11 +18,12 @@ class _UserProfileState extends State<UserProfile> {
   String dropdownValue;
   String userCode;
   bool isEditing = false;
-   SharedPreferences preferences;
+  SharedPreferences preferences;
   String id = "";
 
   void getUserData() async {
-    var url = 'http://sanjayagarwal.in/Finance App/UserDetails.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Profile/UserDetails.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -35,7 +37,7 @@ class _UserProfileState extends State<UserProfile> {
     setState(() {
       name = message[0]['Name'];
       dob = message[0]['DOB'];
-      mobile =message[0]['Mobile'];
+      mobile = message[0]['Mobile'];
       pan = message[0]['PAN'];
       referalCode = message[0]['ReferalCode'];
       dropdownValue = message[0]['Gender'];
@@ -43,6 +45,7 @@ class _UserProfileState extends State<UserProfile> {
       email = message[0]['Email'];
     });
   }
+
   void profileUpdate() async {
     var url = 'http://sanjayagarwal.in/Finance App/UserUpdate.php';
     final response1 = await http.post(
@@ -54,9 +57,8 @@ class _UserProfileState extends State<UserProfile> {
         "PAN": pan,
         "Email": email,
         "UserID": userCode,
-        "Gender":dropdownValue,
-        "ReferalCode":referalCode
-
+        "Gender": dropdownValue,
+        "ReferalCode": referalCode
       }),
     );
     var message1 = await jsonDecode(response1.body);
@@ -74,21 +76,26 @@ class _UserProfileState extends State<UserProfile> {
       isEditing = true;
     }
   }
-String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
+
+  String name = "",
+      dob = "",
+      mobile = "",
+      pan = "",
+      referalCode = "",
+      email = "";
   void updateUserData() {
     //function to update the data of user to sync database
-     Firestore.instance.collection('users').document(id).updateData(
-        {
-          'Name': name,
-          'Date of Birth': dob,
-          'Mobile Number': mobile,
-          'Pan Number': pan,
-          'Marital Status': referalCode,
-          'Gender': dropdownValue,
-          'Unique Client Code': userCode
-        }
-    );
+    Firestore.instance.collection('users').document(id).updateData({
+      'Name': name,
+      'Date of Birth': dob,
+      'Mobile Number': mobile,
+      'Pan Number': pan,
+      'Marital Status': referalCode,
+      'Gender': dropdownValue,
+      'Unique Client Code': userCode
+    });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -140,12 +147,11 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                   ),
                   isEditing
                       ? TextFormField(
-                    initialValue: name,
-                    onChanged: (value)
-                    {
-                      name = value;
-                    },
-                  )
+                          initialValue: name,
+                          onChanged: (value) {
+                            name = value;
+                          },
+                        )
                       : Text(
                           '$name',
                           style: TextStyle(
@@ -173,12 +179,11 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                   ),
                   isEditing
                       ? TextFormField(
-                    initialValue: dob,
-                    onChanged: (value)
-                    {
-                      dob = value;
-                    },
-                  )
+                          initialValue: dob,
+                          onChanged: (value) {
+                            dob = value;
+                          },
+                        )
                       : Text(
                           '$dob',
                           style: TextStyle(
@@ -206,12 +211,11 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                   ),
                   isEditing
                       ? TextFormField(
-                    initialValue: mobile,
-                    onChanged: (value)
-                    {
-                      mobile = value;
-                    },
-                  )
+                          initialValue: mobile,
+                          onChanged: (value) {
+                            mobile = value;
+                          },
+                        )
                       : Text(
                           '$mobile',
                           style: TextStyle(
@@ -239,24 +243,23 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                   ),
                   isEditing
                       ? TextFormField(
-                    initialValue: email,
-                    onChanged: (value)
-                    {
-                      email = value;
-                    },
-                  )
+                          initialValue: email,
+                          onChanged: (value) {
+                            email = value;
+                          },
+                        )
                       : Text(
-                    '$email',
-                    style: TextStyle(
-                      fontSize: tileHeight / 55,
-                      color: Colors.black45,
-                    ),
-                  ),
+                          '$email',
+                          style: TextStyle(
+                            fontSize: tileHeight / 55,
+                            color: Colors.black45,
+                          ),
+                        ),
                   isEditing
                       ? SizedBox()
                       : Divider(
-                    color: Colors.black45,
-                  ),
+                          color: Colors.black45,
+                        ),
                   SizedBox(
                     height: tileHeight / 40,
                   ),
@@ -272,12 +275,11 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                   ),
                   isEditing
                       ? TextFormField(
-                    initialValue: pan,
-                    onChanged: (value)
-                    {
-                      pan = value;
-                    },
-                  )
+                          initialValue: pan,
+                          onChanged: (value) {
+                            pan = value;
+                          },
+                        )
                       : Text(
                           '$pan',
                           style: TextStyle(
@@ -318,10 +320,9 @@ String name = "", dob="", mobile = "", pan = "", referalCode = "",email= "";
                           onChanged: (String newValue) {
                             setState(() {
                               dropdownValue = newValue;
-
                             });
                           },
-                          items: <String>['Male', 'Female','']
+                          items: <String>['Male', 'Female', '']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,

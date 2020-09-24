@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'income2.dart';
+
 class Add extends StatefulWidget {
   String currentUserId;
   Add({@required this.currentUserId});
@@ -14,7 +15,8 @@ class Add extends StatefulWidget {
 class _AddState extends State<Add> {
   int incsel = 0;
   Future incomeInsert() async {
-    var url1 = 'http://sanjayagarwal.in/Finance App/IncomeIdMax.php';
+    var url1 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeIdMax.php';
     final response = await http.post(
       url1,
       body: jsonEncode(<String, String>{
@@ -24,23 +26,29 @@ class _AddState extends State<Add> {
     var message = jsonDecode(response.body);
     String oldIncomeID = message[0]['max(IncomeID)'];
     int intermediateId = int.parse(oldIncomeID);
-    int newIncomeID = intermediateId+1;
-    var url = 'http://sanjayagarwal.in/Finance App/InsertIncome.php';
+    int newIncomeID = intermediateId + 1;
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/IncomeInsert.php';
     print("****************************************************");
     print("$incsel,${value.text},${widget.currentUserId},$newIncomeID");
     print("****************************************************");
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
-        "Type":incsel.toString(),
-        "Amount":value.text,
-        "UserID":widget.currentUserId,
+        "Type": incsel.toString(),
+        "Amount": value.text,
+        "UserID": widget.currentUserId,
         "IncomeID": newIncomeID.toString()
       }),
     );
     var message1 = jsonDecode(response1.body);
-    if (message1["message"] == "Successful Insertion") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => income2(currentUserID: widget.currentUserId,)));
+    if (message1 == "Successful Insertion") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => income2(
+                    currentUserID: widget.currentUserId,
+                  )));
     } else {
       print(message1["message"]);
     }
@@ -239,7 +247,8 @@ class AddE extends StatefulWidget {
 class _AddEState extends State<AddE> {
   int expsel = 0;
   Future expenseInsert() async {
-    var url1 = 'http://sanjayagarwal.in/Finance App/ExpenseIdMax.php';
+    var url1 =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseIdMax.php';
     final response = await http.post(
       url1,
       body: jsonEncode(<String, String>{
@@ -249,27 +258,34 @@ class _AddEState extends State<AddE> {
     var message = jsonDecode(response.body);
     String oldExpenseID = message[0]['max(ExpenseID)'];
     int intermediateId = int.parse(oldExpenseID);
-    int newExpenseID = intermediateId+1;
-    var url = 'http://sanjayagarwal.in/Finance App/ExpenseInsert.php';
+    int newExpenseID = intermediateId + 1;
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/IncomeExpense/ExpenseInsert.php';
     print("****************************************************");
     print("$expsel,${val.text},${widget.currentUserId},$newExpenseID");
     print("****************************************************");
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
-        "Type":expsel.toString(),
-        "Amount":val.text,
-        "UserID":widget.currentUserId,
-        "IncomeID": newExpenseID.toString()
+        "Type": expsel.toString(),
+        "Amount": val.text,
+        "UserID": widget.currentUserId,
+        "ExpenseID": newExpenseID.toString()
       }),
     );
     var message1 = jsonDecode(response1.body);
-    if (message1["message"] == "Successful Insertion") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => income2(currentUserID: widget.currentUserId,)));
+    if (message1 == "Successful Insertion") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => income2(
+                    currentUserID: widget.currentUserId,
+                  )));
     } else {
       print(message1["message"]);
     }
   }
+
   TextEditingController val = TextEditingController();
   @override
   Widget build(BuildContext context) {
