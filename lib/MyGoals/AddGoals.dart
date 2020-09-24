@@ -24,7 +24,8 @@ class _AddGoalsState extends State<AddGoals> {
     String amoun = value.text;
     String yea = year.text;
     String type = goalselected.toString();
-    var url1 = 'http://sanjayagarwal.in/Finance App/GoalIdMax.php';
+    var url1 =
+        'http://sanjayagarwal.in/Finance App/UserApp/Goals/GoalIdMax.php';
     final response = await http.post(
       url1,
       body: jsonEncode(<String, String>{
@@ -34,11 +35,10 @@ class _AddGoalsState extends State<AddGoals> {
     var message = jsonDecode(response.body);
     String oldGoalID = message[0]['max(GoalID)'];
     int intermediateId = int.parse(oldGoalID);
-    int newGoalID = intermediateId+1;
+    int newGoalID = intermediateId + 1;
 
-
-
-    var url = 'http://sanjayagarwal.in/Finance App/GoalInsert.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Goals/GoalInsert.php';
     print("****************************************************");
     print("$name,$amoun,$year,$type");
     print("****************************************************");
@@ -47,15 +47,20 @@ class _AddGoalsState extends State<AddGoals> {
       body: jsonEncode(<String, String>{
         "Name": nam,
         "Amount": amoun,
-        "Type":type,
-        "Year":yea,
-        "UserID":currentUserID,
+        "Type": type,
+        "Year": yea,
+        "UserID": currentUserID,
         "GoalID": newGoalID.toString()
       }),
     );
     var message1 = jsonDecode(response1.body);
-    if (message1["message"] == "Successful Insertion") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewGoalsPage(currentUserID: currentUserID,)));
+    if (message1 == "Successful Insertion") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NewGoalsPage(
+                    currentUserID: currentUserID,
+                  )));
     } else {
       print(message1["message"]);
     }
@@ -66,6 +71,7 @@ class _AddGoalsState extends State<AddGoals> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

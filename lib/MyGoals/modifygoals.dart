@@ -12,8 +12,12 @@ class ModifyGoalsPage extends StatefulWidget {
   ModifyGoalsPage(this.goalid, this.indexone, this.gname, this.gamt, this.gyear,
       {@required this.currentUserID});
   @override
-  _ModifyGoalsPageState createState() =>
-      _ModifyGoalsPageState(currentUserID: currentUserID,goalselected: indexone,name: gname,value: gamt,year: gyear);
+  _ModifyGoalsPageState createState() => _ModifyGoalsPageState(
+      currentUserID: currentUserID,
+      goalselected: indexone,
+      name: gname,
+      value: gamt,
+      year: gyear);
 }
 
 class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
@@ -23,10 +27,16 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
   String year;
 
   String currentUserID;
-  _ModifyGoalsPageState({@required this.currentUserID, this.goalselected,this.name,this.year,this.value});
+  _ModifyGoalsPageState(
+      {@required this.currentUserID,
+      this.goalselected,
+      this.name,
+      this.year,
+      this.value});
 
   Future goalUpdate() async {
-    var url = 'http://sanjayagarwal.in/Finance App/GoalUpdate.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Goals/GoalUpdate.php';
     final response1 = await http.post(
       url,
       body: jsonEncode(<String, String>{
@@ -39,7 +49,7 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
       }),
     );
     var message1 = jsonDecode(response1.body);
-    if (message1["message"] == "Successful Updation") {
+    if (message1 == "Successful Updation") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -150,9 +160,10 @@ class _ModifyGoalsPageState extends State<ModifyGoalsPage> {
                                             category[index].name,
                                             style: TextStyle(
                                                 color: Color(0xff373D3F),
-                                                fontWeight: goalselected == index
-                                                    ? FontWeight.bold
-                                                    : FontWeight.w400),
+                                                fontWeight:
+                                                    goalselected == index
+                                                        ? FontWeight.bold
+                                                        : FontWeight.w400),
                                           ),
                                         ],
                                       ),
