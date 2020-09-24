@@ -28,14 +28,15 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
   List data = [];
   bool _loading;
   void deleteGoals(var goalID) async {
-    var url = 'http://sanjayagarwal.in/Finance App/GoalDelete.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Goals/GoalDelete.php';
     final response = await http.post(
       url,
       body: jsonEncode(
           <String, String>{"UserID": currentUserID, "GoalID": goalID}),
     );
     var message = await jsonDecode(response.body);
-    if (message["message"] == "Successfully Deleted") {
+    if (message == "Successfully Deleted") {
       getGoals();
     } else {
       print(message["message"]);
@@ -46,7 +47,8 @@ class _NewGoalsPageState extends State<NewGoalsPage> {
     setState(() {
       _loading = true;
     });
-    var url = 'http://sanjayagarwal.in/Finance App/GoalDetails.php';
+    var url =
+        'http://sanjayagarwal.in/Finance App/UserApp/Goals/GoalDetails.php';
     final response = await http.post(
       url,
       body: jsonEncode(<String, String>{
